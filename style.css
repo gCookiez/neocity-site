@@ -1,0 +1,56 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Verdana;
+}
+
+* {
+  --hover-demo-bg-color: #fff;
+  --hover-item-bg-color: #A0A0A0;
+
+  --box-shadow-top-close: -10px -10px;
+  --box-shadow-bottom-close: 10px 10px;
+  --box-shadow-top-exp: 20px 20px;
+  --box-shadow-bottom-exp: 30px 30px;
+
+  --box-shadow-top: green;
+  --box-shadow-bottom: blue;
+
+  --box-bounce: linear(0 0%, 0 2.27%, 0.02 4.53%, 0.04 6.8%, 0.06 9.07%, 0.1 11.33%, 0.14 13.6%, 0.25 18.15%, 0.39 22.7%, 0.56 27.25%, 0.77 31.8%, 1 36.35%, 0.89 40.9%, 0.85 43.18%, 0.81 45.45%, 0.79 47.72%, 0.77 50%, 0.75 52.27%, 0.75 54.55%, 0.75 56.82%, 0.77 59.1%, 0.79 61.38%, 0.81 63.65%, 0.85 65.93%, 0.89 68.2%, 1 72.7%, 0.97 74.98%, 0.95 77.25%, 0.94 79.53%, 0.94 81.8%, 0.94 84.08%, 0.95 86.35%, 0.97 88.63%, 1 90.9%, 0.99 93.18%, 0.98 95.45%, 0.99 97.73%, 1 100%);
+}
+
+.construction {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+  flex-direction: column;
+}
+
+.hover-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+  width: 65vw;
+  min-width: 640px;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  background-color: var(--hover-demo-bg-color);
+  gap: 50px;
+}
+
+.hover-item {
+  background-color: var(--hover-item-bg-color);
+  width: 100px;
+  aspect-ratio: 1;
+  box-shadow: var( --box-shadow-top-close) var(--box-shadow-top), var(--box-shadow-bottom-close) var(--box-shadow-bottom);
+  transition: box-shadow 0.5s cubic-bezier(0.6, 0.02, 0.13, 0.98), transform 0.5s var(--box-bounce);
+}
+
+.hover-item:hover {
+  transform: translate(-30px, -30px);
+  box-shadow: var( --box-shadow-top-exp) var(--box-shadow-top), var(--box-shadow-bottom-exp) var(--box-shadow-bottom);
+}
