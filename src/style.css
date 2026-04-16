@@ -1,25 +1,41 @@
 body {
   background-color: black;
-  color: white;
+  color: black;
   font-family: Verdana;
 }
 
 * {
   --hover-demo-bg-color: #fff;
-  --hover-item-bg-color: #A0A0A0;
+  --hover-item-bg-color: #EEE;
 
-  --box-shadow-top-up: 0px -20px;
-  --box-shadow-bottom-up: 0px -40px;
+  --box-shadow-top-up: 0px -10px;
+  --box-shadow-bottom-up: 0px -20px;
 
   --box-shadow-close: 0px;
 
-  --box-shadow-top-exp: 15px 15px;
-  --box-shadow-bottom-exp: 30px 30px;
+  --box-shadow-top-exp: 10px 10px;
+  --box-shadow-bottom-exp: 20px 20px;
+
+  --box-sh-sh-neutral: 0px 0px;
+  --box-sh-sh-main-top-exp: 5px 0px;
+  --box-sh-sh-top-top-exp: 10px 5px;
+  --box-sh-sh-top-right-exp: 15px 5px;
+  --box-sh-sh-main-bot-exp: 0px 5px;
+  --box-sh-sh-top-bot-exp: 5px 15px;
+
+  --box-sh-sh-bot-exp: 0px 20px;
+
+  --box-shadow-shadows: var(--box-sh-sh-main-top-exp )black, var(--box-sh-sh-top-top-exp )black, var(--box-sh-sh-top-right-exp )black, var(--box-sh-sh-main-bot-exp )black, var(--box-sh-sh-top-bot-exp )black;
+
+  --box-shadow-0: var(--box-shadow-top-up) var(--box-shadow-top),  var(--box-shadow-bottom-up) var(--box-shadow-bottom);
+  --box-shadow-50: var(--box-shadow-close) var(--box-shadow-top),  var(--box-shadow-close) var(--box-shadow-bottom);
+  --box-shadow-100: var(--box-shadow-top-exp) var(--box-shadow-top),  var(--box-shadow-bottom-exp) var(--box-shadow-bottom), var(--box-shadow-shadows);
+
 
   --box-shadow-top: green;
   --box-shadow-bottom: blue;
 
-  --box-spring-up: translate(-30px, -30px);
+  --box-spring-up: translate(-20px, -20px);
   --box-spring-neutral: translate(0px, 0px);
 
   --box-bounce: linear(0 0%, 0 2.27%, 0.02 4.53%, 0.04 6.8%, 0.06 9.07%, 0.1 11.33%, 0.14 13.6%, 0.25 18.15%, 0.39 22.7%, 0.56 27.25%, 0.77 31.8%, 1 36.35%, 0.89 40.9%, 0.85 43.18%, 0.81 45.45%, 0.79 47.72%, 0.77 50%, 0.75 52.27%, 0.75 54.55%, 0.75 56.82%, 0.77 59.1%, 0.79 61.38%, 0.81 63.65%, 0.85 65.93%, 0.89 68.2%, 1 72.7%, 0.97 74.98%, 0.95 77.25%, 0.94 79.53%, 0.94 81.8%, 0.94 84.08%, 0.95 86.35%, 0.97 88.63%, 1 90.9%, 0.99 93.18%, 0.98 95.45%, 0.99 97.73%, 1 100%);
@@ -29,40 +45,53 @@ body {
 @keyframes springitem{
   0% {
     transform: var(--box-spring-neutral);
+    margin-top: 20px;
+  }
+  50% {
+    border-right: 5px solid black;
+    border-bottom: 5px solid black;
   }
   100% {
-    transform: var(--box-spring-up)
+    transform: var(--box-spring-up);
+    border-top: 5px solid black;
+    border-left: 5px solid black;
+    /* border-right: none;
+    border-bottom: none; */
+    margin-top: 0px;
   }
 }
 @keyframes shadowspring{
   0% {
-    box-shadow: var(--box-shadow-top-up) var(--box-shadow-top), var(--box-shadow-bottom-up) var(--box-shadow-bottom);
+    box-shadow: var(--box-shadow-0)
   }
   50% {
-    box-shadow: var(--box-shadow-close) var(--box-shadow-top), var(--box-shadow-close) var(--box-shadow-bottom);
+    box-shadow: var(--box-shadow-50)
   }
   100% {
-    box-shadow: var(--box-shadow-top-exp) var(--box-shadow-top), var(--box-shadow-bottom-exp) var(--box-shadow-bottom);
+    box-shadow: var(--box-shadow-100);
   }
 }
 @keyframes springitemRev{
   0% {
-    transform: var(--box-spring-up)
+    transform: var(--box-spring-up);
+    margin-top: 0px;
   }
   100% {
     transform: var(--box-spring-neutral);
+    margin-top: 20px;
+    margin-bottom: 0px;
   }
 }
 @keyframes shadowspringRev{
   0% {
-    box-shadow: var(--box-shadow-top-exp) var(--box-shadow-top), var(--box-shadow-bottom-exp) var(--box-shadow-bottom);
+    box-shadow: var(--box-shadow-100);
     
   }
   50% {
-    box-shadow: var(--box-shadow-close) var(--box-shadow-top), var(--box-shadow-close) var(--box-shadow-bottom);
+    box-shadow: var(--box-shadow-50)
   }
   100% {
-    box-shadow: var(--box-shadow-top-up) var(--box-shadow-top), var(--box-shadow-bottom-up) var(--box-shadow-bottom);
+    box-shadow: var(--box-shadow-0)
   }
 }
 
@@ -92,13 +121,18 @@ body {
 .window-container {
   display: flex;
   flex-direction: column;
-  width: 85%;
+  width: 40%;
   align-items: center;
+  border: 5px solid black;
+  background-color: yellow;
+  /* padding-top: 20px; */
+  transition: box-shadow 0.5s var(--box-bounce);
+  
 }
 
 .window-content {
   background-color: yellow;
-  height: 640px;
+  height: 740px;
   width: 100%;
 }
 
@@ -118,16 +152,20 @@ body {
 }
 
 .hover-container:hover > .hover-item{
-  
-  /* transition: box-shadow 0.3s cubic-bezier(0.6, 0.02, 0.13, 0.98), transform 0.4s ; */
-  /* box-shadow: var( --box-shadow-top-exp) var(--box-shadow-top), var(--box-shadow-bottom-exp) var(--box-shadow-bottom); */
   transform: var(--box-spring-neutral);
-  animation: springitem cubic-bezier(0.6, 0.02, 0.13, 0.98) 0.2s forwards 0.1s, shadowspring var(--box-bounce) 0.4s forwards;
+  animation: springitem cubic-bezier(0.6, 0.02, 0.13, 0.98) 0.2s forwards, shadowspring var(--box-bounce) 0.4s forwards;
   
 }
 
 .hover-container:not(:hover) > .hover-item {
   transform: var(--box-spring-up);
   animation: springitemRev cubic-bezier(0.6, 0.02, 0.13, 0.98) 0.2s forwards, shadowspringRev var(--box-bounce) 0.4s forwards;
+}
+
+.window-container:has(.hover-container:not(:hover)) {
+  box-shadow: 10px 10px black;
+}
+.window-container:has(.hover-container:hover) {
+  box-shadow: 5px 5px black;
 }
 
