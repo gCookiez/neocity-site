@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: gray;
   color: black;
   font-family: Verdana;
 }
@@ -103,31 +103,51 @@ body {
   flex-direction: column;
 }
 
-.hover-demo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 95vh;
+.wrapper {
+  display: grid;
+  height: 100vh;
   width: 65vw;
   min-width: 640px;
   max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
-  flex-direction: column;
-  background-color: var(--hover-demo-bg-color);
-  gap: 20px;
+  background-color: var(--hover-demo-bg-color)00;
+}
+
+.wrapper.home {
+  grid-template-areas: 'header header header'  'navi content content' 'navi content content' '. content content';
+  grid-template-rows: 120px auto;
+  grid-template-columns: 1fr 3fr;
+  gap: 10px;
 }
 
 .window-container {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 95%;
   align-items: center;
   border: 5px solid black;
   background-color: yellow;
   /* padding-top: 20px; */
   transition: box-shadow 0.5s var(--box-bounce);
   
+}
+
+.grid-container.header {
+  background-color: aquamarine;
+  grid-area: header;
+}
+
+.grid-container.navi {
+  grid-area: navi ;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.grid-container.content {
+  grid-area: content;
+  background-color: orange;
 }
 
 .window-content {
@@ -138,7 +158,7 @@ body {
 
 .hover-item {
   background-color: var(--hover-item-bg-color);
-  height: 100px;
+  height: 50px;
   width: 100%;
   aspect-ratio: 1/5;
 }
@@ -163,9 +183,9 @@ body {
 }
 
 .window-container:has(.hover-container:not(:hover)) {
-  box-shadow: 10px 10px black;
+  box-shadow: 7px 7px black;
 }
 .window-container:has(.hover-container:hover) {
-  box-shadow: 5px 5px black;
+  box-shadow: 2px 2px black;
 }
 
