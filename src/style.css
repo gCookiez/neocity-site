@@ -7,6 +7,8 @@ body {
 * {
   --hover-demo-bg-color: #fff;
   --hover-item-bg-color: #EEE;
+  --hover-item-select-bg-color: orange;
+  --hover-item-hover-bg-color: lime;
 
   --box-shadow-top-up: 0px -10px;
   --box-shadow-bottom-up: 0px -20px;
@@ -22,14 +24,15 @@ body {
   --box-sh-sh-top-right-exp: 15px 5px;
   --box-sh-sh-main-bot-exp: 0px 5px;
   --box-sh-sh-top-bot-exp: 5px 15px;
+  --box-sh-sh-bot-top-exp: 20px 15px;
 
   --box-sh-sh-bot-exp: 0px 20px;
 
-  --box-shadow-shadows: var(--box-sh-sh-main-top-exp )black, var(--box-sh-sh-top-top-exp )black, var(--box-sh-sh-top-right-exp )black, var(--box-sh-sh-main-bot-exp )black, var(--box-sh-sh-top-bot-exp )black;
+  --box-shadow-shadows: var(--box-sh-sh-main-top-exp)black, var(--box-sh-sh-top-top-exp)black, var(--box-sh-sh-top-right-exp)black, var(--box-sh-sh-main-bot-exp)black, var(--box-sh-sh-top-bot-exp)black, var(--box-sh-sh-bot-top-exp)black;
 
-  --box-shadow-0: var(--box-shadow-top-up) var(--box-shadow-top),  var(--box-shadow-bottom-up) var(--box-shadow-bottom);
-  --box-shadow-50: var(--box-shadow-close) var(--box-shadow-top),  var(--box-shadow-close) var(--box-shadow-bottom);
-  --box-shadow-100: var(--box-shadow-top-exp) var(--box-shadow-top),  var(--box-shadow-bottom-exp) var(--box-shadow-bottom), var(--box-shadow-shadows);
+  --box-shadow-0: var(--box-shadow-top-up) var(--box-shadow-top), var(--box-shadow-bottom-up) var(--box-shadow-bottom);
+  --box-shadow-50: var(--box-shadow-close) var(--box-shadow-top), var(--box-shadow-close) var(--box-shadow-bottom);
+  --box-shadow-100: var(--box-shadow-top-exp) var(--box-shadow-top), var(--box-shadow-bottom-exp) var(--box-shadow-bottom), var(--box-shadow-shadows);
 
 
   --box-shadow-top: green;
@@ -42,56 +45,68 @@ body {
 }
 
 
-@keyframes springitem{
+@keyframes springitem {
   0% {
     transform: var(--box-spring-neutral);
     margin-top: 20px;
   }
+
   50% {
     border-right: 5px solid black;
     border-bottom: 5px solid black;
   }
+
   100% {
     transform: var(--box-spring-up);
     border-top: 5px solid black;
     border-left: 5px solid black;
-    /* border-right: none;
-    border-bottom: none; */
+    background-color: var(--hover-item-select-bg-color);
     margin-top: 0px;
+
   }
 }
-@keyframes shadowspring{
+
+@keyframes shadowspring {
   0% {
     box-shadow: var(--box-shadow-0)
   }
+
   50% {
     box-shadow: var(--box-shadow-50)
   }
+
   100% {
     box-shadow: var(--box-shadow-100);
+    
   }
 }
-@keyframes springitemRev{
+
+@keyframes springitemRev {
   0% {
     transform: var(--box-spring-up);
     margin-top: 0px;
   }
+
   100% {
     transform: var(--box-spring-neutral);
-    margin-top: 20px;
-    margin-bottom: 0px;
+
   }
 }
-@keyframes shadowspringRev{
+
+@keyframes shadowspringRev {
   0% {
     box-shadow: var(--box-shadow-100);
-    
+
   }
+
   50% {
     box-shadow: var(--box-shadow-50)
   }
+
   100% {
-    box-shadow: var(--box-shadow-0)
+    box-shadow: var(--box-shadow-0);
+    margin-top: 20px;
+    margin-bottom: 0px;
   }
 }
 
@@ -115,9 +130,9 @@ body {
 }
 
 .wrapper.home {
-  grid-template-areas: 'header header header'  'navi content content' 'navi content content' '. content content';
+  grid-template-areas: 'header header header' 'navi content content' 'navi content content' '. content content';
   grid-template-rows: 120px auto;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 4fr;
   gap: 10px;
 }
 
@@ -130,7 +145,7 @@ body {
   background-color: yellow;
   /* padding-top: 20px; */
   transition: box-shadow 0.5s var(--box-bounce);
-  
+
 }
 
 .grid-container.header {
@@ -139,7 +154,7 @@ body {
 }
 
 .grid-container.navi {
-  grid-area: navi ;
+  grid-area: navi;
   display: flex;
   /* align-items: center; */
   justify-content: center;
@@ -156,11 +171,10 @@ body {
   width: 100%;
 }
 
-.hover-item {
-  background-color: var(--hover-item-bg-color);
-  height: 50px;
-  width: 100%;
-  aspect-ratio: 1/5;
+
+
+.hover-item.active {
+  background-color: var(--hover-item-hover-bg-color);
 }
 
 .hover-container {
@@ -169,23 +183,61 @@ body {
   justify-content: center;
   width: 100%;
   cursor: pointer;
+  position: relative;
 }
 
-.hover-container:hover > .hover-item{
+.hover-hitbox {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.hover-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 10px;
+  background-color: var(--hover-item-bg-color);
+  height: 50px;
+  width: 100%;
+  aspect-ratio: 1/5;
+  z-index: 999;
+}
+
+
+
+.hover-hitbox:hover {
+  height: 150%;
+  width: 120%;
+  left: -20px;
+  top: -20px;
+  /* background-color: red; */
+}
+
+.hover-container:last-child:has(.hover-hitbox:hover)> .hover-hitbox {
+  height: 180%;
+}
+
+.window-container:has(.hover-hitbox:hover) > .hover-hitbox:not(:hover){
+  pointer-events: none;
+}
+
+.hover-container:has(.hover-hitbox:hover)>.hover-item {
   transform: var(--box-spring-neutral);
   animation: springitem cubic-bezier(0.6, 0.02, 0.13, 0.98) 0.2s forwards, shadowspring var(--box-bounce) 0.4s forwards;
-  
 }
 
-.hover-container:not(:hover) > .hover-item {
+.hover-container:has(.hover-hitbox:not(:hover))>.hover-item {
   transform: var(--box-spring-up);
   animation: springitemRev cubic-bezier(0.6, 0.02, 0.13, 0.98) 0.2s forwards, shadowspringRev var(--box-bounce) 0.4s forwards;
 }
 
-.window-container:has(.hover-container:not(:hover)) {
+.window-container:has(.hover-hitbox:not(:hover)) {
   box-shadow: 7px 7px black;
 }
-.window-container:has(.hover-container:hover) {
+
+.window-container:has(.hover-hitbox:hover) {
   box-shadow: 2px 2px black;
 }
-
