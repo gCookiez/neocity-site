@@ -6,7 +6,11 @@ const menuItems = {
     },
     gallery: {
         name: 'Gallery',
-        url: 'gallery/'
+        url: `pages/gallery/`
+    },
+    about: {
+        name: 'About',
+        url: `pages/about/`
     }
 }
 const menuItem = document.createElement('template');

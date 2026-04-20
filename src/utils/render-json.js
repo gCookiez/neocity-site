@@ -13,3 +13,16 @@ export function applyArticle(data) {
     return documentArea
 
 }
+
+export function fetchJson(url) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const format = applyArticle(data);
+            const container = document.querySelector('.content-container');
+            container.append(format);
+        })
+        .catch(error => console.error("Error: ", error));
+
+
+}
