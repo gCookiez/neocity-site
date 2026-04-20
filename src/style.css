@@ -4,6 +4,10 @@ body {
   font-family: Verdana;
 }
 
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
 * {
   --hover-demo-bg-color: #fff;
   --hover-item-bg-color: #EEE;
@@ -109,6 +113,17 @@ body {
     margin-top: 20px;
     margin-bottom: 0px;
   }
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.site-title {
+  font-size: 48px;
 }
 
 .construction {
