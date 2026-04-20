@@ -1,5 +1,14 @@
 const pageTemplate = document.createElement('template');
-const menuItems = ['Home', 'Gallery', 'Contact', 'Network', 'MISC']
+const menuItems = {
+    home: {
+        name: 'Home',
+        url: 'main/'
+    },
+    gallery: {
+        name: 'Gallery',
+        url: 'gallery/'
+    }
+}
 const menuItem = document.createElement('template');
 menuItem.innerHTML = `
 				<div class="hover-container">
@@ -10,19 +19,28 @@ menuItem.innerHTML = `
 
 `
 function generateMenuItems(items) {
-	var stringComp = '';
-	for (var item of items) {
+	const comp = document.createElement('div');
+    comp.classList.add('window-container');
+
+	for (var [key, value] of Object.entries(items)) {
 		const clone = menuItem.cloneNode(true)
 		const template = clone.content.firstElementChild;
-		console.log(template);
+
 		const textBox = template.querySelector('.hover-item');
 		const id = template.querySelector('.hover-hitbox');
-		id.setAttribute('id', item);
-		textBox.innerHTML= `<h4> ${item} </h4>`;
-		stringComp += template.outerHTML;
+        const url = value.url
+
+		id.setAttribute('id', key);
+        id.addEventListener('click', () => {
+            window.location.pathname = `/${url}`
+        })
+
+		textBox.innerHTML= `<h4> ${value.name} </h4>`;
+
+		comp.append(template);
 	}
 
-	return stringComp;
+	return comp;
 }
 
 const htmlString = `
@@ -34,9 +52,6 @@ const htmlString = `
             </div>
         </div>
         <div class="grid-container navi">
-            <div class="window-container">
-                ${generateMenuItems(menuItems)}
-            </div>
 
         </div>
 
@@ -56,6 +71,8 @@ const htmlString = `
 
 pageTemplate.innerHTML = htmlString.trim();
 const element = pageTemplate.content.firstElementChild;
+
+element.querySelector('.grid-container.navi').append(generateMenuItems(menuItems))
 
 
 export { element };
