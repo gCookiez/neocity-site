@@ -1,26 +1,58 @@
+const articleTemplate = `
+    <div class="article-area">
+        <div class="article-details">
+            <div class="article-title">
+            
+            </div>
+            <div class="date-posted">
+
+            </div>
+        </div>
+    <div class="article-content">
+
+    </div>
+    <div class="expand-article">
+        <span> Read More </span> 
+    </div>
+</div>
+`
+
+const elementArticleTemplate = document.createElement('template');
+elementArticleTemplate.innerHTML = articleTemplate;
+
+
+
+
 export function applyArticle(data) {
-    const documentArea = document.createElement('div');
-    documentArea.classList.add('article-area');
-    documentArea.innerHTML = `
-        <h2> ${data.title} </h2>
-        <br>
-        <span> Posted on: ${data.date} </span>
-        <br>
-        <br>
-        <p> ${data.content} </p>
-    `
+    const documentArea = elementArticleTemplate.content.firstElementChild.cloneNode(true);
+    documentArea.querySelector('.article-title').innerHTML = `<h2> ${data.title} </h2>`
+    documentArea.querySelector('.date-posted').innerHTML = `<span> Posted on: ${data.date} </span>`
+    documentArea.querySelector('.article-content').innerHTML = `<p> ${data.content} </p>`
+    const container = document.querySelector('.content-container');
+    container.append(documentArea);
 
-    return documentArea
+    return;
 
+}
+
+export function listArticles(data) {
+    for (var article of data.articles) {
+        applyArticle(article);
+    }
+}
+
+export function fetchGallery(data) {
+    return false;
 }
 
 export function fetchJson(url) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            const format = applyArticle(data);
-            const container = document.querySelector('.content-container');
-            container.append(format);
+            if (data.method == "article") {
+                listArticles(data);
+                return;
+            }
         })
         .catch(error => console.error("Error: ", error));
 

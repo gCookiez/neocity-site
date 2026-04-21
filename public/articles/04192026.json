@@ -1,5 +1,15 @@
 {
-    "title": "Welcome to My Page",
-    "date": "19-04-2026",
-    "content": "Feel free to explore my webpage as i'm currently improving the site. <br> New content will come in regular intervals (If i feel like posting)"
+    "method": "article",
+    "articles": [
+        {
+            "title": "Welcome to My Page",
+            "date": "19-04-2026",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas tortor rhoncus, posuere lacus ut, porta lacus. Aliquam porttitor mattis lorem ut tempor. Aenean pellentesque, nisl nec placerat porta, orci ligula sagittis lorem, vitae pellentesque turpis lorem in metus. Vivamus vehicula risus ut enim pulvinar tempus. Proin id accumsan tellus, et sodales orci. Donec sagittis semper urna, sit amet maximus libero condimentum vitae. Integer interdum congue dolor sed semper. Phasellus mi lacus, congue congue semper sed, dictum sit amet ipsum. Duis et ipsum ut ante condimentum iaculis eget sit amet mi. Aliquam erat volutpat. Pellentesque ornare libero accumsan, cursus mi id, ullamcorper metus. Donec eget pellentesque lacus."
+        },
+        {
+            "title": "Welcome to My Page",
+            "date": "19-04-2026",
+            "content": "Feel free to explore my webpage as i'm currently improving the site. <br> New content will come in regular intervals (If i feel like posting)"
+        }
+    ]
 }
