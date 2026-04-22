@@ -52,7 +52,7 @@ const htmlString = `
 
         <div class="grid-container header">
             <div class="header-container">
-                <h1 class="site-title"> WEB COLORS </h1>
+                <h1 class="site-title"> &lt; BLOG FROM A HUNGRY DEV/&gt; </h1>
             </div>
         </div>
         <div class="grid-container navi">

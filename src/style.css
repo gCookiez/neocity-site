@@ -178,6 +178,7 @@ h4 {
 
 .grid-container.navi {
   grid-area: navi;
+  padding-top: 10px;
 }
 
 .grid-container.content {
@@ -286,7 +287,7 @@ h4 {
 /* article */
 
 .content-container {
-  padding: 10px 20px;
+  padding: 10px 0px 10px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -302,8 +303,9 @@ h4 {
   box-sizing: border-box;
   box-shadow: 8px 8px black;
   transition: box-shadow 0.5s var(--box-bounce);
-  min-height: 220px;
-  max-height: 220px;
+  min-height: 250px;
+  max-height: 250px;
+  padding-bottom: 20px;
 }
 
 .article-content,
