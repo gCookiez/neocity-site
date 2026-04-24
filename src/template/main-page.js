@@ -1,18 +1,10 @@
+import { route, menuItems } from '@utils/router'
+
 const pageTemplate = document.createElement('template');
-const menuItems = {
-    home: {
-        name: 'Home',
-        url: 'main/'
-    },
-    gallery: {
-        name: 'Gallery',
-        url: `pages/gallery/`
-    },
-    about: {
-        name: 'About',
-        url: `pages/about/`
-    }
-}
+
+
+
+
 const menuItem = document.createElement('template');
 menuItem.innerHTML = `
 				<div class="hover-container">
@@ -36,7 +28,7 @@ function generateMenuItems(items) {
 
 		id.setAttribute('id', key);
         id.addEventListener('click', () => {
-            window.location.pathname = `/${url}`
+            route(url);
         })
 
 		textBox.innerHTML= `<h4> ${value.name} </h4>`;

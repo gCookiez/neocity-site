@@ -27,5 +27,3 @@ const blogTemplate = `
 `
 pageTemplate.innerHTML = blogTemplate.trim();
 const blogElement = pageTemplate.content.firstElementChild;
-
-export { blogElement }
