@@ -26,4 +26,10 @@ const blogTemplate = `
 </div>
 `
 pageTemplate.innerHTML = blogTemplate.trim();
-const blogElement = pageTemplate.content.firstElementChild;
+
+export function applyBlogFormat(data) {
+    const blogElement = pageTemplate.content.firstElementChild.cloneNode(true);
+    
+    return;
+}
+
