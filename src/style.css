@@ -347,3 +347,15 @@ h4 {
   font-weight: 600;
   
 }
+
+/*blog content*/
+
+.blog-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  min-height: 100vh;
+  transition: box-shadow 0.5s var(--box-bounce);
+  box-shadow: 8px 8px black;
+  box-sizing: border-box;
+}
