@@ -1,5 +1,5 @@
 import { route, handleLocation } from '@utils/router'
-// route('/main');
+route('/main');
 
 window.onpopstate = handleLocation;
 window.route = route;

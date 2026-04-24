@@ -19,6 +19,7 @@ function generateMenuItems(items) {
     comp.classList.add('window-container');
 
 	for (var [key, value] of Object.entries(items)) {
+        if (value.hidden == true) continue;
 		const clone = menuItem.cloneNode(true)
 		const template = clone.content.firstElementChild;
 

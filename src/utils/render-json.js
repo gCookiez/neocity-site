@@ -1,4 +1,6 @@
 import { listArticles } from '@template/blog-item'
+import { applyBlogFormat } from '@template/view-blog'
+import { route } from '@utils/router'
 
 export function fetchGallery(data) {
     return false;
@@ -18,11 +20,15 @@ export function fetchJson(url) {
                 listArticles(data);
                 return;
             }
-            // if (data.method == "blogContents") {
-            //     return;
-            // }
+            if (data.method == "blogRender") {
+                applyBlogFormat(data);
+                return;
+            }
         })
-        .catch(error => console.error("Error: ", error));
+        .catch(error => {
+            console.error("Error: ", error)
+            route('/404');
+        });
 
 
 }

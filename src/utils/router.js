@@ -15,6 +15,17 @@ export const menuItems = {
         name: 'About',
         url: `/about`,
         path: '../views/catalog.json'
+    },
+    blog: {
+        name: 'Blog',
+        hidden: true,
+        url: `/blog`,
+    },
+    404: {
+        name: '404',
+        hidden: true,
+        url: `/404`,
+        path: false
     }
 }
 
@@ -35,8 +46,11 @@ export function route (event) {
 }
 
 export const handleLocation = () => {
-    const path = window.location.pathname.replace('/', '');
-    const route = menuItems[path].path;
-    fetchJson(route);
+    const path = window.location.pathname.replace('/', '').split('/');
+    const route = path[0] === "blog" ? `../articles/${path[1]}.json` : menuItems[path[0]].path;
+    if (route) {
+        fetchJson(route);
+    }
+    
 } 
 

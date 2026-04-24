@@ -27,7 +27,7 @@ export function applyArticle(data) {
     documentArea.querySelector('.date-posted').innerHTML = `<span> Posted on: ${data.date} </span>`
     documentArea.querySelector('.article-content').innerHTML = `<p> ${data.content} </p>`
     documentArea.querySelector('.expand-article span').addEventListener("click", () => {
-        
+        route(`blog/${data.articleID}`);
     })
     const container = document.querySelector('.content-container');
     container.append(documentArea);

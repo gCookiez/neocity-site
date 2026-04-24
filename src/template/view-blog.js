@@ -29,6 +29,13 @@ pageTemplate.innerHTML = blogTemplate.trim();
 
 export function applyBlogFormat(data) {
     const blogElement = pageTemplate.content.firstElementChild.cloneNode(true);
+    blogElement.querySelector('.blog-title').innerHTML = `<h2> ${data.title} </h2>`
+    blogElement.querySelector('.blog-date').innerHTML = `<span> ${data.title} </span>`
+    blogElement.querySelector('.blog-author').innerHTML = `<span> ${data.author} </span>`
+    blogElement.querySelector('.blog-text').innerHTML = `<span> ${data.content} </span>`
+
+    const container = document.querySelector('.content-container');
+    container.append(blogElement);
     
     return;
 }
