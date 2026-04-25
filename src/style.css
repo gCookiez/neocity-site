@@ -154,7 +154,7 @@ h4 {
 
 .wrapper.home {
   grid-template-areas: 'header header header' 'navi content content' 'footer footer footer';
-  grid-template-rows: 120px 60em 120px;
+  grid-template-rows: 120px auto 120px;
   grid-template-columns: 1fr 4fr;
   gap: 10px;
 }
@@ -290,13 +290,17 @@ h4 {
 
 /* article */
 
-.content-container {
+.list-catalog {
   padding: 10px 0px 10px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 15px;
+}
+
+.list-catalog.hidden {
+  display: none;
 }
 
 .article-area {
@@ -358,7 +362,8 @@ h4 {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  min-height: 100vh;
+  min-height: 600px;
+  height: 100%;
   transition: box-shadow 0.5s var(--box-bounce);
   box-shadow: 8px 8px black;
   box-sizing: border-box;
@@ -380,4 +385,20 @@ h4 {
   margin-left: auto;
   margin-right: auto;
   width: 95%;
+}
+
+/*pagination*/
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  background-color: white;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.pages {
+  display: flex;
+  gap: 5px;
 }

@@ -40,19 +40,34 @@ function convertToJSON(data, fullPath) {
 function convertToView() {
   const view = {
     method: "view",
-    articles: []
+    articles: {}
   }
+
+  const fillfour = [];
+  var counter = 0;
+
   for (var file of collection) {
     const tempObj = {}
     tempObj.articleID = file.articleID;
     tempObj.title = file.title;
     tempObj.date = file.date;
-    
+
     const replaced = file.content.replace(/<\/?\w[^>]*>|&\w+/g, '').replace("\\s+", " ").trim();
     console.log(replaced);
     tempObj.content = replaced.length > 300 ? replaced.substr(0, 300) + '...' : replaced;
-    view.articles.push(tempObj);
+    fillfour.push(tempObj);
+    if (fillfour.length === 4) {
+      view.articles[counter] = JSON.parse(JSON.stringify(fillfour));
+      fillfour.length = 0;
+      counter++;
+    }
   }
+
+  if (fillfour.length > 0) {
+    view.articles[counter] = JSON.parse(JSON.stringify(fillfour));
+    fillfour.length = 0;
+  }
+
   fs.writeFile(`public/views/catalog.json`, JSON.stringify(view), (err) => {
     if (err) throw err;
     console.log(`catalog.json created`);
