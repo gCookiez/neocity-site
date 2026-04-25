@@ -1,17 +1,1 @@
-{
-    "method": "view",
-    "articles": [
-        {
-            "articleID" : "24042026",
-            "title": "Welcome to My Page",
-            "date": "19-04-2026",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas tortor rhoncus, posuere lacus ut, porta lacus. Aliquam porttitor mattis lorem ut tempor. Aenean pellentesque, nisl nec placerat porta, orci ligula sagittis lorem, vitae pellentesque turpis lorem in metus. Vivamus vehicula risus ut enim pulvinar tempus. Proin id accumsan tellus, et sodales orci. Donec sagittis semper urna, sit amet maximus libero condimentum vitae. Integer interdum congue dolor sed semper. Phasellus mi lacus, congue congue semper sed, dictum sit amet ipsum. Duis et ipsum ut ante condimentum iaculis eget sit amet mi. Aliquam erat volutpat. Pellentesque ornare libero accumsan, cursus mi id, ullamcorper metus. Donec eget pellentesque lacus."
-        },
-        {
-            "articleID" : "boredom",
-            "title": "Boredom",
-            "date": "19-04-2026",
-            "content": "One Hell of a test"
-        }
-    ]
-}
+{"method":"view","articles":[{"articleID":"test","title":" This is a test Blog ","date":"2026-04-25","content":"I have created a script that should be able to read the contents of this html to be converted to json file.\n    I am chaking the capabilities of the read write methods of Node.js to ensure that there are no discrepancies occurring in the article.\n    It seems that it is possible to embed Paragraph t..."}]}

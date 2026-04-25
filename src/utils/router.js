@@ -8,11 +8,13 @@ export const menuItems = {
     },
     gallery: {
         name: 'Gallery',
+        hidden: true,
         url: `/gallery`,
         path: '../views/catalog.json'
     },
     about: {
         name: 'About',
+        hidden: true,
         url: `/about`,
         path: '../views/catalog.json'
     },

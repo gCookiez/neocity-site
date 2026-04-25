@@ -58,7 +58,7 @@ const htmlString = `
         </div>
 
         <div class="grid-container footer">
-            
+            <h4> ©crispypata 2026 </h4> 
         </div>
 
 
