@@ -1,3 +1,4 @@
+import { pagination } from "@utils/pagination";
 export const articleTemplate = `
     <div class="article-area">
         <div class="article-details">
@@ -15,14 +16,6 @@ export const articleTemplate = `
         <span> Read More </span> 
     </div>
 </div>
-`
-
-export const paginationFormat = `
-        <div class="pagination">
-            <span id="left-nav"> &lt; </span>
-            <div class="pages"> </div>
-            <span id="right-nav"> &gt; </span>
-        </div>
 `
 
 const elementArticleTemplate = document.createElement('template');
@@ -44,46 +37,7 @@ export function applyArticle(data) {
 
 }
 
-function createCommands(element) {
-    element.querySelector('#left-nav').addEventListener('click', () => {
-        
-    })
-}
-
-export function getPagination(data) {
-    const paginationRender = document.createRange().createContextualFragment(paginationFormat);
-
-
-
-    const pagelength = Object.keys(data.articles).length;
-    const pages = paginationRender.querySelector('.pages') 
-    for (var i = 1; i <= pagelength; i++) {
-        const pageItem = document.createElement('span');
-        pageItem.setAttribute('id', `page-${i}`);
-        pageItem.innerHTML = i;
-        pages.append(pageItem)
-    }
-
-    return paginationRender;
-}
-
 export function listArticles(data) {
-    const listingCatalog = document.createElement('div');
-    listingCatalog.classList.add('group-catalog');
-
-    for (var [page, article] of Object.entries(data.articles)) {
-        const pageView = document.createElement('div');
-        pageView.classList.add('list-catalog', 'hidden', `page-${page}`);
-        article.forEach(element => {
-            const item = applyArticle(element);
-            pageView.append(item);
-        });
-        listingCatalog.append(pageView);
-
-    }
-
-    const pagination = getPagination(data);
-    const container = document.querySelector('.content-container');
-    container.append(listingCatalog, pagination);
-
+    const catalog = new pagination(data);
+    return;
 }
