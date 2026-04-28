@@ -1,4 +1,4 @@
-
+import { intToDateFormat } from "@utils/date";
 // container.append(documentArea);\
 const pageTemplate = document.createElement('template');
 
@@ -30,7 +30,7 @@ pageTemplate.innerHTML = blogTemplate.trim();
 export function applyBlogFormat(data) {
     const blogElement = pageTemplate.content.firstElementChild.cloneNode(true);
     blogElement.querySelector('.blog-title').innerHTML = `<h1> ${data.title} </h1>`
-    blogElement.querySelector('.blog-date').innerHTML = `<span> Date: ${data.title} </span>`
+    blogElement.querySelector('.blog-date').innerHTML = `<span> Date: ${intToDateFormat(data.date)} </span>`
     blogElement.querySelector('.blog-author').innerHTML = `<span> Published by: <b>${data.author}</b> </span>`
     blogElement.querySelector('.blog-text').innerHTML = `${data.content}`
 

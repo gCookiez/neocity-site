@@ -11,12 +11,14 @@ async function readAllFiles(dir) {
     const content = await fs.promises.readFile(fullPath, 'utf8');
     convertToJSON(content, fullPath);
   }
-  writeFiles();
-  convertToView();
+  collection.sort((a, b) => b.date - a.date);
+  await writeFiles();
+  await convertToView();
 
 }
 
-function convertToJSON(data, fullPath) {
+async function convertToJSON(data, fullPath) {
+
 
   const dom = new jsdom.JSDOM(data);
   const object = {
@@ -25,11 +27,21 @@ function convertToJSON(data, fullPath) {
 
   const raw = dom.window.document
   object.articleID = raw.querySelector('meta.file-id').getAttribute('fileid');
+
+  const checkIfExisting = await fs.promises.readFile(`./public/articles/${object.articleID}.json`, 'utf8').catch(err => null);
+
+  if (checkIfExisting !== null) {
+    console.log('JSON SKIP')
+    collection.push(JSON.parse(checkIfExisting));
+    return checkIfExisting;
+  }
+
   object.author = raw.querySelector('author').textContent;
   object.title = raw.querySelector('title').textContent;
-  object.date = new Date().toJSON().substr(0, 10);
+  object.date = new Date().getTime();
   object.content = raw.querySelector('content.content').innerHTML;
   object.path = 'public/articles'
+  object.fullPath = fullPath;
 
   console.log(object);
   collection.push(object);
@@ -38,13 +50,15 @@ function convertToJSON(data, fullPath) {
 }
 
 function convertToView() {
+  console.log(collection)
   const view = {
     method: "view",
     articles: {}
   }
+  var counter = 0;
+
 
   const fillfour = [];
-  var counter = 0;
 
   for (var file of collection) {
     const tempObj = {}
@@ -53,7 +67,6 @@ function convertToView() {
     tempObj.date = file.date;
 
     const replaced = file.content.replace(/<\/?\w[^>]*>|&\w+/g, '').replace("\\s+", " ").trim();
-    console.log(replaced);
     tempObj.content = replaced.length > 300 ? replaced.substr(0, 300) + '...' : replaced;
     fillfour.push(tempObj);
     if (fillfour.length === 4) {
@@ -76,8 +89,14 @@ function convertToView() {
 }
 
 
-function writeFiles() {
+async function writeFiles() {
   for (var file of collection) {
+    const checkIfExisting = await fs.promises.readFile(`./public/articles/${file.articleID}.json`, 'utf8').catch(err => null);
+    if (checkIfExisting) {
+      console.log(`./public/articles/${file.articleID}.json`)
+      console.log('write skip');
+      continue;
+    }
     const filepath = file.path;
     delete file.path;
     fs.writeFile(`${filepath}/${file.articleID}.json`, JSON.stringify(file), (err) => {
@@ -88,8 +107,8 @@ function writeFiles() {
 
 }
 
-fs.rmSync('./public/articles', { recursive: true, force: true });
-fs.mkdirSync('./public/articles');
+// fs.rmSync('./public/articles', { recursive: true, force: true });
+// fs.mkdirSync('./public/articles');
 readAllFiles('public/raw');
 
 
