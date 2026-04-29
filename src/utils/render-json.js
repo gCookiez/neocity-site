@@ -1,5 +1,6 @@
 import { listArticles } from '@template/blog-item'
 import { applyBlogFormat } from '@template/view-blog'
+import { populateGallery } from '@template/gallery'
 import { route } from '@utils/router'
 
 export function fetchGallery(data) {
@@ -22,6 +23,10 @@ export function fetchJson(url) {
             }
             if (data.method == "blogRender") {
                 applyBlogFormat(data);
+                return;
+            }
+            if (data.method == "gallery") {
+                populateGallery(data);
                 return;
             }
         })

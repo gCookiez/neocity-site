@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite --host --port 8888",
-    "dev-generate":  "node converter.js && vite --host --port 8888",
+    "dev-generate": "node converter.js && vite --host --port 8888",
     "build": "node converter.js && vite build",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,6 +20,7 @@
     "vite": "^8.0.8"
   },
   "dependencies": {
+    "fslightbox": "^3.7.5",
     "jsdom": "^27.0.1"
   }
 }

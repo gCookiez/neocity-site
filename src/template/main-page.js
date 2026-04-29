@@ -1,10 +1,6 @@
 import { route, menuItems } from '@utils/router'
 
 const pageTemplate = document.createElement('template');
-
-
-
-
 const menuItem = document.createElement('template');
 menuItem.innerHTML = `
 				<div class="hover-container">
