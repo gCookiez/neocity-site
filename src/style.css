@@ -406,3 +406,13 @@ h4 {
   display: flex;
   gap: 5px;
 }
+
+/* gallery container */
+
+.gallery-container {
+  display: flex;
+  background-color: white;
+  min-height: 200px;
+  padding: 10px;
+  flex-direction: column;
+}
