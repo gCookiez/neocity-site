@@ -4,8 +4,8 @@ console.log(light.default);
 
 const imgItem = document.createElement('template');
 imgItem.innerHTML = `
-	<a data-fslightbox>
-		<img src="" alt="">
+	<a class="img-item" data-fslightbox>
+		<img class="thumb" src="" alt="">
 	</a>
 `
 
@@ -15,7 +15,9 @@ export function populateGallery(data) {
 	var lightbox = new FsLightbox();
 	const dom = document.querySelector('.content-container');
 	const container = document.createElement('div');
+	const containerGrid = document.createElement('div');
 	container.classList.add('gallery-container');
+	containerGrid.classList.add('gallery-grid');
 	const sources = []
 
 	for (var [integer ,img] of Object.entries(data.images)) {
@@ -28,10 +30,13 @@ export function populateGallery(data) {
 			event.preventDefault();
 			lightbox.open(integerLock);
 		})
+		imgCont.querySelector('img').setAttribute('src', img);
 		imgCont.querySelector('img').setAttribute('alt', img);
-		container.append(imgCont);
+		containerGrid.append(imgCont);
 	}
 
+
+	container.append(containerGrid);
 
 	dom.append(container);
 	lightbox.props.sources = sources;

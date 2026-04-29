@@ -284,7 +284,9 @@ h4 {
 
 /* .content-container:hover, */
 .header-container:hover,
-.article-area:hover {
+.article-area:hover,
+.gallery-grid:hover,
+.blog-content:hover {
   box-shadow: 5px 5px black;
 }
 
@@ -322,7 +324,10 @@ h4 {
   padding: 12px;
 }
 
-.expand-article span, .pages > span, #left-nav, #right-nav {
+.expand-article span,
+.pages>span,
+#left-nav,
+#right-nav {
   cursor: pointer;
 }
 
@@ -357,7 +362,7 @@ h4 {
 
 .expand-article span {
   font-weight: 600;
-  
+
 }
 
 /*blog content*/
@@ -409,10 +414,41 @@ h4 {
 
 /* gallery container */
 
+
 .gallery-container {
-  display: flex;
+  padding: 10px 0px 0px 10px;
+  min-height: 600px;
+
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 200px;
   background-color: white;
-  min-height: 200px;
+  min-height: 600px;
+  transition: box-shadow 0.5s var(--box-bounce);
+  box-shadow: 8px 8px black;
+}
+
+
+
+.gallery-grid > a {
+  display: flex;
+  justify-content: center;
   padding: 10px;
-  flex-direction: column;
+}
+
+.gallery-grid > a > img {
+  transition: box-shadow 0.5s var(--box-bounce), transform 0.5s var(--box-bounce);
+}
+.gallery-grid > a:hover > img {
+  box-shadow: 5px 5px black;
+  transform: translate(-5px, -5px);
+}
+
+
+.thumb {
+  width: 150px;
+  aspect-ratio: 4/5;
 }
