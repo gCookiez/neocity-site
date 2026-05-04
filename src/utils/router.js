@@ -31,22 +31,32 @@ export const menuItems = {
 }
 
 
-export function route (event) {
+export function route(event) {
 
     event = event || window.event;
 
     if (typeof event === 'string') {
-        window.history.pushState({}, "", event);    
+        window.history.pushState({}, "", event);
     }
     if (typeof event == 'object') {
         console.log(event.target.href);
-        window.history.pushState({}, "", event.target.href); 
+        window.history.pushState({}, "", event.target.href);
     }
-    
+
     handleLocation();
 }
 
+export const checkpoint = () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (!queryParams['size']) return;
+    const path = queryParams.get('redirLink');
+    window.history.pushState({}, "", path);
+    return;
+}
+
 export const handleLocation = () => {
+    checkpoint();
+
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
 
     if (path[0] === "blog" && path[1] != undefined) {
@@ -58,8 +68,11 @@ export const handleLocation = () => {
         fetchJson(route);
     }
     else {
-        window.history.pushState({}, "", '404');  
+        window.history.pushState({}, "", '404');
     }
-    
-} 
+
+}
+
+
+
 

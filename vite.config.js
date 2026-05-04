@@ -23,7 +23,8 @@ export default defineConfig({
 		rollDownOptions: {
 			external: ['./public/raw'],
 			input: {
-				main: resolve(__dirname, 'src/index.html')
+				main: resolve(__dirname, 'src/index.html'),
+				"404": resolve(__dirname, 'src/not_found.html')
 			}
 		}
 	}
