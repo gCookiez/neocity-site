@@ -106,6 +106,12 @@ export class pagination {
         });
 
         document.querySelector(`.list-catalog[class*=page-${this.counter}]`).classList.remove('hidden');
+
+        document.querySelectorAll(`.pages > .selected`).forEach(element => {
+            element.classList.remove('selected')
+        })
+
+        document.querySelector(`.pages > [id*=page-${this.counter}]`).classList.add('selected');
     }
 
 

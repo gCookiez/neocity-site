@@ -412,6 +412,12 @@ h4 {
   gap: 5px;
 }
 
+.pages > span.selected {
+  background-color: orange;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
 /* gallery container */
 
 
@@ -431,7 +437,15 @@ h4 {
   box-shadow: 8px 8px black;
 }
 
+.blog-img-container {
+  display: flex;
+  justify-content: center;
+}
 
+.blog-image {
+  width: 30em;
+  height: 30em;
+}
 
 .gallery-grid > a {
   display: flex;

@@ -21,7 +21,7 @@ async function readAllFiles(dir) {
 async function readAllImg(dir) {
   const files = await fs.promises.readdir(dir);
   for (const file of files) {
-    const fullPath = path.join(dir, file).replace('public/', '');
+    const fullPath = path.join(dir, file).replaceAll('public\\', '');
     imgCollection.push(fullPath);
   }
   console.log(imgCollection);
