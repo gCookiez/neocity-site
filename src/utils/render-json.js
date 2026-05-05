@@ -11,6 +11,11 @@ export function resetPage() {
     document.querySelector('.content-container').replaceChildren();
 }
 
+export function notFound() {
+    resetPage();
+    
+}
+
 
 export function fetchJson(url) {
     fetch(url)
@@ -34,6 +39,4 @@ export function fetchJson(url) {
             console.error("Error: ", error)
             route('/404');
         });
-
-
 }

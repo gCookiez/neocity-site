@@ -1,4 +1,5 @@
 import { fetchJson } from '@utils/render-json.js'
+import { place404 } from '@template/not-found.js'
 
 export const menuItems = {
     '/': {
@@ -60,15 +61,16 @@ export const handleLocation = () => {
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
 
     if (path[0] === "blog" && path[1] != undefined) {
-        fetchJson(`../articles/${path[1]}.json`);
+        fetchJson(`../articles/${path[1]}.json?t=${new Date().getTime()}`);
         return;
     }
-    const route = menuItems[path[0]] ? menuItems[path[0]].path : menuItems['404'].path;
+    const route = menuItems[path[0]] ? `${menuItems[path[0]].path}?t=${new Date().getTime()}`: menuItems['404'].path;
     if (route) {
         fetchJson(route);
     }
     else {
         window.history.pushState({}, "", '404');
+        place404();
     }
 
 }
