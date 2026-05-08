@@ -13,7 +13,6 @@ export function resetPage() {
 
 export function notFound() {
     resetPage();
-    
 }
 
 

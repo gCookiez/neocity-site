@@ -1,33 +1,46 @@
-import { fetchJson } from '@utils/render-json.js'
+import { fetchJson, resetPage} from '@utils/render-json.js'
 import { place404 } from '@template/not-found.js'
+import { guestBookRender } from '@template/guestbook' 
 
 export const menuItems = {
     '/': {
         name: 'Home',
         url: '/',
-        path: '../views/catalog.json'
+        path: '../views/catalog.json',
+        fetch: true
     },
     gallery: {
         name: 'Gallery',
         url: `/gallery`,
-        path: '../views/gallery.json'
+        path: '../views/gallery.json',
+        fetch: true
     },
     about: {
         name: 'About',
         hidden: true,
         url: `/about`,
-        path: '../views/catalog.json'
+        path: '../views/catalog.json',
+        fetch: true
     },
     blog: {
         name: 'Blog',
         hidden: true,
         url: `/blog`,
+        fetch: true
+    },
+    guestbook: {
+        name: "Guestbook",
+        url: "/guestbook",
+        fetch: false,
+        action: () => {
+            guestBookRender();
+        }
     },
     404: {
         name: '404',
         hidden: true,
         url: `/404`,
-        path: false
+        fetch: true
     }
 }
 
@@ -60,11 +73,21 @@ export const handleLocation = () => {
 
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
 
+
+
     if (path[0] === "blog" && path[1] != undefined) {
         fetchJson(`../articles/${path[1]}.json?t=${new Date().getTime()}`);
         return;
     }
-    const route = menuItems[path[0]] ? `${menuItems[path[0]].path}?t=${new Date().getTime()}`: menuItems['404'].path;
+
+    const route = menuItems[path[0]] && undefined !== menuItems[path[0]].path ? `${menuItems[path[0]].path}?t=${new Date().getTime()}` : false;
+
+    if ((undefined !== menuItems[path[0]] && !menuItems[path[0]].fetch ) && !route) {
+        resetPage();
+        undefined !== menuItems[path[0]].action ? menuItems[path[0]].action() : null;
+        return;
+    }
+
     if (route) {
         fetchJson(route);
     }

@@ -286,7 +286,8 @@ h4 {
 .header-container:hover,
 .article-area:hover,
 .gallery-grid:hover,
-.blog-content:hover {
+.blog-content:hover,
+.guestbook:hover {
   box-shadow: 5px 5px black;
 }
 
@@ -487,4 +488,20 @@ h4 {
 .nothing-burger > span {
   font-size: 16pt;
   color: black;
+}
+
+/*guestbook*/
+
+.guestbook-cont {
+  width: 100%;
+  min-height: 600px;
+}
+
+.guestbook {
+  margin-top: 10px;
+  width: 100%;
+  min-height: inherit;
+  border: 0 solid black;
+  box-shadow: 8px 8px black;
+  transition: box-shadow 0.5s var(--box-bounce);
 }
