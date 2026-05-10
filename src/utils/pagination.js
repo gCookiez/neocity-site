@@ -111,6 +111,8 @@ export class pagination {
             element.classList.remove('selected')
         })
 
+        if (!document.querySelector(`.pages`)) return;
+
         document.querySelector(`.pages > [id*=page-${this.counter}]`).classList.add('selected');
     }
 
