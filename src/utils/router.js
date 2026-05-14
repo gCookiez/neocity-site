@@ -1,6 +1,7 @@
-import { fetchJson, resetPage} from '@utils/render-json.js'
+import { fetchJson, resetPage } from '@utils/render-json.js'
 import { place404 } from '@template/not-found.js'
-import { guestBookRender } from '@template/guestbook' 
+import { guestBookRender } from '@template/guestbook'
+import { mainHome } from '@template/revo-main'
 
 export const menuItems = {
     '/': {
@@ -34,6 +35,14 @@ export const menuItems = {
         fetch: false,
         action: () => {
             guestBookRender();
+        }
+    },
+    home: {
+        name: "Home Alt",
+        url: "/home",
+        fetch: false,
+        action: () => {
+            mainHome();
         }
     },
     404: {
@@ -82,7 +91,8 @@ export const handleLocation = () => {
 
     const route = menuItems[path[0]] && undefined !== menuItems[path[0]].path ? `${menuItems[path[0]].path}?t=${new Date().getTime()}` : false;
 
-    if ((undefined !== menuItems[path[0]] && !menuItems[path[0]].fetch ) && !route) {
+    if ((undefined !== menuItems[path[0]] && !menuItems[path[0]].fetch) && !route) {
+        console.log('call');
         resetPage();
         undefined !== menuItems[path[0]].action ? menuItems[path[0]].action() : null;
         return;

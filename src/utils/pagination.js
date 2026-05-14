@@ -101,6 +101,9 @@ export class pagination {
     }
 
     renderChanges() {
+
+        const top = document.querySelector('.group-catalog');
+        top.scrollIntoView();
         document.querySelectorAll('.list-catalog[class*=page]').forEach(element => {
             element.classList.add('hidden');
         });
