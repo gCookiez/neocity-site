@@ -7,6 +7,11 @@ export function fetchGallery(data) {
     return false;
 }
 
+export function container() {
+    return document.querySelector('.content-container'); 
+}
+
+
 export function resetPage() {
     document.querySelector('.content-container').replaceChildren();
 }
