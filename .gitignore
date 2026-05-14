@@ -2,3 +2,4 @@ node_modules
 dist
 .env
 raw
+public/articles
