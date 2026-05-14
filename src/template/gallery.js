@@ -1,4 +1,5 @@
 import * as light from 'fslightbox';
+import { container } from '@utils/render-json';
 
 console.log(light.default);
 
@@ -13,10 +14,10 @@ imgItem.innerHTML = `
 export function populateGallery(data) {
 
 	var lightbox = new FsLightbox();
-	const dom = document.querySelector('.content-container');
-	const container = document.createElement('div');
+	const dom = container();
+	const cont = document.createElement('div');
 	const containerGrid = document.createElement('div');
-	container.classList.add('gallery-container');
+	cont.classList.add('gallery-container');
 	containerGrid.classList.add('gallery-grid');
 	const sources = []
 
@@ -36,9 +37,9 @@ export function populateGallery(data) {
 	}
 
 
-	container.append(containerGrid);
+	cont.append(containerGrid);
 
-	dom.append(container);
+	dom.append(cont);
 	lightbox.props.sources = sources;
 	// refreshFsLightBox(data.images);
 

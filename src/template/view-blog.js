@@ -1,4 +1,5 @@
 import { intToDateFormat } from "@utils/date";
+import { container } from '@utils/render-json';
 // container.append(documentArea);\
 const pageTemplate = document.createElement('template');
 
@@ -34,8 +35,8 @@ export function applyBlogFormat(data) {
     blogElement.querySelector('.blog-author').innerHTML = `<span> Published by: <b>${data.author}</b> </span>`
     blogElement.querySelector('.blog-text').innerHTML = `${data.content}`
 
-    const container = document.querySelector('.content-container');
-    container.append(blogElement);
+    const cont = container();
+    cont.append(blogElement);
     
     return;
 }

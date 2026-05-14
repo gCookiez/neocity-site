@@ -1,5 +1,5 @@
 body {
-  background-color: gray;
+  background-color: #393E41;
   color: black;
   font-family: Verdana;
 }
@@ -18,8 +18,8 @@ h4 {
 * {
   --hover-demo-bg-color: #fff;
   --hover-item-bg-color: #EEE;
-  --hover-item-select-bg-color: orange;
-  --hover-item-hover-bg-color: lime;
+  --hover-item-select-bg-color: #D3D0CB;
+  --hover-item-hover-bg-color: #E7E5DF;
   --content-bg-color: #EFEFEF;
 
   --box-shadow-top-up: 0px -10px;
@@ -47,8 +47,8 @@ h4 {
   --box-shadow-100: var(--box-shadow-top-exp) var(--box-shadow-top), var(--box-shadow-bottom-exp) var(--box-shadow-bottom), var(--box-shadow-shadows);
 
 
-  --box-shadow-top: green;
-  --box-shadow-bottom: blue;
+  --box-shadow-top: #44BBA4;
+  --box-shadow-bottom: #E7BB41;
 
   --box-spring-up: translate(-20px, -20px);
   --box-spring-neutral: translate(0px, 0px);
@@ -56,8 +56,8 @@ h4 {
   --box-bounce: linear(0 0%, 0 2.27%, 0.02 4.53%, 0.04 6.8%, 0.06 9.07%, 0.1 11.33%, 0.14 13.6%, 0.25 18.15%, 0.39 22.7%, 0.56 27.25%, 0.77 31.8%, 1 36.35%, 0.89 40.9%, 0.85 43.18%, 0.81 45.45%, 0.79 47.72%, 0.77 50%, 0.75 52.27%, 0.75 54.55%, 0.75 56.82%, 0.77 59.1%, 0.79 61.38%, 0.81 63.65%, 0.85 65.93%, 0.89 68.2%, 1 72.7%, 0.97 74.98%, 0.95 77.25%, 0.94 79.53%, 0.94 81.8%, 0.94 84.08%, 0.95 86.35%, 0.97 88.63%, 1 90.9%, 0.99 93.18%, 0.98 95.45%, 0.99 97.73%, 1 100%);
 
   --container-padding: 10px 0px 10px 20px;
-  --container-hover-shadow: 5px 5px black;
-  --container-normal-shadow: 8px 8px black;
+  --container-hover-shadow: 5px 5px var(--box-shadow-top);
+  --container-normal-shadow: 8px 8px var(--box-shadow-top);
   --container-normal-trans: box-shadow 0.5s var(--box-bounce);
 }
 
@@ -191,7 +191,7 @@ h4 {
 
 .grid-container.footer {
   grid-area: footer;
-  background-color: lime;
+  background-color: var(--box-shadow-top);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -268,11 +268,11 @@ h4 {
 }
 
 .window-container:has(.hover-hitbox:not(:hover)) {
-  box-shadow: 7px 7px black;
+  box-shadow: 7px 7px var(--box-shadow-top);
 }
 
 .window-container:has(.hover-hitbox:hover) {
-  box-shadow: 2px 2px black;
+  box-shadow: 2px 2px var(--box-shadow-top);
 }
 
 
@@ -353,7 +353,7 @@ h4 {
 
 .article-details {
   border: 2px solid black;
-  background-color: orange;
+  background-color: var(--hover-item-select-bg-color);
 }
 
 .expand-article {
@@ -381,11 +381,12 @@ h4 {
   transition: var(--container-normal-trans);
   box-shadow: var(--container-normal-shadow);
   box-sizing: border-box;
+  margin: var(--container-padding);
 }
 
 .blog-details {
   padding: 12px;
-  background-color: orange;
+  background-color: var(--hover-item-select-bg-color);
   box-sizing: border-box;
   border: 2px solid black;
 }
@@ -418,7 +419,7 @@ h4 {
 }
 
 .pages>span.selected {
-  background-color: orange;
+  background-color: var(--hover-item-select-bg-color);
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -530,4 +531,10 @@ h4 {
   flex: 1 1 100%;
   transition: var(--container-normal-trans);
   box-shadow: var(--container-normal-shadow);
+}
+
+/* new home */
+
+.welcome-cont {
+  padding: var(--container-padding)
 }

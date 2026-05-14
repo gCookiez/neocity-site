@@ -1,13 +1,14 @@
 const link = "https://crispypata.atabook.org/";
+import { container } from '@utils/render-json';
 
 export function guestBookRender() {
     const iframe = document.createElement('iframe');
-    const container = document.createElement('div');
-    const dom = document.querySelector('.content-container');
+    const cont = document.createElement('div');
+    const dom = container();
     iframe.classList.add('guestbook');
-    container.classList.add('guestbook-cont')
+    cont.classList.add('guestbook-cont')
     iframe.setAttribute('src', link);
-    container.append(iframe)
-    dom.append(container)
+    cont.append(iframe)
+    dom.append(cont)
     return;
 }

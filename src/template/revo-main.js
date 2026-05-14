@@ -1,6 +1,6 @@
 import { container } from '@utils/render-json'
 
-export function mainHome() {
+export function mainHome(callback) {
     const cont = container();
     const content = document.createElement('div');
     const gridSetup = document.createElement('div');
@@ -9,6 +9,7 @@ export function mainHome() {
     gridSetup.append(welcomePlace());
     content.append(gridSetup);
     cont.append(content);
+    callback();
     return;
 }
 

@@ -42,7 +42,10 @@ export const menuItems = {
         url: "/home",
         fetch: false,
         action: () => {
-            mainHome();
+            mainHome(() => {
+                // post render stuff
+                console.log('Post render');
+            });
         }
     },
     404: {
@@ -92,7 +95,6 @@ export const handleLocation = () => {
     const route = menuItems[path[0]] && undefined !== menuItems[path[0]].path ? `${menuItems[path[0]].path}?t=${new Date().getTime()}` : false;
 
     if ((undefined !== menuItems[path[0]] && !menuItems[path[0]].fetch) && !route) {
-        console.log('call');
         resetPage();
         undefined !== menuItems[path[0]].action ? menuItems[path[0]].action() : null;
         return;
