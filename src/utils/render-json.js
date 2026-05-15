@@ -36,7 +36,7 @@ export function fetchJson(url, options) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            if (undefined !== options && undefined !== options.group && true === options.group) {
+            if (undefined !== options && undefined !== options.module && true === options.module) {
                 options.callback(data);
                 return;
             }

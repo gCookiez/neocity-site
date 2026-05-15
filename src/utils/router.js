@@ -1,12 +1,28 @@
 import { fetchJson, resetPage } from '@utils/render-json.js'
 import { place404 } from '@template/not-found.js'
 import { guestBookRender } from '@template/guestbook'
-import { mainHome } from '@template/revo-main'
+import { mainHome, blogletModule } from '@template/revo-main'
 
 export const menuItems = {
     '/': {
-        name: 'Home',
-        url: '/',
+        name: "Home",
+        url: "/",
+        fetch: false,
+        action: () => {
+            mainHome(() => {
+                // post render stuff
+                console.log('Post render');
+                const options = {
+                    module: true,
+                    callback: blogletModule
+                }
+                fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
+            });
+        }
+    },
+    blog: {
+        name: 'Blog',
+        url: '/blog',
         path: '../views/catalog.json',
         fetch: true
     },
@@ -23,29 +39,12 @@ export const menuItems = {
         path: '../views/catalog.json',
         fetch: true
     },
-    blog: {
-        name: 'Blog',
-        hidden: true,
-        url: `/blog`,
-        fetch: true
-    },
     guestbook: {
         name: "Guestbook",
         url: "/guestbook",
         fetch: false,
         action: () => {
             guestBookRender();
-        }
-    },
-    home: {
-        name: "Home Alt",
-        url: "/home",
-        fetch: false,
-        action: () => {
-            mainHome(() => {
-                // post render stuff
-                console.log('Post render');
-            });
         }
     },
     404: {
