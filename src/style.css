@@ -550,16 +550,55 @@ h4 {
   flex: 1 1 100%;
   box-sizing: border-box;
   display: grid;
-  grid-template-areas: 'others others' 'bloglet chat';
-  grid-template-rows: 500px 400px;
+  grid-template-areas: 'const const' 'bloglet chat';
+  grid-template-rows: 500px 500px;
   grid-template-columns: 50% 50%;
+}
+
+.bloglet-module,
+.main-widget-module,
+.alt-widget-module{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.alt-widget-module {
+  grid-area: chat;
+}
+
+.chat-soon {
+  background-color: #ccc;
+  width: 400px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.main-widget-module {
+  grid-area: const;
+}
+
+.main-widget-module > .under-construction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  background-color: var(--box-shadow-bottom);
+}
+
+.warning {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  margin-bottom: 20px;
 }
 
 .bloglet-module {
   grid-area: bloglet;
-  justify-content: center;
-  display: flex;
-  align-items: center;
 }
 
 .bloglet-window {
@@ -567,6 +606,12 @@ h4 {
   background-color: #fff;
   box-sizing: border-box;
   max-width: 500px;
+  box-shadow: 7px 7px var(--box-shadow-bottom);
+  transition: var(--container-normal-trans);
+}
+
+.bloglet-window:hover {
+   box-shadow: 2px 2px var(--box-shadow-bottom);
 }
 
 .bloglet-mod-title {
@@ -595,8 +640,9 @@ h4 {
   flex-direction: column;
   background-color: var(--hover-item-hover-bg-color);
   box-sizing: border-box;
-  border: 1px solid #000;
+  border-bottom: 1px solid #CCC;
   justify-content: center;
   padding-left: 20px;
+  padding-right: 20px;
   overflow-x: hidden;
 }

@@ -23,6 +23,8 @@ export function mainHome(callback) {
 
     content.append(contSetup);
     cont.append(content);
+    underConstruction();
+    someKindOfChat()
     callback();
     return;
 }
@@ -81,4 +83,36 @@ export function blogletModule(data) {
     blogletCont.append(blogletContent)
     moduleSetup.append(blogletCont);
     return blogletCont;
+}
+
+
+export function underConstruction() {
+    const moduleSetup = document.querySelector('.home-sub-module-place')
+    const constructionDiv = document.createElement('div');
+    const format = `
+        <div class="under-construction">
+            <img class="warning" src="sys/warning.png" />
+            <h3> SITE UNDER CONSTRUCTION </h3>
+            <p> All content placed in this site is turbulent. Appearances may be subject to change. </p>
+        </div>
+    `
+    const contentFormat = document.createRange().createContextualFragment(format)
+    constructionDiv.classList.add('main-widget-module');
+    constructionDiv.append(contentFormat)
+    moduleSetup.append(constructionDiv);
+}
+
+
+export function someKindOfChat() {
+    const moduleSetup = document.querySelector('.home-sub-module-place')
+    const modDiv = document.createElement('div');
+    const format = `
+        <div class="chat-soon">
+            <h3> Chat coming soon? </h3>
+        </div>
+    `
+    const contentFormat = document.createRange().createContextualFragment(format)
+    modDiv.classList.add('alt-widget-module');
+    modDiv.append(contentFormat)
+    moduleSetup.append(modDiv);
 }
