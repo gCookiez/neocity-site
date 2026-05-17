@@ -25,6 +25,7 @@ export function mainHome(callback) {
     cont.append(content);
     underConstruction();
     someKindOfChat()
+    webRingContainer();
     callback();
     return;
 }
@@ -66,6 +67,32 @@ export function blogletList(data) {
     }
 
     return containerArea;
+}
+
+export function webRingContainer() {
+    const webringContent = `
+        <div class="webring-content">
+            <h3> TO BE ADDED/COLLECTED </h3>
+            <a class="email-me" href="mailto:musou_saber@proton.me"> 
+                <span> Email me for contributing your webring </span>
+            </a>
+        </div>
+    `
+    const moduleSetup = document.querySelector('.home-sub-module-place');
+    const blogletCont = document.createElement('div');
+    const blogletContent = document.createElement('div');
+    const blogletModTitle = document.createElement('div');
+    const webringFrag = document.createRange().createContextualFragment(webringContent)
+    blogletModTitle.classList.add('bloglet-mod-title');
+    blogletCont.classList.add('bloglet-webring');
+    blogletContent.classList.add('bloglet-window');
+
+    blogletModTitle.innerHTML = '<h3> Webring Collection </h3>';
+    blogletContent.append(blogletModTitle, webringFrag);
+    blogletCont.append(blogletContent)
+    moduleSetup.append(blogletCont);
+
+    return moduleSetup;
 }
 
 export function blogletModule(data) {
