@@ -1,4 +1,5 @@
 import { route, menuItems } from '@utils/router'
+import { generateFooter } from '@template/footer';
 
 const pageTemplate = document.createElement('template');
 const menuItem = document.createElement('template');
@@ -53,10 +54,6 @@ const htmlString = `
 
         </div>
 
-        <div class="grid-container footer">
-            <h4> ©crispypata 2026 </h4>
-            <img src="/neocities.png" />
-        </div>
 
 
     </div>
@@ -65,7 +62,7 @@ const htmlString = `
 
 pageTemplate.innerHTML = htmlString.trim();
 const element = pageTemplate.content.firstElementChild;
-
+element.append(generateFooter())
 element.querySelector('.grid-container.navi').append(generateMenuItems(menuItems))
 
 

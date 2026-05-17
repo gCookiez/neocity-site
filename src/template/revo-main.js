@@ -78,6 +78,7 @@ export function blogletModule(data) {
     blogletContent.classList.add('bloglet-window');
 
     blogletModTitle.innerHTML = '<h3> Blog </h3>';
+    
 
     blogletContent.append(blogletModTitle, blogletList(data.articles[0]));
     blogletCont.append(blogletContent)

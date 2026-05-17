@@ -2,6 +2,7 @@ import { fetchJson, resetPage } from '@utils/render-json.js'
 import { place404 } from '@template/not-found.js'
 import { guestBookRender } from '@template/guestbook'
 import { mainHome, blogletModule } from '@template/revo-main'
+import { createSiteMap } from '@template/sitemap'
 
 export const menuItems = {
     '/': {
@@ -18,26 +19,32 @@ export const menuItems = {
                 }
                 fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
             });
-        }
+        },
+        desc: 'The front page of the website. The start area for any visitor.'
     },
     blog: {
         name: 'Blog',
         url: '/blog',
         path: '../views/catalog.json',
-        fetch: true
+        fetch: true,
+        desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
     },
     gallery: {
         name: 'Gallery',
         url: `/gallery`,
         path: '../views/gallery.json',
-        fetch: true
+        fetch: true,
+        desc: `Includes the images shared by the developer.`
+        
     },
     about: {
         name: 'About',
         hidden: true,
+        hiddenFinal: true,
         url: `/about`,
         path: '../views/catalog.json',
-        fetch: true
+        fetch: true,
+        desc: `About the developer.`
     },
     guestbook: {
         name: "Guestbook",
@@ -45,13 +52,25 @@ export const menuItems = {
         fetch: false,
         action: () => {
             guestBookRender();
-        }
+        },
+        desc: `Where visitors share their inner thoughts about anything about the webpage and whatever.`
+    },
+    sitemap: {
+        name: "Sitemap",
+        hidden: false,
+        url: "/sitemap",
+        fetch: false,
+        action: () => {
+            createSiteMap();
+        },
+        desc: `Contains all the available routes of this site.`
     },
     404: {
         name: '404',
         hidden: true,
         url: `/404`,
-        fetch: true
+        fetch: true,
+        desc: `Wrong turn buddy.`
     }
 }
 
@@ -104,6 +123,7 @@ export const handleLocation = () => {
     }
     else {
         window.history.pushState({}, "", '404');
+        resetPage();
         place404();
     }
 
