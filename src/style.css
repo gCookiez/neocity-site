@@ -2,8 +2,7 @@ body {
   background-color: #393E41;
   color: black;
   font-family: Verdana;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin:0;
 }
 
 body.preload * {
@@ -62,7 +61,7 @@ h4 {
   --container-normal-shadow: 8px 8px var(--box-shadow-top);
   --container-normal-trans: box-shadow 0.5s var(--box-bounce);
 
-  --warning: repeating-linear-gradient(140.5deg, var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
+  --warning: repeating-linear-gradient(141.9deg, var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
   --warped: repeating-linear-gradient(-141.4deg, var(--hover-item-select-bg-color), var(--hover-item-select-bg-color) 15px, var(--hover-item-hover-bg-color) 15px, var(--hover-item-hover-bg-color) 25px);
 }
 
@@ -142,11 +141,6 @@ h4 {
   }
 }
 
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .site-title {
   font-size: 35px;
@@ -160,21 +154,28 @@ h4 {
   flex-direction: column;
 }
 
+
+.body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
 .wrapper {
   display: grid;
-  height: 100vh;
-  width: 85vw;
-  min-width: 640px;
+  min-height: 100vh;
+  min-width: 0;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   background-color: var(--hover-demo-bg-color)00;
 }
 
 .wrapper.home {
-  grid-template-areas: 'header header header header' 'navi content content extra' 'footer footer footer footer';
-  grid-template-rows: 60px auto 120px;
-  grid-template-columns: 200px 60em 200px;
+  grid-template-areas: 'header header header' 'navi content side-panel';
+  grid-template-rows: 60px auto;
+  grid-template-columns: 12em 70em 14em;
   gap: 10px;
 }
 
@@ -190,14 +191,20 @@ h4 {
 
 }
 
+.grid-container.side-panel-wrap{
+  grid-area: side-panel;
+  margin-top: 10px;
+
+}
+
 .grid-container.header {
-  background-color: aquamarine;
+  display: flex;
   grid-area: header;
 }
 
 .grid-container.navi {
   grid-area: navi;
-  padding-top: 10px;
+  margin-top: 10px;
 }
 
 .grid-container.content {
@@ -205,13 +212,27 @@ h4 {
   /* background-color: orange; */
 }
 
-.grid-container.footer {
-  grid-area: footer;
+.side-panel {
+  background-color: var(--box-shadow-top);
+  width: 200px;
+  height: 95vh;
+  margin-left: 20px;
+  box-shadow: 7px 7px var(--box-shadow-bottom);
+  transition: var(--container-normal-trans);
+}
+
+
+.side-panel:hover {
+  box-shadow: 2px 2px var(--box-shadow-bottom);
+}
+
+.footer {
   background-color: var(--box-shadow-top);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  height: 120px;
 }
 
 .footer>.lhs,
@@ -312,11 +333,15 @@ h4 {
 
 /* .content-container, */
 .header-container {
-  width: 100%;
+  flex: 1 1 100%;
   height: 100%;
+  width: 100%;
   background-color: var(--content-bg-color);
   transition: var(--container-normal-trans);
   box-shadow: var(--container-normal-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* .content-container:hover, */
@@ -460,13 +485,20 @@ h4 {
   padding-right: 2px;
 }
 
+/*similar elements*/
+.guestbook-cont,
+.gallery-container,
+.site-map,
+.gallery-grid {
+  min-height: 800px;
+}
+
+
 /* gallery container */
 
 
 .gallery-container {
-  padding: 10px 0px 0px 20px;
-  min-height: 600px;
-
+  padding: var(--container-padding)
 }
 
 .gallery-grid {
@@ -474,7 +506,6 @@ h4 {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 200px;
   background-color: white;
-  min-height: 600px;
   transition: var(--container-normal-trans);
   box-shadow: var(--container-normal-shadow);
 }
@@ -536,7 +567,6 @@ h4 {
 
 .guestbook-cont {
   width: 100%;
-  min-height: 600px;
   padding: var(--container-padding);
   box-sizing: border-box;
 }
@@ -636,6 +666,7 @@ h4 {
 .under-construction>* {
   color: white;
   text-shadow: 2px 2px 0px #000;
+  text-align: center;
 }
 
 .warning {
@@ -721,7 +752,6 @@ h4 {
 
 .site-map {
   width: 100%;
-  min-height: 600px;
   padding: var(--container-padding);
   display: flex;
   flex-direction: column;
@@ -736,6 +766,7 @@ h4 {
   transition: var(--container-normal-trans);
   box-shadow: var(--container-normal-shadow);
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .link-list {

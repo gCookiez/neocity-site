@@ -1,6 +1,5 @@
 import { route, menuItems } from '@utils/router'
-import { generateFooter } from '@template/footer';
-
+import { applySideBar } from '@template/right-panel';
 const pageTemplate = document.createElement('template');
 const menuItem = document.createElement('template');
 menuItem.innerHTML = `
@@ -38,31 +37,34 @@ function generateMenuItems(items) {
 }
 
 const htmlString = `
-	<div class="wrapper home">
+    <div class="body-container">
+	    <div class="wrapper home">
 
-        <div class="grid-container header">
-            <div class="header-container">
-                <h1 class="site-title"> &lt; BLOG FROM A HUNGRY DEV/&gt; </h1>
+            <div class="grid-container header">
+                <div class="header-container">
+                    <h1 class="site-title"> &lt; BLOG FROM A HUNGRY DEV/&gt; </h1>
+                </div>
             </div>
-        </div>
-        <div class="grid-container navi">
+            <div class="grid-container navi">
+
+            </div>
+
+            <div class="grid-container content">
+                <div class="content-container"></div>
+
+            </div>
+
+
 
         </div>
-
-        <div class="grid-container content">
-            <div class="content-container"></div>
-
-        </div>
-
-
-
     </div>
 	`
 
 
 pageTemplate.innerHTML = htmlString.trim();
 const element = pageTemplate.content.firstElementChild;
-element.append(generateFooter())
+
+element.querySelector('.wrapper.home').append(applySideBar())
 element.querySelector('.grid-container.navi').append(generateMenuItems(menuItems))
 
 
