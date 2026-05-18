@@ -219,11 +219,31 @@ h4 {
   margin-left: 20px;
   box-shadow: 7px 7px var(--box-shadow-bottom);
   transition: var(--container-normal-trans);
+  padding-top: 10px;
 }
 
 
 .side-panel:hover {
   box-shadow: 2px 2px var(--box-shadow-bottom);
+}
+
+.icon-title {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  justify-self: center;
+}
+
+.icon-item {
+  width: max-content;
+}
+
+.icon-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+  height: 200px;
 }
 
 .footer {
@@ -790,3 +810,4 @@ h4 {
   text-decoration: underline dotted black;
   cursor: pointer;
 }
+
