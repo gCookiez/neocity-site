@@ -703,13 +703,17 @@ h4 {
 
 .bloglet-webring {
   grid-area: webring;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bloglet-window {
   margin: 20px;
   background-color: var(--hover-item-bg-color);
   box-sizing: border-box;
-  max-width: 500px;
+  min-width: 400px;
+  max-width: 400px;
   box-shadow: 7px 7px var(--box-shadow-bottom);
   transition: var(--container-normal-trans);
 }
@@ -739,6 +743,7 @@ h4 {
 }
 
 .list-item-bloglet {
+  min-width: 200px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -752,7 +757,7 @@ h4 {
 }
 
 .webring-content {
-  min-height: 320px;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
   align-items: center;
