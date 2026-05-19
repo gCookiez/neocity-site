@@ -22,6 +22,13 @@ export const menuItems = {
         },
         desc: 'The front page of the website. The start area for any visitor.'
     },
+    about: {
+        name: 'About',
+        url: `/about`,
+        fetch: true,
+        path: '../views/about.json',
+        desc: `About the developer.`
+    },
     blog: {
         name: 'Blog',
         url: '/blog',
@@ -36,15 +43,6 @@ export const menuItems = {
         fetch: true,
         desc: `Includes the images shared by the developer.`
         
-    },
-    about: {
-        name: 'About',
-        hidden: true,
-        hiddenFinal: true,
-        url: `/about`,
-        path: '../views/catalog.json',
-        fetch: true,
-        desc: `About the developer.`
     },
     guestbook: {
         name: "Guestbook",

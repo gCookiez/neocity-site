@@ -2,6 +2,7 @@ import { listArticles } from '@template/blog-item'
 import { applyBlogFormat } from '@template/view-blog'
 import { populateGallery } from '@template/gallery'
 import { route } from '@utils/router'
+import { aboutMe } from '@template/about';
 
 export function fetchGallery(data) {
     return false;
@@ -28,6 +29,10 @@ export function linkBrowser(data) {
     }
     if (data.method == "gallery") {
         populateGallery(data);
+        return;
+    }
+    if (data.method == "about") {
+        aboutMe(data);
         return;
     }
 }

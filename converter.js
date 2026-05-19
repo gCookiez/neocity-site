@@ -160,6 +160,6 @@ async function writeFiles() {
 // fs.rmSync('./public/articles', { recursive: true, force: true });
 // fs.mkdirSync('./public/articles');
 readAllFiles('./raw', finalize);
-// readAllImg('public/images')
+readAllImg('public/images')
 
 

@@ -3,5 +3,6 @@ dist
 .env
 raw
 public/articles
+public/images
 *.drawio
 public/neocities.png
