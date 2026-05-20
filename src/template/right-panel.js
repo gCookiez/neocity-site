@@ -21,7 +21,43 @@ const iconsList = [
         name: "Valid CSS!",
         path: "https://jigsaw.w3.org/css-validator/images/vcss",
         link: "https://jigsaw.w3.org/css-validator/check/referer"
+    },
+    {
+        name: "auberylis.moe",
+        path: "https://auberylis.moe/indexfiles/sitebuttons/auberylismoe.png",
+        link: "https://auberylis.moe/"
+    },
+    {
+        name: "Snew",
+        path: "https://snewdraws.net/snewbutton.gif",
+        link: "https://snewdraws.net"
+    },
+    {
+        name: "Knoxie's World",
+        path: "icons/knoxstation.gif",
+        link: "https://knoxstation.neocities.org/"
+    },
+    {
+        name: "Absolute Realm",
+        path: "icons/absolute-realm.gif",
+        link: "https://theabsoluterealm.com/"
+    },
+    {
+        name: "lazer-bunny",
+        path: "https://lazer-bunny.neocities.org/Art_Storage/Site_Buttons/Button_88x31.gif",
+        link: "https://lazer-bunny.neocities.org/"
+    },
+    {
+        name: "ranfren",
+        path: "https://ranfren.neocities.org/banner.gif",
+        link: "https://ranfren.neocities.org/"
+    },
+    {
+        name: "Kamen Cafe",
+        path: "icons/KAMEN-CAFE-button.gif",
+        link: "https://dedroll.neocities.org/"
     }
+
 
 ]
 
@@ -33,9 +69,41 @@ const template = `
     </div>
 `
 
+export function linkMe() {
+
+    const container = document.createElement('div');
+    const ref = document.createElement('div');
+    const pickup = document.createElement('textarea');
+    const title = document.createElement('div');
+    const iconDom = document.createRange().createContextualFragment(template);
+    const format = `
+            <a href="https://crispypata.neocities.org/" target="_blank"><img src="{Download The Image and Set your link}" alt="Hungry Dev Site"></a>
+    `
+    title.innerHTML = `
+        <h4> Add me to your site! </h4>
+    `
+
+    ref.classList.add('reference-group')
+    container.classList.add('reference-me');
+    pickup.classList.add('reference-text-area');
+    title.classList.add('icon-title');
+    iconDom.querySelector('a').setAttribute('href', 'https://crispypata.neocities.org/icons/icon.gif');
+    iconDom.querySelector('img').setAttribute('src', 'icons/icon.gif');
+    iconDom.querySelector('img').setAttribute('alt', 'Hungry Dev Site');
+
+    pickup.value = format.trim();
+
+    container.append(iconDom, pickup);
+
+    ref.append(title, container)
+
+    return ref;
+
+}
+
 export function iconList() {
     const iconRender = document.createElement('div');
-    
+
     iconRender.classList.add('icon-list')
 
 
@@ -52,6 +120,7 @@ export function iconList() {
 
 export function applySideBar() {
     const sidePanelWrap = document.createElement('div');
+    const iconCollection = document.createElement('div');
     const sidePanel = document.createElement('div');
     const iconTitle = document.createElement('div');
     iconTitle.innerHTML = `
@@ -61,7 +130,10 @@ export function applySideBar() {
     sidePanelWrap.classList.add('grid-container', 'side-panel-wrap');
     sidePanel.classList.add('side-panel')
 
-    sidePanel.append(iconTitle, iconList())
+    iconCollection.classList.add('icon-collection')
+    iconCollection.append(iconTitle, iconList())
+
+    sidePanel.append(iconCollection, linkMe())
 
 
     sidePanelWrap.append(sidePanel);

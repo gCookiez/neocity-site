@@ -69,26 +69,71 @@ export function blogletList(data) {
     return containerArea;
 }
 
-export function webRingContainer() {
+const webringList = [
+    {
+        name: "no-ai",
+        content: `
+            <map name="noaimini14">
+                <area href="https://baccyflap.com/noai" shape="rect" coords="21,0,47,30" target="_blank" alt="no ai webring" title="no ai webring">
+                <area href="https://baccyflap.com/noai/?prv&s=hdb" target="_top" shape="rect" coords="1,13,19,29" alt="previous" title="previous">
+                <area href="https://baccyflap.com/noai/?rnd" target="_top" shape="rect" coords="59,7,66,16" alt="random" title="random">
+                <area href="https://baccyflap.com/noai/?nxt&s=hdb" target="_top" shape="rect" coords="68,1,86,17" alt="next" title="next">
+            </map>
+            <img usemap="#noaimini14" src="https://baccyflap.com/noai/miniwidget14.gif" alt="a bluegreen rectangle showing the words the NO AI webring, with NO AI being written by a fountain pen, all in the style of 16 bit Windows 95 icons. to either side are two equally Windows-95-style cursors pointing left and right, softly bouncing up and down. in between it all is a small black question mark">
+        `
+    },
+    {
+        name: "html-energy",
+        content: `
+            <div id="html-energy-webring">
+                <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/variables.js"></script>
+                <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/widget.js"></script>
+            </div>
+        `
+    }
+]
+
+export function webringRenderer() {
     const webringContent = `
         <div class="webring-content">
-            <h3> TO BE ADDED/COLLECTED </h3>
+            <div class="webring-list">
+            </div>
             <a class="email-me" href="mailto:musou_saber@proton.me"> 
                 <span> Email me for contributing your webring </span>
             </a>
         </div>
     `
+
+    const webringListItem = `
+        <div class="webring-item"> 
+        </div>
+    `
+    const webringFrag = document.createRange().createContextualFragment(webringContent)
+    const start = webringFrag.querySelector('.webring-list')
+
+    for (var [key, val] of Object.entries(webringList)) {
+        const cont = document.createRange().createContextualFragment(webringListItem);
+        const contentRing = document.createRange().createContextualFragment(val.content);
+        cont.querySelector('.webring-item').append(contentRing);
+        start.append(cont);
+    }
+
+    return webringFrag;
+}
+
+export function webRingContainer() {
+
     const moduleSetup = document.querySelector('.home-sub-module-place');
     const blogletCont = document.createElement('div');
     const blogletContent = document.createElement('div');
     const blogletModTitle = document.createElement('div');
-    const webringFrag = document.createRange().createContextualFragment(webringContent)
+
     blogletModTitle.classList.add('bloglet-mod-title');
     blogletCont.classList.add('bloglet-webring');
     blogletContent.classList.add('bloglet-window');
 
     blogletModTitle.innerHTML = '<h3> Webring Collection </h3>';
-    blogletContent.append(blogletModTitle, webringFrag);
+    blogletContent.append(blogletModTitle, webringRenderer());
     blogletCont.append(blogletContent)
     moduleSetup.append(blogletCont);
 
@@ -105,7 +150,7 @@ export function blogletModule(data) {
     blogletContent.classList.add('bloglet-window');
 
     blogletModTitle.innerHTML = '<h3> Blog </h3>';
-    
+
 
     blogletContent.append(blogletModTitle, blogletList(data.articles[0]));
     blogletCont.append(blogletContent)

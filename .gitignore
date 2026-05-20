@@ -4,5 +4,6 @@ dist
 raw
 public/articles
 public/images
+public/icons
 *.drawio
 public/neocities.png

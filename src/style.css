@@ -237,14 +237,45 @@ h4 {
   width: max-content;
 }
 
-.icon-list {
+.icon-item > * img {
+  width: 88px;
+  height: 34px;
+}
+
+.icon-list, .reference-me {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   overflow-y: auto;
+  border: 2px solid black;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+
+.icon-list {
   height: 200px;
 }
+
+.reference-me {
+  height: 120px;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  gap:10px;
+}
+
+.reference-me > textarea {
+  height: 50px;
+}
+
+.reference-text-area {
+  resize: none;
+}
+
+
 
 .footer {
   background-color: var(--box-shadow-top);
@@ -703,7 +734,7 @@ h4 {
 
 .bloglet-webring {
   grid-area: webring;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -762,6 +793,23 @@ h4 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.webring-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+
+}
+
+.webring-item {
+  justify-content: center;
+  display: flex;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow-y: auto;
 }
 
 
@@ -823,23 +871,25 @@ h4 {
 /* about */
 
 .about-area {
-    display: flex;
-    background-color: #fff;
-    min-height: 600px;
-    height: 100%;
-    transition: var(--container-normal-trans);
-    box-shadow: var(--container-normal-shadow);
-    box-sizing: border-box;
-    margin: var(--container-padding);
+  display: flex;
+  background-color: #fff;
+  min-height: 600px;
+  height: 100%;
+  transition: var(--container-normal-trans);
+  box-shadow: var(--container-normal-shadow);
+  box-sizing: border-box;
+  margin: var(--container-padding);
 }
 
 .img-group {
   display: flex;
   gap: 10px;
 }
+
 .about-me {
   padding: 20px;
 }
+
 .about-img {
   width: 40%;
 }
