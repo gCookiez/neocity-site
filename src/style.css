@@ -144,6 +144,7 @@ h4 {
 
 .site-title {
   font-size: 35px;
+  user-select: none;  
 }
 
 .construction {
@@ -200,6 +201,7 @@ h4 {
 .grid-container.header {
   display: flex;
   grid-area: header;
+  justify-content: center;
 }
 
 .grid-container.navi {
@@ -384,15 +386,18 @@ h4 {
 
 /* .content-container, */
 .header-container {
-  flex: 1 1 100%;
   height: 100%;
-  width: 100%;
+  width: 50%;
   background-color: var(--content-bg-color);
-  transition: var(--container-normal-trans);
+  transition: var(--container-normal-trans), width 0.5s var(--box-bounce);
   box-shadow: var(--container-normal-shadow);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.header-container:hover {
+  width:80%;
 }
 
 /* .content-container:hover, */
@@ -789,17 +794,21 @@ h4 {
 
 .webring-content {
   min-height: 380px;
+  max-height: 380px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
 }
 
 .webring-list {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 10px;
+  margin-top: 200px;
+  padding: 10px;
+
 
 }
 

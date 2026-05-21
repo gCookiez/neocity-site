@@ -10,7 +10,11 @@ const footerTemplate = `
             </div> 
 
             <div class="rhs">
-            <span> For inquiries: <b> musou_saber@proton.me </b> </span>
+            <span> For inquiries:   
+            <a class="email-me" href="mailto:musou_saber@proton.me"> 
+                <b> musou_saber@proton.me </b>
+            </a> 
+            </span>
             <span class="site-map-link"> Sitemap </span>
             </div> 
             

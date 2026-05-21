@@ -90,6 +90,18 @@ const webringList = [
                 <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/widget.js"></script>
             </div>
         `
+    }, 
+    {
+        name: "Pinoy Websites",
+        content: `
+            <webring-banner>
+            <p>Member of the <a href="https://webring.antaresph.dev">Pinoy Websites</a> webring</p>
+                <a href="https://webring.antaresph.dev/previous">Previous</a>
+                <a href="https://webring.antaresph.dev/random">Random</a>
+                <a href="https://webring.antaresph.dev/next">Next</a>
+            </webring-banner>
+            <script async src="https://webring.antaresph.dev/embed.js"></script>
+        `
     }
 ]
 
@@ -98,9 +110,6 @@ export function webringRenderer() {
         <div class="webring-content">
             <div class="webring-list">
             </div>
-            <a class="email-me" href="mailto:musou_saber@proton.me"> 
-                <span> Email me for contributing your webring </span>
-            </a>
         </div>
     `
 

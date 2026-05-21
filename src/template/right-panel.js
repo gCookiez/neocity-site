@@ -56,6 +56,11 @@ const iconsList = [
         name: "Kamen Cafe",
         path: "icons/KAMEN-CAFE-button.gif",
         link: "https://dedroll.neocities.org/"
+    },
+    {
+        name: "Cinni's Dream Home",
+        path: "icons/cinni.button_keyklubhouse1.png",
+        link: "https://cinni.net/"
     }
 
 
