@@ -102,6 +102,30 @@ const webringList = [
             </webring-banner>
             <script async src="https://webring.antaresph.dev/embed.js"></script>
         `
+    },
+    {
+        name: "epic webring",
+        content: `
+            <div id='epicring'>
+                <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/onionring-variables.js"></script>
+                <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/newclassic-widget.js"></script>
+            </div>
+        `
+    }, 
+    {
+        name: "bolonese",
+        content: `
+            <iframe src="https://spagwhetti.github.io/embed.html?name=crispy_pata" width="100%" height="50px" style="border: none;"></iframe>
+        `
+    },
+    {
+        name: 'Nyan Cat',
+        content: `
+        <div id='NYAN_'>
+            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-variables.js"></script>
+            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-widget - small.js"></script>
+        </div>
+        `
     }
 ]
 
