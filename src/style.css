@@ -312,10 +312,37 @@ h4 {
   width: 100%;
 }
 
+.icon-set-shrink {
+  width: 50px;
+  height: 50px;
+  background-image: url('sys/sysassets.png');
+  background-repeat: no-repeat;
+  background-size: 550%;
+  background-attachment:local;
+}
 
+.icon-set-shrink.Home {
+  background-position: 6px;
+}
+.icon-set-shrink.About {
+  background-position: -43px;
+}
+.icon-set-shrink.Blog {
+  background-position: -91px;
+}
+.icon-set-shrink.Gallery {
+  background-position: -138px;
+}
+.icon-set-shrink.Guestbook {
+  background-position: -186px;
+}
+.icon-set-shrink.Sitemap {
+  background-position: -236px;
+}
 
-.hover-item.active {
+.hover-item {
   background-color: var(--hover-item-hover-bg-color);
+  gap: 10px;
 }
 
 .hover-container {

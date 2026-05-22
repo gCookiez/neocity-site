@@ -28,7 +28,10 @@ function generateMenuItems(items) {
             route(url);
         })
 
-		textBox.innerHTML= `<h4> ${value.name} </h4>`;
+		textBox.innerHTML= `
+            <span class="icon-set-shrink ${value.name}"> </span>
+            <h4> ${value.name} </h4>
+        `;
 
 		comp.append(template);
 	}

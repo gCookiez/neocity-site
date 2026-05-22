@@ -8,6 +8,7 @@ export const menuItems = {
     '/': {
         name: "Home",
         url: "/",
+        img: "/sys/sysassets.png",
         fetch: false,
         action: () => {
             mainHome(() => {

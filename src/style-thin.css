@@ -119,7 +119,7 @@
     }
 
     * {
-        --warning: repeating-linear-gradient(141deg, var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
+        --warning: repeating-linear-gradient(141.3deg, var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
     }
 
 }
