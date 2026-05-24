@@ -19,6 +19,16 @@ export const articleTemplate = `
 </div>
 `
 
+export const categoryTemplate = `
+    <div class="blog-category-item">
+        <div class="blog-category-title">
+
+        </div>
+        <div class="blog-category-desc">
+        </div>
+    </div>
+`
+
 const elementArticleTemplate = document.createElement('template');
 elementArticleTemplate.innerHTML = articleTemplate;
 
@@ -36,6 +46,13 @@ export function applyArticle(data) {
 
     return documentArea;
 
+}
+
+export function sortedByCategory(data) {
+    const temp =  document.createRange().createContextualFragment(categoryTemplate);
+    temp.querySelector('.blog-category-title').innerHTML = `<span> ${data.title} </span>`
+    temp.querySelector('.blog-category-desc').innerHTML = `<span> ${data.desc} </span>`
+    return temp;
 }
 
 export function listArticles(data) {
