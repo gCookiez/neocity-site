@@ -1,32 +1,49 @@
-import { fetchJson, resetPage} from '@utils/render-json.js'
+import { fetchJson, resetPage } from '@utils/render-json.js'
 import { place404 } from '@template/not-found.js'
-import { guestBookRender } from '@template/guestbook' 
+import { guestBookRender } from '@template/guestbook'
+import { mainHome, blogletModule } from '@template/revo-main'
+import { createSiteMap } from '@template/sitemap'
 
 export const menuItems = {
     '/': {
-        name: 'Home',
-        url: '/',
+        name: "Home",
+        url: "/",
+        img: "/sys/sysassets.png",
+        fetch: false,
+        action: () => {
+            mainHome(() => {
+                // post render stuff
+                console.log('Post render');
+                const options = {
+                    module: true,
+                    callback: blogletModule
+                }
+                fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
+            });
+        },
+        desc: 'The front page of the website. The start area for any visitor.'
+    },
+    about: {
+        name: 'About',
+        url: `/about`,
+        fetch: true,
+        path: '../views/about.json',
+        desc: `About the developer.`
+    },
+    blog: {
+        name: 'Blog',
+        url: '/blog',
         path: '../views/catalog.json',
-        fetch: true
+        fetch: true,
+        desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
     },
     gallery: {
         name: 'Gallery',
         url: `/gallery`,
         path: '../views/gallery.json',
-        fetch: true
-    },
-    about: {
-        name: 'About',
-        hidden: true,
-        url: `/about`,
-        path: '../views/catalog.json',
-        fetch: true
-    },
-    blog: {
-        name: 'Blog',
-        hidden: true,
-        url: `/blog`,
-        fetch: true
+        fetch: true,
+        desc: `Includes the images shared by the developer.`
+        
     },
     guestbook: {
         name: "Guestbook",
@@ -34,13 +51,25 @@ export const menuItems = {
         fetch: false,
         action: () => {
             guestBookRender();
-        }
+        },
+        desc: `Where visitors share their inner thoughts about anything about the webpage and whatever.`
+    },
+    sitemap: {
+        name: "Sitemap",
+        hidden: false,
+        url: "/sitemap",
+        fetch: false,
+        action: () => {
+            createSiteMap();
+        },
+        desc: `Contains all the available routes of this site.`
     },
     404: {
         name: '404',
         hidden: true,
         url: `/404`,
-        fetch: true
+        fetch: true,
+        desc: `Wrong turn buddy.`
     }
 }
 
@@ -82,7 +111,7 @@ export const handleLocation = () => {
 
     const route = menuItems[path[0]] && undefined !== menuItems[path[0]].path ? `${menuItems[path[0]].path}?t=${new Date().getTime()}` : false;
 
-    if ((undefined !== menuItems[path[0]] && !menuItems[path[0]].fetch ) && !route) {
+    if ((undefined !== menuItems[path[0]] && !menuItems[path[0]].fetch) && !route) {
         resetPage();
         undefined !== menuItems[path[0]].action ? menuItems[path[0]].action() : null;
         return;
@@ -93,6 +122,7 @@ export const handleLocation = () => {
     }
     else {
         window.history.pushState({}, "", '404');
+        resetPage();
         place404();
     }
 

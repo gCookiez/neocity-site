@@ -1,4 +1,5 @@
 import { applyArticle } from "@template/blog-item";
+import { container } from '@utils/render-json';
 export class pagination {
     constructor(data) {
         if (typeof data != "object") return;
@@ -84,15 +85,15 @@ export class pagination {
     }
 
     initRender() {
-        const container = document.querySelector('.content-container');
-        if (container.querySelector('.group-catalog') === null) {
+        const cont = container();
+        if (cont.querySelector('.group-catalog') === null) {
             if (this.renderedCatalog == undefined) this.renderedCatalog = this.catalogRender();
             if (this.renderedPagination == undefined) this.renderedPagination = this.initPagination();
             if (this.limit <= 1) {
-                container.append(this.renderedCatalog);
+                cont.append(this.renderedCatalog);
             }
             else {
-                container.append(this.renderedCatalog, this.renderedPagination);
+                cont.append(this.renderedCatalog, this.renderedPagination);
             }
             
             this.renderChanges();
@@ -101,6 +102,9 @@ export class pagination {
     }
 
     renderChanges() {
+
+        const top = document.querySelector('.group-catalog');
+        top.scrollIntoView();
         document.querySelectorAll('.list-catalog[class*=page]').forEach(element => {
             element.classList.add('hidden');
         });
@@ -110,6 +114,8 @@ export class pagination {
         document.querySelectorAll(`.pages > .selected`).forEach(element => {
             element.classList.remove('selected')
         })
+
+        if (!document.querySelector(`.pages`)) return;
 
         document.querySelector(`.pages > [id*=page-${this.counter}]`).classList.add('selected');
     }

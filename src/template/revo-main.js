@@ -1,0 +1,224 @@
+import { container } from '@utils/render-json'
+import { intToDateFormat } from '@utils/date'
+import { route } from '@utils/router'
+
+const listModule = `
+    <div class="list-item-bloglet"> 
+        <span class="bloglet-title"></span> 
+        <span class="bloglet-date"></span> 
+    </div>
+`
+
+export function mainHome(callback) {
+    const cont = container();
+    const content = document.createElement('div');
+    const contSetup = document.createElement('div');
+    const moduleSetup = document.createElement('div');
+
+    moduleSetup.classList.add('home-sub-module-place');
+
+    content.classList.add('home-padding');
+    contSetup.classList.add('home-grid');
+    contSetup.append(welcomePlace(), moduleSetup);
+
+    content.append(contSetup);
+    cont.append(content);
+    underConstruction();
+    someKindOfChat()
+    webRingContainer();
+    callback();
+    return;
+}
+
+export function welcomePlace() {
+    const placeholder = ` 
+    <div class="welcome-cont">
+        <h2> Welcome to my webpage! </h2>
+        <p> This is where I might post random entries (including some ramblings about the dev of this site :/ ) </p>
+    </div> 
+    `
+    const frag = document.createRange().createContextualFragment(placeholder);
+
+    return frag;
+
+}
+
+
+export function blogletList(data) {
+
+    const containerArea = document.createElement('div')
+    containerArea.classList.add('bloglet-list');
+
+    for (var i of data) {
+        const listItem = document.createRange().createContextualFragment(listModule);
+        const title = listItem.querySelector('.bloglet-title')
+        const blogdate = listItem.querySelector('.bloglet-date')
+        title.innerHTML = i.title;
+        blogdate.innerHTML = intToDateFormat(i.date);
+        containerArea.append(listItem);
+        const articleID = i.articleID;
+
+        title.addEventListener('click', () => {
+            route(`blog/${articleID}`);
+        })
+        blogdate.addEventListener('click', () => {
+            route(`blog/${articleID}`);
+        })
+    }
+
+    return containerArea;
+}
+
+const webringList = [
+    {
+        name: "no-ai",
+        content: `
+            <map name="noaimini14">
+                <area href="https://baccyflap.com/noai" shape="rect" coords="21,0,47,30" target="_blank" alt="no ai webring" title="no ai webring">
+                <area href="https://baccyflap.com/noai/?prv&s=hdb" target="_top" shape="rect" coords="1,13,19,29" alt="previous" title="previous">
+                <area href="https://baccyflap.com/noai/?rnd" target="_top" shape="rect" coords="59,7,66,16" alt="random" title="random">
+                <area href="https://baccyflap.com/noai/?nxt&s=hdb" target="_top" shape="rect" coords="68,1,86,17" alt="next" title="next">
+            </map>
+            <img usemap="#noaimini14" src="https://baccyflap.com/noai/miniwidget14.gif" alt="a bluegreen rectangle showing the words the NO AI webring, with NO AI being written by a fountain pen, all in the style of 16 bit Windows 95 icons. to either side are two equally Windows-95-style cursors pointing left and right, softly bouncing up and down. in between it all is a small black question mark">
+        `
+    },
+    {
+        name: "html-energy",
+        content: `
+            <div id="html-energy-webring">
+                <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/variables.js"></script>
+                <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/widget.js"></script>
+            </div>
+        `
+    }, 
+    {
+        name: "Pinoy Websites",
+        content: `
+            <webring-banner>
+            <p>Member of the <a href="https://webring.antaresph.dev">Pinoy Websites</a> webring</p>
+                <a href="https://webring.antaresph.dev/previous">Previous</a>
+                <a href="https://webring.antaresph.dev/random">Random</a>
+                <a href="https://webring.antaresph.dev/next">Next</a>
+            </webring-banner>
+            <script async src="https://webring.antaresph.dev/embed.js"></script>
+        `
+    },
+    {
+        name: "epic webring",
+        content: `
+            <div id='epicring'>
+                <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/onionring-variables.js"></script>
+                <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/newclassic-widget.js"></script>
+            </div>
+        `
+    }, 
+    {
+        name: "bolonese",
+        content: `
+            <iframe src="https://spagwhetti.github.io/embed.html?name=crispy_pata" width="100%" height="50px" style="border: none;"></iframe>
+        `
+    },
+    {
+        name: 'Nyan Cat',
+        content: `
+        <div id='NYAN_'>
+            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-variables.js"></script>
+            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-widget - small.js"></script>
+        </div>
+        `
+    }
+]
+
+export function webringRenderer() {
+    const webringContent = `
+        <div class="webring-content">
+            <div class="webring-list">
+            </div>
+        </div>
+    `
+
+    const webringListItem = `
+        <div class="webring-item"> 
+        </div>
+    `
+    const webringFrag = document.createRange().createContextualFragment(webringContent)
+    const start = webringFrag.querySelector('.webring-list')
+
+    for (var [key, val] of Object.entries(webringList)) {
+        const cont = document.createRange().createContextualFragment(webringListItem);
+        const contentRing = document.createRange().createContextualFragment(val.content);
+        cont.querySelector('.webring-item').append(contentRing);
+        start.append(cont);
+    }
+
+    return webringFrag;
+}
+
+export function webRingContainer() {
+
+    const moduleSetup = document.querySelector('.home-sub-module-place');
+    const blogletCont = document.createElement('div');
+    const blogletContent = document.createElement('div');
+    const blogletModTitle = document.createElement('div');
+
+    blogletModTitle.classList.add('bloglet-mod-title');
+    blogletCont.classList.add('bloglet-webring');
+    blogletContent.classList.add('bloglet-window');
+
+    blogletModTitle.innerHTML = '<h3> Webring Collection </h3>';
+    blogletContent.append(blogletModTitle, webringRenderer());
+    blogletCont.append(blogletContent)
+    moduleSetup.append(blogletCont);
+
+    return moduleSetup;
+}
+
+export function blogletModule(data) {
+    const moduleSetup = document.querySelector('.home-sub-module-place')
+    const blogletCont = document.createElement('div');
+    const blogletContent = document.createElement('div');
+    const blogletModTitle = document.createElement('div');
+    blogletModTitle.classList.add('bloglet-mod-title');
+    blogletCont.classList.add('bloglet-module');
+    blogletContent.classList.add('bloglet-window');
+
+    blogletModTitle.innerHTML = '<h3> Blog </h3>';
+
+
+    blogletContent.append(blogletModTitle, blogletList(data.articles[0]));
+    blogletCont.append(blogletContent)
+    moduleSetup.append(blogletCont);
+    return blogletCont;
+}
+
+
+export function underConstruction() {
+    const moduleSetup = document.querySelector('.home-sub-module-place')
+    const constructionDiv = document.createElement('div');
+    const format = `
+        <div class="under-construction">
+            <img class="warning" src="sys/warning.png" />
+            <h3> SITE UNDER CONSTRUCTION </h3>
+            <p> All content placed in this site is turbulent. Appearances may be subject to change. </p>
+        </div>
+    `
+    const contentFormat = document.createRange().createContextualFragment(format)
+    constructionDiv.classList.add('main-widget-module');
+    constructionDiv.append(contentFormat)
+    moduleSetup.append(constructionDiv);
+}
+
+
+export function someKindOfChat() {
+    const moduleSetup = document.querySelector('.home-sub-module-place')
+    const modDiv = document.createElement('div');
+    const format = `
+        <div class="chat-soon">
+            <h3> Chat coming soon? </h3>
+        </div>
+    `
+    const contentFormat = document.createRange().createContextualFragment(format)
+    modDiv.classList.add('alt-widget-module');
+    modDiv.append(contentFormat)
+    moduleSetup.append(modDiv);
+}

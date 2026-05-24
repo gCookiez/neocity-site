@@ -1,5 +1,5 @@
 import { route, menuItems } from '@utils/router'
-
+import { applySideBar } from '@template/right-panel';
 const pageTemplate = document.createElement('template');
 const menuItem = document.createElement('template');
 menuItem.innerHTML = `
@@ -28,7 +28,10 @@ function generateMenuItems(items) {
             route(url);
         })
 
-		textBox.innerHTML= `<h4> ${value.name} </h4>`;
+		textBox.innerHTML= `
+            <span class="icon-set-shrink ${value.name}"> </span>
+            <h4> ${value.name} </h4>
+        `;
 
 		comp.append(template);
 	}
@@ -37,28 +40,26 @@ function generateMenuItems(items) {
 }
 
 const htmlString = `
-	<div class="wrapper home">
+    <div class="body-container">
+	    <div class="wrapper home">
 
-        <div class="grid-container header">
-            <div class="header-container">
-                <h1 class="site-title"> &lt; BLOG FROM A HUNGRY DEV/&gt; </h1>
+            <div class="grid-container header">
+                <div class="header-container">
+                    <h1 class="site-title"> &lt; BLOG FROM A HUNGRY DEV/&gt; </h1>
+                </div>
             </div>
-        </div>
-        <div class="grid-container navi">
+            <div class="grid-container navi">
+
+            </div>
+
+            <div class="grid-container content">
+                <div class="content-container"></div>
+
+            </div>
+
+
 
         </div>
-
-        <div class="grid-container content">
-            <div class="content-container"></div>
-
-        </div>
-
-        <div class="grid-container footer">
-            <h4> ©crispypata 2026 </h4>
-            <img src="/neocities.png" />
-        </div>
-
-
     </div>
 	`
 
@@ -66,6 +67,7 @@ const htmlString = `
 pageTemplate.innerHTML = htmlString.trim();
 const element = pageTemplate.content.firstElementChild;
 
+element.querySelector('.wrapper.home').append(applySideBar())
 element.querySelector('.grid-container.navi').append(generateMenuItems(menuItems))
 
 

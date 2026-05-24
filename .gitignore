@@ -2,3 +2,8 @@ node_modules
 dist
 .env
 raw
+public/articles
+public/images
+public/icons
+*.drawio
+public/neocities.png
