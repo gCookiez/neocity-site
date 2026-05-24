@@ -3,6 +3,7 @@ import { place404 } from '@template/not-found.js'
 import { guestBookRender } from '@template/guestbook'
 import { mainHome, blogletModule } from '@template/revo-main'
 import { createSiteMap } from '@template/sitemap'
+import { categoryRenderer } from './category'
 
 export const menuItems = {
     '/': {
@@ -35,6 +36,16 @@ export const menuItems = {
         url: '/blog',
         path: '../views/catalog.json',
         fetch: true,
+        desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
+    },
+    testblog: {
+        name: 'Blog Test',
+        url: '/testblog',
+        // path: '../views/catalog.json',
+        fetch: false,
+        action: () => {
+            categoryRenderer();
+        },
         desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
     },
     gallery: {
