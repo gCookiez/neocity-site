@@ -1,3 +1,6 @@
+const object = {}
+
+
 export async function categorySorter(f, p, s) {
 
     console.log(p)
@@ -5,6 +8,15 @@ export async function categorySorter(f, p, s) {
     return;
 }
 
-export async function convertToJSON(file, fullPath, stamp,) {
 
+export async function convertToJSON(file, fullPath, stamp,) {
+    try {
+        const content = await fs.promises.readFile(fullPath, 'utf8');
+
+
+    }
+    catch(e) {
+        console.error(e)
+        return false
+    }
 }
