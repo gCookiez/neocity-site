@@ -11,7 +11,7 @@ export class pagination {
                     <span id="right-nav"> &gt; </span>
                 </div>
         `
-
+        console.log(data);
         this.catalog = data;
         this.limit = Object.keys(this.catalog.articles).length;
         this.initRender();
@@ -38,6 +38,7 @@ export class pagination {
             const pageView = document.createElement('div');
             pageView.classList.add('list-catalog', 'hidden', `page-${parseInt(page) + 1}`);
             article.forEach(element => {
+                element.category = this.catalog.category;
                 const item = applyArticle(element);
                 pageView.append(item);
             });

@@ -8,6 +8,7 @@ export function segregateByTag(data) {
     container.classList.add('main-content-container');
 
     for (var [key, value] of Object.entries(data)) {
+        value.category = key;
         const temp = sortedByCategory(value);
         container.append(temp)
     }
@@ -17,21 +18,8 @@ export function segregateByTag(data) {
     return element;
 }
 
-
-const testJSON = {
-    blog: {
-        title: 'Main Blog',
-        desc: 'General Blog Entries'
-    },
-    updates: {
-        title: 'Site Updates',
-        desc: 'Detailing Site Updates'
-    }
-}
-
-
-export function categoryRenderer() {
+export function categoryRenderer(data) {
     const cont = container();
-    const render = segregateByTag(testJSON);
+    const render = segregateByTag(data);
     cont.append(render)
 }

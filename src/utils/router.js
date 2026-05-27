@@ -31,20 +31,25 @@ export const menuItems = {
         path: '../views/about.json',
         desc: `About the developer.`
     },
+    // blog: {
+    //     name: 'Blog',
+    //     url: '/blog',
+    //     path: '../views/catalog.json',
+    //     fetch: true,
+    //     desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
+    // },
     blog: {
         name: 'Blog',
         url: '/blog',
-        path: '../views/catalog.json',
-        fetch: true,
-        desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
-    },
-    testblog: {
-        name: 'Blog Test',
-        url: '/testblog',
         // path: '../views/catalog.json',
         fetch: false,
         action: () => {
-            categoryRenderer();
+
+            const options = {
+                module: true,
+                callback: categoryRenderer
+            }
+            fetchJson(`../views/category.json?t=${new Date().getTime()}`, options)
         },
         desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
     },
@@ -54,7 +59,7 @@ export const menuItems = {
         path: '../views/gallery.json',
         fetch: true,
         desc: `Includes the images shared by the developer.`
-        
+
     },
     guestbook: {
         name: "Guestbook",
@@ -90,6 +95,7 @@ export function route(event) {
     event = event || window.event;
 
     if (typeof event === 'string') {
+        console.log(event);
         window.history.pushState({}, "", event);
     }
     if (typeof event == 'object') {
@@ -114,9 +120,13 @@ export const handleLocation = () => {
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
 
 
-
     if (path[0] === "blog" && path[1] != undefined) {
-        fetchJson(`../articles/${path[1]}.json?t=${new Date().getTime()}`);
+
+        if (undefined !== path[2]) {
+            fetchJson(`/articles/${path[1]}/${path[2]}.json?t=${new Date().getTime()}`);
+            return;
+        }
+        fetchJson(`/views/categories/${path[1]}.json?t=${new Date().getTime()}`);
         return;
     }
 

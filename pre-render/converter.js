@@ -81,6 +81,7 @@ async function convertToJSON(fullPath, stamp) {
 
   const checkIfExisting = await fs.promises.readFile(`./public/articles/${object.articleID}.json`, 'utf8').catch(err => null);
   const parsed = JSON.parse(checkIfExisting);
+
   if (checkIfExisting !== null && (stamp.mtime === parsed.mTime)) {
     console.log('JSON SKIP')
     collection.push(parsed);

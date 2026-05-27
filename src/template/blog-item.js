@@ -39,7 +39,7 @@ export function applyArticle(data) {
     documentArea.querySelector('.date-posted').innerHTML = `<span> Posted on: ${intToDateFormat(data.date)} </span>`
     documentArea.querySelector('.article-content').innerHTML = `<p> ${data.content} </p>`
     documentArea.querySelector('.expand-article span').addEventListener("click", () => {
-        route(`blog/${data.articleID}`);
+        route(`${data.category}/${data.fileId}`);
     })
     // const container = document.querySelector('.content-container');
     // container.append(documentArea);
@@ -52,6 +52,11 @@ export function sortedByCategory(data) {
     const temp =  document.createRange().createContextualFragment(categoryTemplate);
     temp.querySelector('.blog-category-title').innerHTML = `<span> ${data.title} </span>`
     temp.querySelector('.blog-category-desc').innerHTML = `<span> ${data.desc} </span>`
+    console.log(data);
+
+    temp.querySelector('.blog-category-title').addEventListener('click', () => {
+        route(`blog/${data.category}`);
+    })
     return temp;
 }
 
