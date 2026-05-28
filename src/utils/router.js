@@ -12,15 +12,15 @@ export const menuItems = {
         img: "/sys/sysassets.png",
         fetch: false,
         action: () => {
-            mainHome(() => {
-                // post render stuff
-                console.log('Post render');
-                const options = {
-                    module: true,
-                    callback: blogletModule
-                }
-                fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
-            });
+            mainHome(() => {});
+            //     // post render stuff
+            //     console.log('Post render');
+            //     const options = {
+            //         module: true,
+            //         callback: blogletModule
+            //     }
+            //     fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
+            // });
         },
         desc: 'The front page of the website. The start area for any visitor.'
     },
@@ -31,17 +31,9 @@ export const menuItems = {
         path: '../views/about.json',
         desc: `About the developer.`
     },
-    // blog: {
-    //     name: 'Blog',
-    //     url: '/blog',
-    //     path: '../views/catalog.json',
-    //     fetch: true,
-    //     desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
-    // },
     blog: {
         name: 'Blog',
         url: '/blog',
-        // path: '../views/catalog.json',
         fetch: false,
         action: () => {
 
@@ -104,6 +96,17 @@ export function route(event) {
     }
 
     handleLocation();
+}
+
+export function backtrack(data) {
+    const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
+    if (path.length <= 0) return;
+    path.length = path.length - 1;
+
+    console.log(path);
+    const joined = path.join('/')
+    route(`/${joined}`)
+
 }
 
 export const checkpoint = () => {

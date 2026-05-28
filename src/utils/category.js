@@ -5,7 +5,7 @@ export function segregateByTag(data) {
     const element = document.createElement('div');
     const container = document.createElement('div');
     element.classList.add('blog-category', 'main-content-wrapper');
-    container.classList.add('main-content-container');
+    container.classList.add('main-content-container', 'categories');
 
     for (var [key, value] of Object.entries(data)) {
         value.category = key;

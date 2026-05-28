@@ -50,7 +50,7 @@ export function applyArticle(data) {
 
 export function sortedByCategory(data) {
     const temp =  document.createRange().createContextualFragment(categoryTemplate);
-    temp.querySelector('.blog-category-title').innerHTML = `<span> ${data.title} </span>`
+    temp.querySelector('.blog-category-title').innerHTML = `<h2> ${data.title} </h2>`
     temp.querySelector('.blog-category-desc').innerHTML = `<span> ${data.desc} </span>`
     console.log(data);
 
