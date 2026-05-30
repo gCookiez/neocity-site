@@ -1,5 +1,4 @@
 body {
-  background-color: #393E41;
   color: black;
   font-family: Verdana;
   margin: 0;
@@ -76,6 +75,16 @@ h4 {
   }
 }
 
+@keyframes bgShifting {
+  from {
+    background-position: 3px 3px;
+  }
+
+  to {
+    background-position: 50px 50px;
+  }
+}
+
 
 @keyframes springitem {
   0% {
@@ -141,6 +150,13 @@ h4 {
     margin-bottom: 0px;
   }
 }
+
+body {
+  background-image: url('/sys/bg.png');
+  background-size: 5%;
+  animation: bgShifting 5s infinite both linear;
+}
+
 
 /* template */
 
