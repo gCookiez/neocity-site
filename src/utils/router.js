@@ -3,6 +3,7 @@ import { place404 } from '@template/not-found.js'
 import { guestBookRender } from '@template/guestbook'
 import { mainHome, blogletModule } from '@template/revo-main'
 import { createSiteMap } from '@template/sitemap'
+import { categoryRenderer } from './category'
 
 export const menuItems = {
     '/': {
@@ -11,15 +12,15 @@ export const menuItems = {
         img: "/sys/sysassets.png",
         fetch: false,
         action: () => {
-            mainHome(() => {
-                // post render stuff
-                console.log('Post render');
-                const options = {
-                    module: true,
-                    callback: blogletModule
-                }
-                fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
-            });
+            mainHome(() => {});
+            //     // post render stuff
+            //     console.log('Post render');
+            //     const options = {
+            //         module: true,
+            //         callback: blogletModule
+            //     }
+            //     fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
+            // });
         },
         desc: 'The front page of the website. The start area for any visitor.'
     },
@@ -33,8 +34,15 @@ export const menuItems = {
     blog: {
         name: 'Blog',
         url: '/blog',
-        path: '../views/catalog.json',
-        fetch: true,
+        fetch: false,
+        action: () => {
+
+            const options = {
+                module: true,
+                callback: categoryRenderer
+            }
+            fetchJson(`../views/category.json?t=${new Date().getTime()}`, options)
+        },
         desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
     },
     gallery: {
@@ -43,7 +51,7 @@ export const menuItems = {
         path: '../views/gallery.json',
         fetch: true,
         desc: `Includes the images shared by the developer.`
-        
+
     },
     guestbook: {
         name: "Guestbook",
@@ -79,6 +87,7 @@ export function route(event) {
     event = event || window.event;
 
     if (typeof event === 'string') {
+        console.log(event);
         window.history.pushState({}, "", event);
     }
     if (typeof event == 'object') {
@@ -87,6 +96,17 @@ export function route(event) {
     }
 
     handleLocation();
+}
+
+export function backtrack(data) {
+    const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
+    if (path.length <= 0) return;
+    path.length = path.length - 1;
+
+    console.log(path);
+    const joined = path.join('/')
+    route(`/${joined}`)
+
 }
 
 export const checkpoint = () => {
@@ -103,9 +123,13 @@ export const handleLocation = () => {
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
 
 
-
     if (path[0] === "blog" && path[1] != undefined) {
-        fetchJson(`../articles/${path[1]}.json?t=${new Date().getTime()}`);
+
+        if (undefined !== path[2]) {
+            fetchJson(`/articles/${path[1]}/${path[2]}.json?t=${new Date().getTime()}`);
+            return;
+        }
+        fetchJson(`/views/categories/${path[1]}.json?t=${new Date().getTime()}`);
         return;
     }
 

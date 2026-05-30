@@ -1,11 +1,13 @@
 import { intToDateFormat } from "@utils/date";
 import { container } from '@utils/render-json';
+import { backtrack } from "@utils/router";
 // container.append(documentArea);\
 const pageTemplate = document.createElement('template');
 
 const blogTemplate = `
 <div class="blog-content">
     <div class="blog-details">
+        <span class="back-to-previous"> &lt;- BACK </span>
         <div class="blog-title">
     
         </div>
@@ -30,6 +32,9 @@ pageTemplate.innerHTML = blogTemplate.trim();
 
 export function applyBlogFormat(data) {
     const blogElement = pageTemplate.content.firstElementChild.cloneNode(true);
+    blogElement.querySelector('.back-to-previous').addEventListener('click', () => {
+        backtrack();
+    })
     blogElement.querySelector('.blog-title').innerHTML = `<h1> ${data.title} </h1>`
     blogElement.querySelector('.blog-date').innerHTML = `<span> Date: ${intToDateFormat(data.date)} </span>`
     blogElement.querySelector('.blog-author').innerHTML = `<span> Published by: <b>${data.author}</b> </span>`

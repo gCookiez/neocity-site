@@ -90,7 +90,7 @@ const webringList = [
                 <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/widget.js"></script>
             </div>
         `
-    }, 
+    },
     {
         name: "Pinoy Websites",
         content: `
@@ -111,7 +111,7 @@ const webringList = [
                 <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/newclassic-widget.js"></script>
             </div>
         `
-    }, 
+    },
     {
         name: "bolonese",
         content: `
@@ -125,6 +125,22 @@ const webringList = [
             <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-variables.js"></script>
             <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-widget - small.js"></script>
         </div>
+        `
+    },
+    {
+        name: "bucket",
+        content: `
+            <iframe id="bucket-webring" style="width: 100%; height: 3rem; border: none;" src="https://webring.bucketfish.me/embed.html?name=crispypata"></iframe>
+        `
+    },
+    {
+        name: "Webmaster",
+        content: `
+            <div id="webmasteringbtn">
+            <a href="https://webmasterwebring.netlify.app?crispypata-previous">&lt;</a>
+            <a href="https://webmasterwebring.netlify.app">
+            <img src="https://file.garden/ZrZSgsrYfQXsO7QH/ww/btn.png" width="88" height="31"></a>
+            <a href="https://webmasterwebring.netlify.app?crispypata-random" style="font-size: 1.5rem;">?</a> <a href="https://webmasterwebring.netlify.app?crispypata-next">&gt;</a></div>
         `
     }
 ]

@@ -4,7 +4,7 @@ import { container } from '@utils/render-json'
 const iconsList = [
     {
         name: "Hungry Dev Site",
-        path: "icons/icon.gif",
+        path: "/icons/icon.gif",
         link: "https://crispypata.neocities.org/"
     },
     {
@@ -28,7 +28,7 @@ const iconsList = [
         link: "https://auberylis.moe/"
     },
     {
-        name: "Snew",
+        name: "Snew", 
         path: "https://snewdraws.net/snewbutton.gif",
         link: "https://snewdraws.net"
     },
@@ -93,7 +93,7 @@ export function linkMe() {
     pickup.classList.add('reference-text-area');
     title.classList.add('icon-title');
     iconDom.querySelector('a').setAttribute('href', 'https://crispypata.neocities.org/icons/icon.gif');
-    iconDom.querySelector('img').setAttribute('src', 'icons/icon.gif');
+    iconDom.querySelector('img').setAttribute('src', '/icons/icon.gif');
     iconDom.querySelector('img').setAttribute('alt', 'Hungry Dev Site');
 
     pickup.value = format.trim();

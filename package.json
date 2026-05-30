@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite --host --port 8888",
-    "dev-generate": "node converter.js && vite --host --port 8888",
-    "build": "node converter.js && vite build",
+    "dev-generate": "node pre-render/publisher.js && node pre-render/converter.js && vite --host --port 8888",
+    "build": "node pre-render/publisher.js && node pre-render/converter.js && vite build",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "node converter.js"
+    "generate": "node pre-render/converter.js && node pre-render/converter.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "fslightbox": "^3.7.5",
+    "js-yaml": "^4.1.1",
     "jsdom": "^27.0.1"
   }
 }

@@ -1,5 +1,6 @@
 import { applyArticle } from "@template/blog-item";
 import { container } from '@utils/render-json';
+import { backtrack } from "@utils/router";
 export class pagination {
     constructor(data) {
         if (typeof data != "object") return;
@@ -11,7 +12,12 @@ export class pagination {
                     <span id="right-nav"> &gt; </span>
                 </div>
         `
-
+        this.backbutton = `
+            <div class='back-button'>
+                <span class="back-to-previous"> &lt;- Back </span>
+            </div>
+        `
+        console.log(data);
         this.catalog = data;
         this.limit = Object.keys(this.catalog.articles).length;
         this.initRender();
@@ -38,6 +44,7 @@ export class pagination {
             const pageView = document.createElement('div');
             pageView.classList.add('list-catalog', 'hidden', `page-${parseInt(page) + 1}`);
             article.forEach(element => {
+                element.category = this.catalog.category;
                 const item = applyArticle(element);
                 pageView.append(item);
             });
@@ -47,6 +54,14 @@ export class pagination {
 
         return listingCatalog
     }
+
+    backPage() {
+        const elem = document.createRange().createContextualFragment(this.backbutton);
+        elem.querySelector('.back-to-previous').addEventListener('click', () => {
+            backtrack();
+        }) 
+        return elem;
+    } 
 
     initPagination() {
         const render = this.paginationFormat()
@@ -87,13 +102,14 @@ export class pagination {
     initRender() {
         const cont = container();
         if (cont.querySelector('.group-catalog') === null) {
+            if (this.renderedBackButton == undefined) this.renderedBackButton = this.backPage();
             if (this.renderedCatalog == undefined) this.renderedCatalog = this.catalogRender();
             if (this.renderedPagination == undefined) this.renderedPagination = this.initPagination();
             if (this.limit <= 1) {
-                cont.append(this.renderedCatalog);
+                cont.append(this.renderedBackButton, this.renderedCatalog);
             }
             else {
-                cont.append(this.renderedCatalog, this.renderedPagination);
+                cont.append(this.renderedBackButton, this.renderedCatalog, this.renderedPagination);
             }
             
             this.renderChanges();
@@ -103,7 +119,7 @@ export class pagination {
 
     renderChanges() {
 
-        const top = document.querySelector('.group-catalog');
+        const top = document.querySelector('.site-title');
         top.scrollIntoView();
         document.querySelectorAll('.list-catalog[class*=page]').forEach(element => {
             element.classList.add('hidden');
