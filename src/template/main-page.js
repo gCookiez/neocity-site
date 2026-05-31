@@ -1,5 +1,5 @@
 import { route, menuItems } from '@utils/router'
-import { applySideBar } from '@template/right-panel';
+
 const pageTemplate = document.createElement('template');
 const menuItem = document.createElement('template');
 menuItem.innerHTML = `
@@ -67,7 +67,7 @@ const htmlString = `
 pageTemplate.innerHTML = htmlString.trim();
 const element = pageTemplate.content.firstElementChild;
 
-element.querySelector('.wrapper.home').append(applySideBar())
+
 element.querySelector('.grid-container.navi').append(generateMenuItems(menuItems))
 
 

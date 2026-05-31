@@ -3,8 +3,10 @@
 import * as fs from 'fs'
 import * as jsdom from 'jsdom'
 import path from 'path';
+import * as yaml from 'js-yaml';
 import { categorySorter, convertToJSON } from './src/raw-converter.js';
 import { generateCategoryView, generateCatalogView } from './src/convert-view.js';
+import { generateOuterLinks} from './src/external-links.js';
 
 
 const collection = {}
@@ -111,9 +113,23 @@ async function readRawFiles(dir, processor, callback) {
     callback();
 }
 
-function initialize() {
-    generateCategoryView();
-    readRawFiles('raw', convertToJSON, finalize);
+async function callYAML() {
+    try {
+        const fileContents = fs.readFileSync('./pre-render/config.yaml', 'utf8');
+        const data = yaml.load(fileContents);
+        global.config = data;
+    }
+    catch (e) {
+        console.error(e);
+        global.config = undefined;
+    }
+}
+
+async function initialize() {
+    await callYAML();
+    await generateOuterLinks();
+    await generateCategoryView();
+    await readRawFiles('raw', convertToJSON, finalize);
 
 }
 

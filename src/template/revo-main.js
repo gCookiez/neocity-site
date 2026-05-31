@@ -69,81 +69,7 @@ export function blogletList(data) {
     return containerArea;
 }
 
-const webringList = [
-    {
-        name: "no-ai",
-        content: `
-            <map name="noaimini14">
-                <area href="https://baccyflap.com/noai" shape="rect" coords="21,0,47,30" target="_blank" alt="no ai webring" title="no ai webring">
-                <area href="https://baccyflap.com/noai/?prv&s=hdb" target="_top" shape="rect" coords="1,13,19,29" alt="previous" title="previous">
-                <area href="https://baccyflap.com/noai/?rnd" target="_top" shape="rect" coords="59,7,66,16" alt="random" title="random">
-                <area href="https://baccyflap.com/noai/?nxt&s=hdb" target="_top" shape="rect" coords="68,1,86,17" alt="next" title="next">
-            </map>
-            <img usemap="#noaimini14" src="https://baccyflap.com/noai/miniwidget14.gif" alt="a bluegreen rectangle showing the words the NO AI webring, with NO AI being written by a fountain pen, all in the style of 16 bit Windows 95 icons. to either side are two equally Windows-95-style cursors pointing left and right, softly bouncing up and down. in between it all is a small black question mark">
-        `
-    },
-    {
-        name: "html-energy",
-        content: `
-            <div id="html-energy-webring">
-                <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/variables.js"></script>
-                <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/widget.js"></script>
-            </div>
-        `
-    },
-    {
-        name: "Pinoy Websites",
-        content: `
-            <webring-banner>
-            <p>Member of the <a href="https://webring.antaresph.dev">Pinoy Websites</a> webring</p>
-                <a href="https://webring.antaresph.dev/previous">Previous</a>
-                <a href="https://webring.antaresph.dev/random">Random</a>
-                <a href="https://webring.antaresph.dev/next">Next</a>
-            </webring-banner>
-            <script async src="https://webring.antaresph.dev/embed.js"></script>
-        `
-    },
-    {
-        name: "epic webring",
-        content: `
-            <div id='epicring'>
-                <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/onionring-variables.js"></script>
-                <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/newclassic-widget.js"></script>
-            </div>
-        `
-    },
-    {
-        name: "bolonese",
-        content: `
-            <iframe src="https://spagwhetti.github.io/embed.html?name=crispy_pata" width="100%" height="50px" style="border: none;"></iframe>
-        `
-    },
-    {
-        name: 'Nyan Cat',
-        content: `
-        <div id='NYAN_'>
-            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-variables.js"></script>
-            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-widget - small.js"></script>
-        </div>
-        `
-    },
-    {
-        name: "bucket",
-        content: `
-            <iframe id="bucket-webring" style="width: 100%; height: 3rem; border: none;" src="https://webring.bucketfish.me/embed.html?name=crispypata"></iframe>
-        `
-    },
-    {
-        name: "Webmaster",
-        content: `
-            <div id="webmasteringbtn">
-            <a href="https://webmasterwebring.netlify.app?crispypata-previous">&lt;</a>
-            <a href="https://webmasterwebring.netlify.app">
-            <img src="https://file.garden/ZrZSgsrYfQXsO7QH/ww/btn.png" width="88" height="31"></a>
-            <a href="https://webmasterwebring.netlify.app?crispypata-random" style="font-size: 1.5rem;">?</a> <a href="https://webmasterwebring.netlify.app?crispypata-next">&gt;</a></div>
-        `
-    }
-]
+
 
 export function webringRenderer() {
     const webringContent = `
@@ -160,7 +86,7 @@ export function webringRenderer() {
     const webringFrag = document.createRange().createContextualFragment(webringContent)
     const start = webringFrag.querySelector('.webring-list')
 
-    for (var [key, val] of Object.entries(webringList)) {
+    for (var [key, val] of Object.entries(window.outerLinks.rings)) {
         const cont = document.createRange().createContextualFragment(webringListItem);
         const contentRing = document.createRange().createContextualFragment(val.content);
         cont.querySelector('.webring-item').append(contentRing);

@@ -14,6 +14,7 @@ export function container() {
 
 
 export function resetPage() {
+    if (null === container()) return;
     container().replaceChildren();
 }
 

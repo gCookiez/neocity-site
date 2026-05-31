@@ -9,7 +9,7 @@
     "build": "node pre-render/publisher.js && node pre-render/converter.js && vite build",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "node pre-render/converter.js && node pre-render/converter.js"
+    "generate": "node pre-render/publisher.js && node pre-render/converter.js"
   },
   "keywords": [],
   "author": "",

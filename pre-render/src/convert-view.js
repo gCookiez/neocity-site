@@ -1,14 +1,15 @@
 import * as fs from 'fs'
-import * as yaml from 'js-yaml';
 
 export function generateCategoryView() {
     try {
-        const fileContents = fs.readFileSync('./pre-render/config.yaml', 'utf8');
-        const data = yaml.load(fileContents);
-        fs.writeFile(`./public/views/category.json`, JSON.stringify(data.categories), (err) => {
-            if (err) throw err;
-            console.log(`category.json created`);
-        })
+        const data = global.config
+        console.log('YAML', data)
+        if (data) {
+            fs.writeFile(`./public/views/category.json`, JSON.stringify(data.categories), (err) => {
+                if (err) throw err;
+                console.log(`category.json created`);
+            })
+        }
     }
     catch (e) {
         console.error(e);
