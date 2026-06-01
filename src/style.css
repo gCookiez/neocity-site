@@ -16,6 +16,8 @@ h4 {
 }
 
 * {
+
+  --burger-top-offset: 20px;
   --link-deco: underline dotted black;
   --hover-demo-bg-color: #fff;
   --hover-item-bg-color: #EEE;
@@ -63,6 +65,62 @@ h4 {
 
   --warning: repeating-linear-gradient(141.5deg, var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
   --warped: repeating-linear-gradient(-141.4deg, var(--hover-item-select-bg-color), var(--hover-item-select-bg-color) 15px, var(--hover-item-hover-bg-color) 15px, var(--hover-item-hover-bg-color) 25px);
+}
+
+@keyframes burgerloading-tb {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes burgerloading-vege {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  85% {
+    transform: translateY(0px);
+  }
+}
+@keyframes burgerloading-meat {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  65% {
+    transform: translateY(0px);
+  }
+}
+@keyframes burgerloading-lettuce {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  45% {
+    transform: translateY(0px);
+  }
+}
+@keyframes burgerloading-bb {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  25% {
+    transform: translateY(0px);
+  }
 }
 
 @keyframes warningWarp {
@@ -157,6 +215,83 @@ body {
   animation: bgShifting 5s infinite both linear;
 }
 
+/*burger loading*/
+#loading-anim.full {
+  height:100vh;
+}
+
+#loading-anim, #loading-anim-stable{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loading-anim-stable {
+  height: fit-content;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.burger-parts {
+  display: block;
+  position: relative;
+  width: 90px;
+  height: 90px;
+  box-sizing: border-box;
+  background-color: var(--box-shadow-top);
+}
+
+.loading-burg {
+  background-image: url('/sys/loading.png');
+  height: 21px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  animation-iteration-count: infinite;
+  animation-timing-function: var(--box-bounce);
+  animation-duration: 1s;
+}
+
+.loading-burg.top_bun {
+  width: 90px;
+  top: calc(var(--burger-top-offset) + 0px);
+  animation-name: burgerloading-tb;
+  background-position: -3% center;
+}
+
+.loading-burg.vege {
+  width: 90px;
+  background-position: 23.5% center;
+  animation-name: burgerloading-vege;
+  top: calc(var(--burger-top-offset) + 7px);
+}
+
+.loading-burg.meat {
+  width: 87px;
+  background-position: 49.2% center;
+  animation-name: burgerloading-meat;
+  top: calc(var(--burger-top-offset) + 16px);
+}
+
+.loading-burg.lettuce {
+  width: 78px;
+  background-position: 72.9% center;
+  animation-name: burgerloading-lettuce;
+  top: calc(var(--burger-top-offset) + 21px);
+  left: 2px;
+  z-index: 10;
+}
+
+.loading-burg.bot_bun {
+  width: 88px;
+  background-position: 103% center;
+  animation-name: burgerloading-bb;
+  top: calc(var(--burger-top-offset) + 31px);
+  left:1px;
+}
+
 
 /* template */
 
@@ -214,7 +349,7 @@ body {
   box-shadow: var(--container-hover-shadow);
 }
 
-.blog-category-title:hover > h2 {
+.blog-category-title:hover>h2 {
   text-decoration: var(--link-deco);
   cursor: pointer;
 }
@@ -311,11 +446,12 @@ body {
 .side-panel {
   background-color: var(--box-shadow-top);
   width: 200px;
-  height: 95vh;
+  height: max-content;
   margin-left: 20px;
   box-shadow: 7px 7px var(--box-shadow-bottom);
   transition: var(--container-normal-trans);
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 

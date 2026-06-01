@@ -4,6 +4,8 @@ import { guestBookRender } from '@template/guestbook'
 import { mainHome, blogletModule } from '@template/revo-main'
 import { createSiteMap } from '@template/sitemap'
 import { categoryRenderer } from './category'
+import { container } from '@utils/render-json'
+import { loadingBurger, spawnLoading } from './render-json'
 
 export const menuItems = {
     '/': {
@@ -12,15 +14,8 @@ export const menuItems = {
         img: "/sys/sysassets.png",
         fetch: false,
         action: () => {
-            mainHome(() => {});
-            //     // post render stuff
-            //     console.log('Post render');
-            //     const options = {
-            //         module: true,
-            //         callback: blogletModule
-            //     }
-            //     fetchJson(`../views/catalog.json?t=${new Date().getTime()}`, options)
-            // });
+                mainHome(() => {
+                });
         },
         desc: 'The front page of the website. The start area for any visitor.'
     },
@@ -34,15 +29,8 @@ export const menuItems = {
     blog: {
         name: 'Blog',
         url: '/blog',
-        fetch: false,
-        action: () => {
-
-            const options = {
-                module: true,
-                callback: categoryRenderer
-            }
-            fetchJson(`../views/category.json?t=${new Date().getTime()}`, options)
-        },
+        fetch: true,
+        path: `../views/category.json?t=${new Date().getTime()}`,
         desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
     },
     gallery: {
@@ -59,6 +47,7 @@ export const menuItems = {
         fetch: false,
         action: () => {
             guestBookRender();
+
         },
         desc: `Where visitors share their inner thoughts about anything about the webpage and whatever.`
     },
@@ -124,7 +113,6 @@ export const handleLocation = () => {
 
 
     if (path[0] === "blog" && path[1] != undefined) {
-
         if (undefined !== path[2]) {
             fetchJson(`/articles/${path[1]}/${path[2]}.json?t=${new Date().getTime()}`);
             return;
@@ -138,6 +126,7 @@ export const handleLocation = () => {
     if ((undefined !== menuItems[path[0]] && !menuItems[path[0]].fetch) && !route) {
         resetPage();
         undefined !== menuItems[path[0]].action ? menuItems[path[0]].action() : null;
+
         return;
     }
 

@@ -6,13 +6,6 @@ import { locationInit } from './articles';
 console.log('Hello!')
 
 async function init() {
-    setTimeout(function () {
-        document.body.className = "";
-        document.querySelectorAll('.meta').forEach(e => {
-            e.classList.add('hidden');
-        })
-    }, 100);
-
     const body = document.querySelector('body')
     body.prepend(element, generateFooter());
     console.log(element);
@@ -21,11 +14,16 @@ async function init() {
 const action = {
     module: true,
     callback: async (data) => {
+        document.querySelector('#loading-anim.full').remove();
         window.outerLinks = data;
         init();
         locationInit();
         element.querySelector('.wrapper.home').append(applySideBar())
-    } 
+    }
 }
 
+console.log('Timed')
+
 fetchJson('/views/outerlinks.json', action);
+
+

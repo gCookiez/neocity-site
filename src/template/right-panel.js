@@ -62,6 +62,8 @@ export function applySideBar() {
     const iconCollection = document.createElement('div');
     const sidePanel = document.createElement('div');
     const iconTitle = document.createElement('div');
+    const burgerPlaceholder = window.loadingAnim();
+    burgerPlaceholder.setAttribute('id', 'loading-anim-stable');
     iconTitle.innerHTML = `
         <h4> Links Collected </h4>
     `
@@ -72,7 +74,7 @@ export function applySideBar() {
     iconCollection.classList.add('icon-collection')
     iconCollection.append(iconTitle, iconList())
 
-    sidePanel.append(iconCollection, linkMe())
+    sidePanel.append(iconCollection, linkMe(), burgerPlaceholder)
 
 
     sidePanelWrap.append(sidePanel);

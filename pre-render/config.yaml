@@ -1,12 +1,14 @@
 categories:
-  update:
-    title: "Site Updates"
-    desc: "Entries for Website Updates"
-    path: "./public/views/categories/update.json"
-  personal:
-    title: "Personal Updates"
-    desc: "Daily Entries for Blog"
-    path: "./public/views/categories/personal.json"
+  method: 'blogcategories'
+  list:
+    update:
+      title: "Site Updates"
+      desc: "Entries for Website Updates"
+      path: "./public/views/categories/update.json"
+    personal:
+      title: "Personal Updates"
+      desc: "Daily Entries for Blog"
+      path: "./public/views/categories/personal.json"
 
 iconsList:
   - name: "Hungry Dev Site"

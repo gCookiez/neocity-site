@@ -9,7 +9,7 @@ const listModule = `
     </div>
 `
 
-export function mainHome(callback) {
+export async function mainHome(callback) {
     const cont = container();
     const content = document.createElement('div');
     const contSetup = document.createElement('div');
