@@ -16,6 +16,7 @@
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
         grid-template-columns: 50em 14em;
+        grid-template-rows: 60px 100px auto;
     }
 
     .grid-container.navi {
@@ -59,6 +60,7 @@
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
         grid-template-columns: 50em 14em;
+        grid-template-rows: 60px 100px auto;
     }
 
     .grid-container.navi {
@@ -100,6 +102,7 @@
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
         grid-template-columns: 50em 14em;
+        grid-template-rows: 60px 100px auto;
     }
 
     .grid-container.navi {
