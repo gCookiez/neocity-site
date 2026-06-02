@@ -9,7 +9,8 @@
     "build": "node pre-render/publisher.js && node pre-render/converter.js && vite build",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "node pre-render/publisher.js && node pre-render/converter.js"
+    "generate": "node pre-render/publisher.js && node pre-render/converter.js",
+    "upload": "node --env-file=.env ./post-render/upload.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
   "dependencies": {
     "fslightbox": "^3.7.5",
     "js-yaml": "^4.1.1",
-    "jsdom": "^27.0.1"
+    "jsdom": "^27.0.1",
+    "neocities": "^0.0.3"
   }
 }
