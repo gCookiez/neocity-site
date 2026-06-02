@@ -2,14 +2,11 @@ import * as fs from 'fs'
 import * as jsdom from 'jsdom'
 
 const object = {}
+const itemsToDelete = {
+    items: []
+};
 
 
-export async function categorySorter(f, p, s) {
-
-    console.log(p)
-    console.log(s)
-    return;
-}
 
 export async function existenceCheck(data) {
     const checkIfExisting = await fs.promises.readFile(`./public/articles/${data.category}/${data.fileId}.json`, 'utf8').catch(err => null)
@@ -22,6 +19,64 @@ export async function existenceCheck(data) {
 
 }
 
+export async function rawCheck(data) {
+    const checkIfExisting = await fs.promises.readFile(data.fullPath, 'utf8').catch(err => undefined)
+    return await checkIfExisting === undefined ? true : false;
+}
+
+export async function scanRaw(data) {
+    const scan = fs.promises.readFile(data, 'utf8').catch(err => undefined);
+    if (undefined !== scan) {
+        return JSON.parse(await scan);
+    }
+    return false;
+}
+
+
+export async function deleteItem(data) {
+    const checkIfExisting = await fs.promises.unlink(`./public/articles/${data.category}/${data.fileId}`).catch(err => null)
+}
+
+export async function setupRemoteDelete() {
+    fs.writeFile('./post-render/remotedelete.json', JSON.stringify(itemsToDelete), (err) => {
+        if (err) throw err;
+        console.log(`remotedelete.json created`);
+    })
+    return;
+}
+
+export async function removeOffData() {
+    try {
+        if (undefined === global.config) throw new Error('Yaml not found. Continuing operations')
+
+        for (var cat of Object.keys(global.config.categories.list)) {
+            console.log(cat);
+            const path = `./public/articles/${cat}`
+            const dirarticles = fs.existsSync(path);
+            if (dirarticles) {
+                const item = await fs.readdirSync(path);
+                for await (var i of item) {
+                    const rawPath = `${path}/${i}`
+                    const result = await scanRaw(rawPath);
+                    if (!result) continue;
+                    const conclude = await rawCheck(result);
+                    if (conclude) {
+                        deleteItem({
+                            category: cat,
+                            fileId: i
+                        })
+                        itemsToDelete.items.push(rawPath.replace('./public', ''));
+                    }
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.error(err);
+    }
+    setupRemoteDelete();
+    return
+}
 
 export async function convertToJSON(file, fullPath, stamp) {
     try {
@@ -43,10 +98,11 @@ export async function convertToJSON(file, fullPath, stamp) {
         const result = await existenceCheck(existenceData)
 
         if (result) {
+
             return result;
         }
 
-        
+
         const title = raw.querySelector('title').textContent.trim()
         const author = raw.querySelector('author').textContent.trim()
         const htmlContent = raw.querySelector('content').innerHTML;

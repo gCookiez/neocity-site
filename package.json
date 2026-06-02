@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate": "node pre-render/publisher.js && node pre-render/converter.js",
-    "upload": "node --env-file=.env ./post-render/upload.js"
+    "upload": "node --env-file=.env ./post-render/upload.js",
+    "generate-upload": "node pre-render/publisher.js && node pre-render/converter.js && vite build && node --env-file=.env ./post-render/upload.js"
   },
   "keywords": [],
   "author": "",

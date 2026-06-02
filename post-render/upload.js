@@ -33,7 +33,7 @@ async function getNecessaryDirs(callback) {
             }
 
             index++;
-            
+
         })
 
     }
@@ -61,7 +61,7 @@ async function readData() {
             const filename = i.path.split(/[\/\\]/).pop();
             const ind = files.findIndex(item => item.path === trueDir);
             if (ind !== -1) {
-                
+
                 files[ind].files.push(filename)
                 continue;
             }
@@ -75,6 +75,28 @@ async function readData() {
         }
     }
     return;
+}
+
+async function deleteItems(callback) {
+
+    const items = await fs.promises.readFile('./post-render/remotedelete.json', 'utf8').catch(err => undefined)
+    if (items) {
+        const parsed = JSON.parse(await items);
+        console.log(parsed);
+
+        if (parsed.items.length !== 0) {
+            api.delete(parsed.items, function (resp) {
+                console.log(resp)
+                if (undefined !== resp && 'success' === resp.result) {
+                    fs.promises.unlink('./post-render/remotedelete.json');
+                    callback()
+                }
+            })
+        }
+        else {
+            callback();
+        }
+    }
 }
 
 function uploadItems(items) {
@@ -92,13 +114,14 @@ function uploadItems(items) {
         });
     }
 
-    api.upload(prepObj, function(resp) {
+    api.upload(prepObj, function (resp) {
         console.log(resp);
     })
 }
 
 
-getNecessaryDirs(() => {
-    uploadItems(files);
-    
+getNecessaryDirs(async () => {
+    await deleteItems(() => {
+        uploadItems(files);
+    })
 })

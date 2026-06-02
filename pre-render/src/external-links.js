@@ -4,7 +4,6 @@ import * as fs from 'fs'
 export function generateOuterLinks() {
     try {
         const data = global.config
-        console.log('YAML', data)
         const obj = {
             links: data.iconsList,
             rings: data.webringList

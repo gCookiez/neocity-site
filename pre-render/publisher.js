@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import * as jsdom from 'jsdom'
 import path from 'path';
 import * as yaml from 'js-yaml';
-import { categorySorter, convertToJSON } from './src/raw-converter.js';
+import { convertToJSON, removeOffData } from './src/raw-converter.js';
 import { generateCategoryView, generateCatalogView } from './src/convert-view.js';
 import { generateOuterLinks} from './src/external-links.js';
 
@@ -107,7 +107,10 @@ async function readRawFiles(dir, processor, callback) {
             birth: time
         }
         const result = await processor(file, fullPath, stamps);
-        sorter(result);
+        if (await result) {
+            sorter(result);
+        }
+        
     }
 
     callback();
@@ -129,6 +132,7 @@ async function initialize() {
     await callYAML();
     await generateOuterLinks();
     await generateCategoryView();
+    await removeOffData();
     await readRawFiles('raw', convertToJSON, finalize);
 
 }

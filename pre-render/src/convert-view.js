@@ -3,7 +3,6 @@ import * as fs from 'fs'
 export function generateCategoryView() {
     try {
         const data = global.config
-        console.log('YAML', data)
         if (data) {
             fs.writeFile(`./public/views/category.json`, JSON.stringify(data.categories), (err) => {
                 if (err) throw err;
