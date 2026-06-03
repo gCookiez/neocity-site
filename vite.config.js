@@ -20,12 +20,18 @@ export default defineConfig({
 	build: {
 		outDir,
 		emptyOutDir: true,
-		rollDownOptions: {
-			external: ['./public/raw'],
+		rollupOptions: {
 			input: {
 				main: resolve(__dirname, 'src/index.html'),
-				"404": resolve(__dirname, 'src/not_found.html')
+				kamen_rider: resolve(__dirname, 'src/shrines/kamen_rider/index.html')
 			}
-		}
+		},
+		// rollDownOptions: {
+		// 	external: ['./public/raw'],
+		// 	input: {
+				
+				
+		// 	}
+		// }
 	}
 })
