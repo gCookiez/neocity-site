@@ -563,6 +563,10 @@ body {
   background-position: -236px;
 }
 
+.icon-set-shrink.Shrines {
+  background-position: -91px;
+}
+
 .hover-item {
   background-color: var(--hover-item-hover-bg-color);
   gap: 10px;
@@ -1062,6 +1066,7 @@ body {
   gap: 5px;
   padding: 10px;
   transform: translateY(150px);
+  padding-top: 50px;
 
 }
 

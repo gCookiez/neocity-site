@@ -58,14 +58,27 @@ export function linkBrowser(data) {
 
 export function fetchJson(url, options) {
     resetPage();
-    
+
     if (undefined === options) {
         spawnLoading();
     }
 
     setTimeout(() => {
         fetch(url)
-            .then(response => response.json())
+            .then(response => {
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    return response.json()
+                }
+                else if (contentType && contentType.includes("html")){
+                    window.history.pushState({}, "", url);
+                    window.location.href = url;
+                    return;
+                }
+                else {
+                    throw new Error();
+                }
+            })
             .then(data => {
                 if (undefined !== options && undefined !== options.module && true === options.module) {
                     options.callback(data);
@@ -79,6 +92,6 @@ export function fetchJson(url, options) {
                 resetPage();
                 route('/404');
             });
-    }, 500)
+    }, 100)
 
 }

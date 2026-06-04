@@ -30,10 +30,10 @@ iconsList:
     path: "https://snewdraws.net/snewbutton.gif"
     link: "https://snewdraws.net"
   - name: "Knoxie's World"
-    path: "icons/knoxstation.gif"
+    path: "/icons/knoxstation.gif"
     link: "https://knoxstation.neocities.org/"
   - name: "Absolute Realm"
-    path: "icons/absolute-realm.gif"
+    path: "/icons/absolute-realm.gif"
     link: "https://theabsoluterealm.com/"
   - name: "lazer-bunny"
     path: "https://lazer-bunny.neocities.org/Art_Storage/Site_Buttons/Button_88x31.gif"
@@ -42,14 +42,23 @@ iconsList:
     path: "https://ranfren.neocities.org/banner.gif"
     link: "https://ranfren.neocities.org/"
   - name: "Kamen Cafe"
-    path: "icons/KAMEN-CAFE-button.gif"
+    path: "/icons/KAMEN-CAFE-button.gif"
     link: "https://dedroll.neocities.org/"
   - name: "Cinni's Dream Home"
-    path: "icons/cinni.button_keyklubhouse1.png"
+    path: "/icons/cinni.button_keyklubhouse1.png"
     link: "https://cinni.net/"
   - name: "Orion_My_Rion"
-    path: "icons/orion.gif"
+    path: "/icons/orion.gif"
     link: "https://orion-my-rion.neocities.org/"
+  - name: "ITS_DIDA.exe"
+    path: "https://itsdida.neocities.org/images/itsdida.png"
+    link: "https://itsdida.neocities.org"
+  - name: "itinerae"
+    path: "/icons/itinerae.png"
+    link: "https://itinerae.org"
+  - name: "p1xelgarden"
+    path: "/icons/P1xelGarden_Button.png"
+    link: "https://p1xelgarden.com/"
 webringList:
   - name: "no-ai"
     content: |
@@ -100,3 +109,6 @@ webringList:
             <a href="https://webmasterwebring.netlify.app">
             <img src="https://file.garden/ZrZSgsrYfQXsO7QH/ww/btn.png" width="88" height="31"></a>
             <a href="https://webmasterwebring.netlify.app?crispypata-random" style="font-size: 1.5rem;">?</a> <a href="https://webmasterwebring.netlify.app?crispypata-next">&gt;</a></div>
+  - name: "null webring"
+    content: |
+            <script src="https://nuthead.neocities.org/ring/ring.js"></script>

@@ -8,7 +8,7 @@ console.log('Hello!')
 async function init() {
     const body = document.querySelector('body')
     body.prepend(element, generateFooter());
-    console.log(element);
+    
 }
 
 const action = {

@@ -14,8 +14,16 @@ export const menuItems = {
         img: "/sys/sysassets.png",
         fetch: false,
         action: () => {
-                mainHome(() => {
-                });
+            mainHome(() => {
+                //fix on webrings that have rely on DOMContentLoaded Triggers
+                setTimeout(() => {
+                    window.document.dispatchEvent(new Event("DOMContentLoaded", {
+                        bubbles: true,
+                        cancelable: true
+                    }));
+                }, 1000)
+
+            });
         },
         desc: 'The front page of the website. The start area for any visitor.'
     },
@@ -40,6 +48,14 @@ export const menuItems = {
         fetch: true,
         desc: `Includes the images shared by the developer.`
 
+    },
+    shrines: {
+        name: "Shrines",
+        hidden: false,
+        url: "/shrines",
+        fetch: true,
+        path: '/shrines/kamen_rider/',
+        desc: `A section full of areas of interest. Feel free to read them all.`
     },
     guestbook: {
         name: "Guestbook",

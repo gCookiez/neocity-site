@@ -27,6 +27,41 @@
     .window-container {
         display: flex;
         flex-direction: row;
+        width: 1000px;
+    }
+
+    .hover-item {
+        width: 100%;
+        justify-content: center;
+    }
+    .hover-hitbox {
+        width: 100%;
+    }
+
+    .hover-container {
+        justify-content: unset;
+        width: 50px;
+        flex: 1;
+    }
+
+    .hover-item > h4 {
+        display: none;
+    }
+
+    .hover-container:has(.hover-hitbox:hover){
+        z-index: 100000;
+    }
+
+    .hover-container:has(.hover-hitbox:hover) > .hover-item {
+        width: 500px;
+        padding-left: unset;
+        padding-right: 10px;
+        padding-top: 10px;
+        gap: 0px;
+    }
+
+    .hover-container:has(.hover-hitbox:hover) > .hover-item > h4 {
+        display: block;
     }
 
     .home-sub-module-place {
