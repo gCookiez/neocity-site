@@ -1,0 +1,11 @@
+{
+    "method": "blogcategories",
+    "list": {
+        "shrines": {
+            "title": "Kamen Rider Site",
+            "desc": "Showcasing my passion and collection of karate bugmen memorabilia",
+            "alt": true,
+            "path": "/shrines/kamen_rider/"
+        }
+    }
+}

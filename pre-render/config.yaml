@@ -36,7 +36,7 @@ iconsList:
     path: "/icons/absolute-realm.gif"
     link: "https://theabsoluterealm.com/"
   - name: "lazer-bunny"
-    path: "https://lazer-bunny.neocities.org/Art_Storage/Site_Buttons/Button_88x31.gif"
+    path: "/icons/bunny.gif"
     link: "https://lazer-bunny.neocities.org/"
   - name: "ranfren"
     path: "https://ranfren.neocities.org/banner.gif"
@@ -75,40 +75,44 @@ webringList:
                 <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/variables.js"></script>
                 <script type="text/javascript" src="https://www.gabriel-export.earth/html-energy-webring/onionring/widget.js"></script>
             </div>    
-  - name: "Pinoy Websites"
-    content: |
-            <webring-banner>
-            <p>Member of the <a href="https://webring.antaresph.dev">Pinoy Websites</a> webring</p>
-                <a href="https://webring.antaresph.dev/previous">Previous</a>
-                <a href="https://webring.antaresph.dev/random">Random</a>
-                <a href="https://webring.antaresph.dev/next">Next</a>
-            </webring-banner>
-            <script async src="https://webring.antaresph.dev/embed.js"></script>
+  # - name: "Pinoy Websites"
+  #   content: |
+  #           <webring-banner>
+  #           <p>Member of the <a href="https://webring.antaresph.dev">Pinoy Websites</a> webring</p>
+  #               <a href="https://webring.antaresph.dev/previous">Previous</a>
+  #               <a href="https://webring.antaresph.dev/random">Random</a>
+  #               <a href="https://webring.antaresph.dev/next">Next</a>
+  #           </webring-banner>
+  #           <script async src="https://webring.antaresph.dev/embed.js"></script>
   - name: "epic webring"
     content: |
             <div id='epicring'>
                 <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/onionring-variables.js"></script>
                 <script type="text/javascript" src="https://epic1.nekoweb.org/epicring/newclassic-widget.js"></script>
             </div>
-  - name: "bolonese"
-    content: |
-            <iframe src="https://spagwhetti.github.io/embed.html?name=crispy_pata" width="100%" height="50px" style="border: none;"></iframe>
-  - name: 'Nyan Cat'
-    content: |
-        <div id='NYAN_'>
-            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-variables.js"></script>
-            <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-widget - small.js"></script>
-        </div>
-  - name: "bucket"
-    content: |
-            <iframe id="bucket-webring" style="width: 100%; height: 3rem; border: none;" src="https://webring.bucketfish.me/embed.html?name=crispypata"></iframe>
-  - name: "Webmaster"
-    content: |
-            <div id="webmasteringbtn">
-            <a href="https://webmasterwebring.netlify.app?crispypata-previous">&lt;</a>
-            <a href="https://webmasterwebring.netlify.app">
-            <img src="https://file.garden/ZrZSgsrYfQXsO7QH/ww/btn.png" width="88" height="31"></a>
-            <a href="https://webmasterwebring.netlify.app?crispypata-random" style="font-size: 1.5rem;">?</a> <a href="https://webmasterwebring.netlify.app?crispypata-next">&gt;</a></div>
+  # - name: "bolonese"
+  #   content: |
+  #           <iframe src="https://spagwhetti.github.io/embed.html?name=crispy_pata" width="100%" height="50px" style="border: none;"></iframe>
+  # - name: 'Nyan Cat'
+  #   content: |
+  #       <div id='NYAN_'>
+  #           <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-variables.js"></script>
+  #           <script type="text/javascript" src="https://epiccity.nekoweb.org/ring/onionring-widget - small.js"></script>
+  #       </div>
+  # - name: "bucket"
+  #   content: |
+  #           <iframe id="bucket-webring" style="width: 100%; height: 3rem; border: none;" src="https://webring.bucketfish.me/embed.html?name=crispypata"></iframe>
+  # - name: "Webmaster"
+  #   content: |
+  #           <div id="webmasteringbtn">
+  #           <a href="https://webmasterwebring.netlify.app?crispypata-previous">&lt;</a>
+  #           <a href="https://webmasterwebring.netlify.app">
+  #           <img src="https://file.garden/ZrZSgsrYfQXsO7QH/ww/btn.png" width="88" height="31"></a>
+  #           <a href="https://webmasterwebring.netlify.app?crispypata-random" style="font-size: 1.5rem;">?</a> <a href="https://webmasterwebring.netlify.app?crispypata-next">&gt;</a></div>
   - name: "null webring"
     content: |
             <script src="https://nuthead.neocities.org/ring/ring.js"></script>
+  - name: "didanim"
+    content: |
+            <iframe frameborder='0' height='180' name='sitelinks' src='https://didanim.github.io/Webring/samyang-webring/widget.html?site=crispypata' width='180'></iframe>
+

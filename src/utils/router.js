@@ -54,7 +54,7 @@ export const menuItems = {
         hidden: false,
         url: "/shrines",
         fetch: true,
-        path: '/shrines/kamen_rider/',
+        path: '../views/shrines.json',
         desc: `A section full of areas of interest. Feel free to read them all.`
     },
     guestbook: {

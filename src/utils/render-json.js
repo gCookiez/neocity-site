@@ -71,15 +71,15 @@ export function fetchJson(url, options) {
                     return response.json()
                 }
                 else if (contentType && contentType.includes("html")){
-                    window.history.pushState({}, "", url);
                     window.location.href = url;
-                    return;
+                    return false;
                 }
                 else {
                     throw new Error();
                 }
             })
             .then(data => {
+                if (!data) return;
                 if (undefined !== options && undefined !== options.module && true === options.module) {
                     options.callback(data);
                     return;

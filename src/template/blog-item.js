@@ -1,5 +1,6 @@
 import { pagination } from "@utils/pagination";
 import { intToDateFormat } from "@utils/date";
+import { fetchJson } from "../utils/render-json";
 export const articleTemplate = `
     <div class="article-area">
         <div class="article-details">
@@ -52,9 +53,13 @@ export function sortedByCategory(data) {
     const temp =  document.createRange().createContextualFragment(categoryTemplate);
     temp.querySelector('.blog-category-title').innerHTML = `<h2> ${data.title} </h2>`
     temp.querySelector('.blog-category-desc').innerHTML = `<span> ${data.desc} </span>`
-    console.log(data);
+    console.log('test', data);
 
     temp.querySelector('.blog-category-title').addEventListener('click', () => {
+        if (undefined !== data.alt && data.alt) {
+            fetchJson(`${data.path}`);
+            return;
+        }
         route(`blog/${data.category}`);
     })
     return temp;

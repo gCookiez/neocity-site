@@ -1,0 +1,122 @@
+* {
+    --zero-bg: #000;
+    --zero-filter: drop-shadow(3px 3px 50px #000) brightness(1) blur(20px);
+    --half-bg: #ff0000;
+    --half-filter: drop-shadow(3px 3px 50px #830000) brightness(1) blur(20px);
+    --full-bg: rgb(238, 102, 102);
+    --full-filter: drop-shadow(3px 3px 50px #F00) brightness(1) blur(20px);
+
+    --zero-filter-content: 10px 10px 20px #000;
+    --half-filter-content: 10px 10px 20px #830000;
+    --fill-filter-content: 10px 10px 20px #F00;
+}
+
+
+
+.spark, .capsem {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background-color: var(--zero-bg);
+    filter: var(--zero-filter);
+}
+
+/* @keyframes blink {
+    0%, 20%, 35%, 50%, 53%, 70%, 100%{
+        background-color: var(--zero-bg);
+        filter: var(--zero-filter);
+    }
+    10%, 25%, 40%{
+        background-color: var(--half-bg);
+        filter: var(--half-filter);
+    }
+    15%, 30%, 45%, 54% {
+        background-color: var(--full-bg);
+        filter: var(--full-filter);
+    }
+}
+
+@keyframes blink-sudden {
+    0%, 20%, 35%, 50%, 60%{
+        box-shadow: var(--zero-filter-content);
+    }
+    10%, 25%, 40%{
+        box-shadow: var(--half-filter-content);
+    }
+    15%, 30%, 45%, 63%, 100% {
+        box-shadow: var(--full-filter-content);
+    }
+} */
+
+
+.capsem {
+    left: 62%;
+    top: 350px;
+    width: 200px;
+    height: 200px;
+ }
+
+.spark:nth-child(1) {
+    left: 94%;
+    top: -50px;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+.spark:nth-child(2) {
+    left: 84%;
+    top: 100px;
+}
+
+.spark:nth-child(3) {
+    left: 75%;
+    top: 250px;
+}
+
+.spark:nth-child(4) {
+    left: 55%;
+    top: 550px;
+}
+
+.spark:nth-child(5) {
+    left: 45%;
+    top: 700px;
+}
+
+.spark:nth-child(6) {
+    left: 35%;
+    top: 850px;
+}
+
+/* .spark.norm:nth-child(1){
+    left: 15% !important;
+    top: 750px !important;
+    animation: var(--animation);
+}
+
+.spark.norm:nth-child(2){
+    left: 25% !important;
+    top: 650px !important;
+    animation: var(--animation);
+}
+
+.spark.norm:nth-child(3){
+    left: 35% !important;
+    top: 550px !important;
+    animation: var(--animation);
+}
+.spark.norm:nth-child(4){
+    left: 55% !important;
+    top: 350px !important;
+    animation: var(--animation);
+}
+.spark.norm:nth-child(5){
+    left: 65% !important;
+    top: 250px !important;
+    animation: var(--animation);
+}
+.spark.norm:nth-child(6){
+    left: 75% !important;
+    top: 150px !important;
+    animation: var(--animation);
+} */
