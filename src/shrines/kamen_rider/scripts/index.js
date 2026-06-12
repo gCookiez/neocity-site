@@ -11,7 +11,8 @@ mainTimeline.timeScale("2.5")
 
 function tableOfContents() {
     const leftpane = document.querySelector('.leftpane > .follow');
-    const headers = document.querySelectorAll('.main-content > section[id]');
+    leftpane.replaceChildren('');
+    const headers = document.querySelectorAll('.main-content > .active > section[id]');
     if (!headers.length) return;
 
     leftpane.innerHTML = '<h3> Table of Contents </h3>'
@@ -19,13 +20,63 @@ function tableOfContents() {
     for (var i of headers) {
         const format = document.createElement('h4');
         const link = document.createElement('a');
+        link.classList.add('main-tb-header')
 
         link.setAttribute('href', `#${i.getAttribute('id')}`);
         format.innerHTML = i.querySelector('#headernote').textContent
         link.append(format)
-
         leftpane.append(link)
+
+        i.querySelectorAll('h3').forEach((j,e) => {
+            const subformat = document.createElement('h5');
+            const sublink = document.createElement('a');
+            subformat.innerHTML = `- ${j.textContent}`;
+            sublink.append(subformat);
+            sublink.classList.add('sub-tb-header')
+            sublink.setAttribute('href', `#${j.getAttribute('id')}`)
+            leftpane.append(sublink);
+        })
     }
+}
+
+const actions = {
+    "about-section": {
+        action: 'show',
+        id: "about"
+    },
+    "coll-section": {
+        action: 'show',
+        id: "collection"
+    },
+    "return-home": {
+        action: 'return',
+    }
+}
+
+function changeState(id) {
+    document.querySelector('.main-content > .active').classList.remove('active');
+    document.querySelector(`.main-content > #${actions[id].id}`).classList.add('active');
+    tableOfContents();
+    return
+}
+
+function changeSection() {
+    const allNavlinks = document.querySelectorAll('.nav-item');
+
+    allNavlinks.forEach((i, e) => {
+        const id = i.querySelector('span').getAttribute('id');
+
+        i.addEventListener('click', () => {
+            if ('show' === actions[id].action) {
+                changeState(id);
+            }
+
+            if('return' === actions[id].action) {
+                window.location.href = "/"
+            }
+        })
+    })
+    // console.log(allNavlinks);
 }
 
 function timelineList(startingLabel) {
@@ -88,4 +139,5 @@ function timelineList(startingLabel) {
 }
 
 timelineList("flicker");
+changeSection();
 tableOfContents();

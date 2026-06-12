@@ -163,7 +163,7 @@ nav>.nav-item {
     background-color: #DDD;
 }
 
-.main-content>section {
+.main-content> * section {
     padding: 20px;
 }
 
@@ -171,12 +171,18 @@ section#first>p {
     text-wrap: wrap;
 }
 
-img {
+div#about > * img{
     display: inline-block;
     width: 200px;
     height: 200px;
     object-fit: cover;
     float: right;
+}
+
+div#collection > * img {
+    display:block;
+    width: 300px;
+    aspect-ratio: 2/1;
 }
 
 img.ichigo {
@@ -202,6 +208,45 @@ ul {
     flex-direction: column;
     gap: 10px;
     padding-top: 20px;
+}
+
+.main-content > :not(.active) {
+    display: none;
+}
+
+.redacted {
+    background-color: #000;
+    cursor: pointer;
+}
+
+.redacted:hover {
+    background-color: rgba(0,0,0,0);
+}
+
+#driver_prop, #driver_prop > * th, #driver_prop > * td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#driver_prop > * th, #driver_prop > * td {
+    padding: 10px;
+}
+
+.space_around {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+
+.image-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 300px 300px;
+    gap: 10px;
+}
+
+.sub-tb-header {
+    margin-left: 10px;
 }
 
 /* section {
