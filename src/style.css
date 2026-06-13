@@ -16,7 +16,6 @@ h4 {
 }
 
 * {
-
   --burger-top-offset: 20px;
   --link-deco: underline dotted black;
   --hover-demo-bg-color: #fff;
@@ -200,6 +199,10 @@ body {
   background-image: url('/sys/bg.png');
   background-size: 5%;
   animation: bgShifting 5s infinite both linear;
+}
+
+body.myeyeshurt, .under-construction.myeyeshurt, .chat-soon.myeyeshurt {
+  animation: none !important;
 }
 
 /*burger loading*/
@@ -1163,4 +1166,33 @@ body {
 
 .about-img.code {
   width: 70%;
+}
+
+/* eyes hurt button */
+.button-access-area {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.standard-button {
+  width: 120px;
+  box-sizing: border-box;
+  border: 2px solid var(--box-shadow-bottom);
+  padding: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.standard-button.inactive-but:hover, .standard-button.active-but{
+  background-color: var(--box-shadow-bottom);
+}
+.standard-button.active-but:hover, .standard-button.inactive-but{
+  background-color: unset;
+}
+
+.standard-button > h4 {
+  text-align: center;
 }

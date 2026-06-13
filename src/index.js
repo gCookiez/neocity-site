@@ -3,6 +3,7 @@ import { generateFooter } from '@template/footer';
 import { fetchJson } from '@utils/render-json';
 import { applySideBar } from '@template/right-panel';
 import { locationInit } from './articles';
+import { switchAnimations } from './template/right-panel';
 console.log('Hello!')
 
 async function init() {
@@ -19,6 +20,7 @@ const action = {
         init();
         locationInit();
         element.querySelector('.wrapper.home').append(applySideBar())
+        switchAnimations();
     }
 }
 

@@ -6,6 +6,7 @@ import { createSiteMap } from '@template/sitemap'
 import { categoryRenderer } from './category'
 import { container } from '@utils/render-json'
 import { loadingBurger, spawnLoading } from './render-json'
+import { switchAnimations } from '@template/right-panel'
 
 export const menuItems = {
     '/': {
@@ -15,6 +16,7 @@ export const menuItems = {
         fetch: false,
         action: () => {
             mainHome(() => {
+                switchAnimations()
                 //fix on webrings that have rely on DOMContentLoaded Triggers
                 setTimeout(() => {
                     window.document.dispatchEvent(new Event("DOMContentLoaded", {

@@ -57,6 +57,75 @@ export function iconList() {
     return iconRender
 }
 
+export function switchAnimations(bool) {
+    let settings = localStorage.eyesHurt;
+    const body = document.querySelector('body');
+    const struct = document.querySelector('.under-construction');
+    const chat = document.querySelector('.chat-soon');
+
+    function trigger() {
+        body.classList.add('myeyeshurt');
+        struct ? struct.classList.add('myeyeshurt') : null;
+        chat ? chat.classList.add('myeyeshurt') : null;
+    }
+
+    function untrigger() {
+        body.classList.remove('myeyeshurt');
+        struct ? struct.classList.remove('myeyeshurt') : null;
+        chat ? chat.classList.remove('myeyeshurt') : null;
+    }
+
+    if (undefined === bool && undefined !== localStorage.eyesHurt && 'true' === localStorage.eyesHurt) {
+        trigger();
+    }
+
+    if (undefined === settings) {
+        localStorage.eyesHurt = 'false';
+        settings = localStorage.eyesHurt;
+        return;
+    }
+
+    localStorage.eyesHurt = bool ? JSON.stringify(!JSON.parse(settings)) : settings;
+
+    JSON.parse(localStorage.eyesHurt) ? (() => trigger())() : (() => untrigger())()
+    return;
+
+}
+
+export function eyesHurt() {
+    let settings = localStorage.eyesHurt;
+    const buttonContain = document.createElement('div');
+    const button = document.createElement('div');
+
+    buttonContain.classList.add('button-access-area');
+    button.classList.add('standard-button');
+
+    function switchLabel() {
+        if (undefined === localStorage.eyesHurt || !JSON.parse(localStorage.eyesHurt)) {
+            button.classList.add('inactive-but');
+            button.classList.remove('active-but');
+            button.innerHTML = "<h4>My Eyes Hurt</h4> "
+        }
+        else {
+            button.classList.remove('inactive-but');
+            button.classList.add('active-but');
+            button.innerHTML = "<h4>My Eyes Dont Hurt</h4> "
+        }
+    }
+
+    switchLabel();
+
+    buttonContain.append(button);
+
+    button.addEventListener('click', () => {
+        switchAnimations(true);
+        switchLabel();
+    })
+
+    return buttonContain;
+
+}
+
 export function applySideBar() {
     const sidePanelWrap = document.createElement('div');
     const iconCollection = document.createElement('div');
@@ -74,7 +143,7 @@ export function applySideBar() {
     iconCollection.classList.add('icon-collection')
     iconCollection.append(iconTitle, iconList())
 
-    sidePanel.append(iconCollection, linkMe(), burgerPlaceholder)
+    sidePanel.append(iconCollection, linkMe(), burgerPlaceholder, eyesHurt())
 
 
     sidePanelWrap.append(sidePanel);
