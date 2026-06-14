@@ -184,6 +184,11 @@ div#collection > * img {
     aspect-ratio: 2/1;
 }
 
+div#collection > * img.gavv {
+    width: 300px;
+    height: 200px
+}
+
 img.ichigo {
     float: right;
     margin-left: 10px;

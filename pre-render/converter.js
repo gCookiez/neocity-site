@@ -5,9 +5,11 @@ import path from 'path';
 const imgCollection = [];
 
 async function readAllImg(dir) {
-  const files = await fs.promises.readdir(dir);
+  const files = await fs.promises.readdir(dir, { withFileTypes: true });
   for (const file of files) {
-    const fullPath = path.join(dir, file).replaceAll('public\\', '');
+    console.log(file);
+    if (file.isDirectory()) continue;
+    const fullPath = path.join(dir, file.name).replaceAll('public\\', '');
     imgCollection.push(fullPath);
   }
   console.log(imgCollection);
