@@ -27,12 +27,21 @@ function tableOfContents() {
         link.append(format)
         leftpane.append(link)
 
-        i.querySelectorAll('h3').forEach((j,e) => {
+        i.querySelectorAll('h3, h4, caption').forEach((j,e) => {
             const subformat = document.createElement('h5');
             const sublink = document.createElement('a');
             subformat.innerHTML = `- ${j.textContent}`;
             sublink.append(subformat);
-            sublink.classList.add('sub-tb-header')
+            if (j && (j.tagName === 'CAPTION')) {
+                sublink.classList.add('sub-sub-tb-header')
+            }
+            if (j && (j.tagName === 'H4')) {
+                sublink.classList.add('super-sub-sect')
+            }
+            else {
+                sublink.classList.add('sub-tb-header')
+            }
+            
             sublink.setAttribute('href', `#${j.getAttribute('id')}`)
             leftpane.append(sublink);
         })

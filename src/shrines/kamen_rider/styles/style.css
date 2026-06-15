@@ -212,6 +212,7 @@ ul {
     flex-direction: column;
     gap: 10px;
     padding-top: 20px;
+    margin-left: 8px;
 }
 
 .main-content > :not(.active) {
@@ -227,12 +228,12 @@ ul {
     background-color: rgba(0,0,0,0);
 }
 
-#driver_prop, #driver_prop > * th, #driver_prop > * td {
+#driver_prop, #driver_prop > * th, #driver_prop > * td, #driver_prop > caption {
     border: 1px solid black;
     border-collapse: collapse;
 }
 
-#driver_prop > * th, #driver_prop > * td {
+#driver_prop > * th, #driver_prop > * td, #driver_prop > caption {
     padding: 10px;
 }
 
@@ -251,6 +252,12 @@ ul {
 
 .sub-tb-header {
     margin-left: 10px;
+}
+.sub-sub-tb-header {
+    margin-left: 25px;
+}
+.super-sub-sect {
+    margin-left: 35px;
 }
 
 /* section {
