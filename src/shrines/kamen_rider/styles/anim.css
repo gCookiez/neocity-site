@@ -1,22 +1,27 @@
 * {
-    --zero-bg: #000;
-    --zero-filter: drop-shadow(3px 3px 50px #000) brightness(1) blur(20px);
+    --zero-bg: #00000000;
+    --zero-filter: drop-shadow(3px 3px 50px #00000000) brightness(1) blur(8px);
     --half-bg: #ff0000;
-    --half-filter: drop-shadow(3px 3px 50px #830000) brightness(1) blur(20px);
+    --half-filter: drop-shadow(3px 3px 50px #830000) brightness(1) blur(8px);
     --full-bg: rgb(238, 102, 102);
-    --full-filter: drop-shadow(3px 3px 50px #F00) brightness(1) blur(20px);
+    --full-filter: drop-shadow(3px 3px 50px #F00) brightness(1) blur(8px);
 
-    --zero-filter-content: 10px 10px 20px #000;
+    --zero-filter-content: 10px 10px 20px #00000000;
     --half-filter-content: 10px 10px 20px #830000;
     --fill-filter-content: 10px 10px 20px #F00;
 }
 
+#zeztz {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
 
-
-.spark, .capsem {
+.spark,
+.capsem {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     border-radius: 100px;
     background-color: var(--zero-bg);
     filter: var(--zero-filter);
@@ -51,41 +56,41 @@
 
 
 .capsem {
-    left: 62%;
-    top: 350px;
-    width: 200px;
-    height: 200px;
- }
+    left: 390px;
+    top: 60px;
+    width: 120px;
+    height: 120px;
+}
 
-.spark:nth-child(1) {
-    left: 94%;
-    top: -50px;
+#zeztz>.spark:nth-child(1) {
+    left: 558px;
+    top: 21px;
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 
-.spark:nth-child(2) {
-    left: 84%;
-    top: 100px;
+#zeztz>.spark:nth-child(2) {
+    left: 526px;
+    top: 41px;
 }
 
-.spark:nth-child(3) {
-    left: 75%;
-    top: 250px;
+#zeztz>.spark:nth-child(3) {
+    left: 494px;
+    top: 60px;
 }
 
-.spark:nth-child(4) {
-    left: 55%;
-    top: 550px;
+#zeztz>.spark:nth-child(4) {
+    left: 361px;
+    top: 136px;
 }
 
-.spark:nth-child(5) {
-    left: 45%;
-    top: 700px;
+#zeztz>.spark:nth-child(5) {
+    left: 328px;
+    top: 156px;
 }
 
-.spark:nth-child(6) {
-    left: 35%;
-    top: 850px;
+#zeztz>.spark:nth-child(6) {
+    left: 298px;
+    top: 173px;
 }
 
 /* .spark.norm:nth-child(1){

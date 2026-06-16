@@ -111,11 +111,6 @@ export function webRingContainer() {
     blogletContent.append(blogletModTitle, webringRenderer());
     blogletCont.append(blogletContent)
     moduleSetup.append(blogletCont);
-
-    // custom scripts to aide webrings to webrings
-    // document.querySelector('.null.destination').parentNode.append(...document.querySelectorAll('.rescript > *'));
-    // document.querySelector('.null.destination').remove();
-    // document.querySelector('.rescript').remove();
     return moduleSetup;
 }
 

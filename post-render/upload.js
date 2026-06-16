@@ -16,7 +16,8 @@ const files = []
 const dirs = {
     articles: '/articles',
     views_cat: '/views',
-    icons: '/icons'
+    icons: '/icons',
+    sys: '/sys'
 }
 
 async function getNecessaryDirs(callback) {

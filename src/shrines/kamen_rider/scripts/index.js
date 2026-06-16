@@ -11,11 +11,15 @@ mainTimeline.timeScale("2.5")
 
 function tableOfContents() {
     const leftpane = document.querySelector('.leftpane > .follow');
+    const returnToTop = document.createElement('h4');
+    returnToTop.innerHTML = '<a href="#"> Return to top </a>';
     leftpane.replaceChildren('');
+    
     const headers = document.querySelectorAll('.main-content > .active > section[id]');
     if (!headers.length) return;
 
     leftpane.innerHTML = '<h3> Table of Contents </h3>'
+    leftpane.append(returnToTop);
 
     for (var i of headers) {
         const format = document.createElement('h4');
