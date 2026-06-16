@@ -59,6 +59,15 @@ iconsList:
   - name: "p1xelgarden"
     path: "/icons/P1xelGarden_Button.png"
     link: "https://p1xelgarden.com/"
+  - name: "burbo's lair"
+    path: "https://brubolair.neocities.org/buttons/Final%20Button.png"
+    link: "https://brubolair.neocities.org"
+  - name: "malune.net"
+    path: "/icons/malune-3.gif"
+    link: "https://malune.net/"
+  - name: "ichomancer"
+    path: "/icons/ichobutton.gif"
+    link: "https://ichomancer.com/"
 webringList:
   - name: "no-ai"
     content: |
@@ -115,4 +124,55 @@ webringList:
   - name: "didanim"
     content: |
             <iframe frameborder='0' height='180' name='sitelinks' src='https://didanim.github.io/Webring/samyang-webring/widget.html?site=crispypata' width='180'></iframe>
+  - name: "droidring"
+    content: |
+            <center>
+            <div class="droidringwidgetSMALLER">
+            <a href="https://kanandraw.neocities.org/stuffs/droidring/home"><img src="https://kanandraw.neocities.org/stuffs/droidring/assets/droidwidgetSMALLERomhh.png" style="width: 75px;padding: 1px;" title="DroidRing!"></a><br>
+            <div class="buttonsdroidringSMALLER">
+            <a href="https://kanandraw.neocities.org/stuffs/droidring/home?action=previous"><button class="navdroidringSMALLER">←</button></a>
+            <a href="https://kanandraw.neocities.org/stuffs/droidring/home?action=random"><button class="navdroidringSMALLER" style="position: relative; top: 1.4px;">⚄</button></a>
+            <a href="https://kanandraw.neocities.org/stuffs/droidring/home?action=next"><button class="navdroidringSMALLER">→</button></a>
+            </div>
+            <style>
+            .droidringwidgetSMALLER {
+            font-family: 'Droid Sans',sans-serif;
+            align-content: center;
+              text-align: center;
+            width: 92px;
+            border: 1px solid #666666;
+            background: linear-gradient(0deg, black, #000000db);
+            padding: 5px;
+            }
+            .buttonsdroidringSMALLER {
+            background: #989898;
+            padding: 4px;
+            margin: -5px;
+            }
+            
+            .navdroidringSMALLER {
+            background: linear-gradient(to bottom, #F1F1F1, #B8B8B8);
+            padding: 1px;
+            color: black;
+            box-shadow: 0 3px 6px #00000029, 0 3px 6px #0000003B;
+            border: none;
+            width: 26px;
+            height: 18px;
+            min-width: 25px;
+            }
+            .navdroidringSMALLER:active {
+            background: linear-gradient(to bottom,#FFD554,#E99D00);
+            }
+            </style>
+            </div>
+            </center>
+  - name: "Tokusatsu webring"
+    content: |
+              <div id='tokuring'>
+              <script type="text/javascript" src="https://onthequiet.nekoweb.org/tokuring/tokuring-variables.js"></script>
+              <script type="text/javascript" src="https://onthequiet.nekoweb.org/tokuring/tokuring-widget.js"></script>
+              <link rel="stylesheet" href="https://onthequiet.nekoweb.org/tokuring/tokuring.css">
+              <script>document.getElementById('iconimg').src="IMGLINK";</script>
+              </div>
+ 
 

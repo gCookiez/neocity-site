@@ -479,7 +479,11 @@ body.myeyeshurt, .under-construction.myeyeshurt, .chat-soon.myeyeshurt {
 
 
 .icon-list {
-  height: 200px;
+  flex-direction: row;
+  overflow-x: hidden;
+  width: max-content;
+  gap: 10px;
+  border: 0;
 }
 
 .reference-me {

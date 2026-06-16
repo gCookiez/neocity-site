@@ -16,6 +16,7 @@ const files = []
 const dirs = {
     articles: '/articles',
     views_cat: '/views',
+    icons: '/icons'
 }
 
 async function getNecessaryDirs(callback) {
@@ -25,8 +26,7 @@ async function getNecessaryDirs(callback) {
     for await (const key of keys) {
         await api.get('list', { path: dirs[key] }, async (c) => {
             dataExtracted.data = (c);
-            readData();
-            console.log(key);
+            readData(dirs[key]);
             if (index === keys.length - 1) {
                 console.log("This is the last item of the array!");
                 callback();
@@ -50,7 +50,24 @@ function getFilesFromDir(dir) {
     return;
 }
 
-async function readData() {
+async function readData(path) {
+    // console.log(path)
+    const checkFiles = fs.readdirSync(`./dist/${path}`);
+    const newSet = new Set(dataExtracted.data.files.map(i => i.path.split(/[\/\\]/).pop()))
+
+    const onlyInLocal = checkFiles.filter(file => !newSet.has(file))
+    console.log(onlyInLocal);
+
+    onlyInLocal.forEach((i, e) => {
+        const obj = {
+            path: `${path}/`,
+            files: [i]
+        }
+        files.push(obj);
+    })
+
+    //simplify the extraction later. might not need to complicated the compilation of files
+
     for (var i of dataExtracted.data.files) {
         if (i.is_directory) {
             fs.existsSync(`./dist/${i.path}`) ? getFilesFromDir(`./dist/${i.path}`) : null;
@@ -82,11 +99,11 @@ async function deleteItems(callback) {
     const items = await fs.promises.readFile('./post-render/remotedelete.json', 'utf8').catch(err => undefined)
     if (items) {
         const parsed = JSON.parse(await items);
-        console.log(parsed);
+        // console.log(parsed);
 
         if (parsed.items.length !== 0) {
             api.delete(parsed.items, function (resp) {
-                console.log(resp)
+                // console.log(resp)
                 if (undefined !== resp && 'success' === resp.result) {
                     fs.promises.unlink('./post-render/remotedelete.json');
                     callback()
@@ -108,7 +125,7 @@ function uploadItems(items) {
                 name: `${i.path}/${element}`,
                 path: `./dist${i.path}/${element}`
             }
-            console.log(obj)
+            // console.log(obj)
             // console.log(obj);
             prepObj.push(obj)
         });
@@ -122,6 +139,7 @@ function uploadItems(items) {
 
 getNecessaryDirs(async () => {
     await deleteItems(() => {
+        // console.log(files);
         uploadItems(files);
     })
 })

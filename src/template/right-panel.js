@@ -42,6 +42,18 @@ export function linkMe() {
 
 export function iconList() {
     const iconRender = document.createElement('div');
+    const iconMarquee = document.createElement('marquee');
+
+    iconMarquee.setAttribute('scrollamount', 10)
+    iconMarquee.setAttribute('scrolldelay', 20)
+    iconMarquee.setAttribute('behavior', 'scroll')
+
+    iconMarquee.addEventListener('mouseenter', (event) => {
+       event.target.stop();
+    })
+    iconMarquee.addEventListener('mouseleave', (event) => {
+       event.target.start();
+    })
 
     iconRender.classList.add('icon-list')
 
@@ -53,8 +65,8 @@ export function iconList() {
         format.querySelector('img').setAttribute('alt', item.name);
         iconRender.append(format);
     }
-
-    return iconRender
+    iconMarquee.append(iconRender)
+    return iconMarquee
 }
 
 export function switchAnimations(bool) {
