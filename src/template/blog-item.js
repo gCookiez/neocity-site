@@ -41,6 +41,12 @@ export function applyArticle(data) {
     documentArea.querySelector('.article-content').innerHTML = `<p> ${data.content} </p>`
     documentArea.querySelector('.expand-article span').addEventListener("click", () => {
         route(`${data.category}/${data.fileId}`);
+        document.querySelector('.site-title').scrollIntoView();
+    })
+
+    documentArea.querySelector('.article-title').addEventListener("click", () => {
+        route(`${data.category}/${data.fileId}`);
+        document.querySelector('.site-title').scrollIntoView();
     })
     // const container = document.querySelector('.content-container');
     // container.append(documentArea);

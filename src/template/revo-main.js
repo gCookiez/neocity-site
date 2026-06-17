@@ -24,7 +24,7 @@ export async function mainHome(callback) {
     content.append(contSetup);
     cont.append(content);
     underConstruction();
-    someKindOfChat()
+    someKindOfChat();
     webRingContainer();
     callback();
     return;
@@ -33,8 +33,9 @@ export async function mainHome(callback) {
 export function welcomePlace() {
     const placeholder = ` 
     <div class="welcome-cont">
-        <h2> Welcome to my webpage! </h2>
-        <p> This is where I might post random entries (including some ramblings about the dev of this site :/ ) </p>
+        <h2> Welcome to my Blogsite! </h2>
+        <br>
+        <center><h3> Feel Free to explore all around my site. Leave a message on my guestbook!</h3></center>
     </div> 
     `
     const frag = document.createRange().createContextualFragment(placeholder);
@@ -98,7 +99,7 @@ export function webringRenderer() {
 
 export function webRingContainer() {
 
-    const moduleSetup = document.querySelector('.home-sub-module-place');
+    // const moduleSetup = document.querySelector('.home-sub-module-place');
     const blogletCont = document.createElement('div');
     const blogletContent = document.createElement('div');
     const blogletModTitle = document.createElement('div');
@@ -110,8 +111,8 @@ export function webRingContainer() {
     blogletModTitle.innerHTML = '<h3> Webring Collection </h3>';
     blogletContent.append(blogletModTitle, webringRenderer());
     blogletCont.append(blogletContent)
-    moduleSetup.append(blogletCont);
-    return moduleSetup;
+    // moduleSetup.append(blogletCont);
+    return blogletCont;
 }
 
 export function blogletModule(data) {
@@ -152,14 +153,26 @@ export function underConstruction() {
 
 export function someKindOfChat() {
     const moduleSetup = document.querySelector('.home-sub-module-place')
-    const modDiv = document.createElement('div');
-    const format = `
-        <div class="chat-soon">
-            <h3> Chat coming soon? </h3>
-        </div>
-    `
-    const contentFormat = document.createRange().createContextualFragment(format)
-    modDiv.classList.add('alt-widget-module');
-    modDiv.append(contentFormat)
-    moduleSetup.append(modDiv);
+    // const modDiv = document.createElement('div');
+    // const format = `
+    //     <div class="chat-soon">
+    //         <h3> Chat coming soon? </h3>
+    //     </div>
+    // `
+    // const contentFormat = document.createRange().createContextualFragment(format)
+    // modDiv.classList.add('alt-widget-module');
+    // modDiv.append(contentFormat)
+    // moduleSetup.append(modDiv);
+    const container = document.createElement('div');
+    const chatTitle = document.createElement('h3')
+    chatTitle.innerHTML = "CHAT AREA";
+    // const script = document.createElement('script');
+    const iframe = document.createElement('iframe');
+    container.classList.add('chat-area','alt-widget-module')
+    // script.setAttribute('src', "https://iframe.chat/scripts/main.min.js");
+    iframe.setAttribute('id', "cbox");
+
+    iframe.setAttribute('src', " https://www3.cbox.ws/box/?boxid=3556129&boxtag=keCO7I");
+    container.append(chatTitle, iframe)
+    moduleSetup.append(container);
 }

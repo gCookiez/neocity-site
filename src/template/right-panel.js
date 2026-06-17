@@ -1,4 +1,5 @@
 import { container } from '@utils/render-json'
+import { webRingContainer } from './revo-main';
 
 const template = `
     <div class="icon-item">
@@ -49,10 +50,10 @@ export function iconList() {
     iconMarquee.setAttribute('behavior', 'scroll')
 
     iconMarquee.addEventListener('mouseenter', (event) => {
-       event.target.stop();
+        event.target.stop();
     })
     iconMarquee.addEventListener('mouseleave', (event) => {
-       event.target.start();
+        event.target.start();
     })
 
     iconRender.classList.add('icon-list')
@@ -138,26 +139,50 @@ export function eyesHurt() {
 
 }
 
-export function applySideBar() {
-    const sidePanelWrap = document.createElement('div');
-    const iconCollection = document.createElement('div');
+
+export function panelModule(list) {
     const sidePanel = document.createElement('div');
+    sidePanel.classList.add('side-panel')
+    sidePanel.append(...list)
+    return sidePanel;
+}
+
+export function iconCollection() {
+    const iconCollection = document.createElement('div');
     const iconTitle = document.createElement('div');
-    const burgerPlaceholder = window.loadingAnim();
-    burgerPlaceholder.setAttribute('id', 'loading-anim-stable');
     iconTitle.innerHTML = `
         <h4> Links Collected </h4>
     `
     iconTitle.classList.add('icon-title')
-    sidePanelWrap.classList.add('grid-container', 'side-panel-wrap');
-    sidePanel.classList.add('side-panel')
-
     iconCollection.classList.add('icon-collection')
     iconCollection.append(iconTitle, iconList())
+    return iconCollection;
+}
 
-    sidePanel.append(iconCollection, linkMe(), burgerPlaceholder, eyesHurt())
+export function spawnBurger() {
+    const burgerPlaceholder = window.loadingAnim();
+    burgerPlaceholder.setAttribute('id', 'loading-anim-stable');
+    return burgerPlaceholder;
+}
 
 
-    sidePanelWrap.append(sidePanel);
+const panelCluster = {
+    panel1: [iconCollection, linkMe, spawnBurger, eyesHurt],
+    panel2: [webRingContainer]
+}
+
+
+export function applySideBar() {
+    const sidePanelWrap = document.createElement('div');
+    sidePanelWrap.classList.add('grid-container', 'side-panel-wrap');
+
+    for (var [key, val] of Object.entries(panelCluster)) {
+        // console.log(val)
+        if (!val.length) continue
+        const sidePanel = panelModule([...val.map(fn => fn())])
+        sidePanel.setAttribute('id', key)
+        sidePanelWrap.append(sidePanel)
+    }
+    // const sidePanel = panelModule([iconCollection(), linkMe(), spawnBurger(), eyesHurt()])
     return sidePanelWrap
 }

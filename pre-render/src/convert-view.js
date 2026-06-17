@@ -39,7 +39,7 @@ export async function generateCatalogView(data) {
             const replaced = file.content.replace(/<\/?\w[^>]*>|&\w+/g, '').replace("\\s+", " ").trim();
             tempObj.content = replaced.length > 300 ? replaced.substr(0, 300) + '...' : replaced;
             fillfour.push(tempObj);
-            if (fillfour.length === 4) {
+            if (fillfour.length === 8) {
                 view.articles[counter] = JSON.parse(JSON.stringify(fillfour));
                 fillfour.length = 0;
                 counter++;

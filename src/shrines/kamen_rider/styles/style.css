@@ -173,7 +173,10 @@ nav>.nav-item {
 
 .leftpane {
     grid-area: leftpane;
+
 }
+
+
 
 .content-grid-about>.leftpane {
     border: 8px ridge white;
@@ -239,10 +242,17 @@ ul {
     overflow-y: auto;
 }
 
-.follow>*,
+.follow>h3,
+.follow>h4,
 .follow>* h4 {
     font-family: Verdana, Arial, Helvetica, sans-serif !important;
+    font-weight: 700 !important;
 }
+
+.follow>a.sub-tb-header>h5, .follow>a.super-sub-sect>h5 {
+    font-weight: 500 !important;
+}
+
 
 .main-content> :not(.active) {
     display: none;

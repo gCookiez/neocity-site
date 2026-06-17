@@ -9,7 +9,7 @@ console.log('Hello!')
 async function init() {
     const body = document.querySelector('body')
     body.prepend(element, generateFooter());
-    
+
 }
 
 const action = {
@@ -21,6 +21,12 @@ const action = {
         locationInit();
         element.querySelector('.wrapper.home').append(applySideBar())
         switchAnimations();
+        setTimeout(() => {
+            window.document.dispatchEvent(new Event("DOMContentLoaded", {
+                bubbles: true,
+                cancelable: true
+            }));
+        }, 1000)
     }
 }
 

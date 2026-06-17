@@ -18,12 +18,7 @@ export const menuItems = {
             mainHome(() => {
                 switchAnimations()
                 //fix on webrings that have rely on DOMContentLoaded Triggers
-                setTimeout(() => {
-                    window.document.dispatchEvent(new Event("DOMContentLoaded", {
-                        bubbles: true,
-                        cancelable: true
-                    }));
-                }, 1000)
+                
 
             });
         },

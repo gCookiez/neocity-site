@@ -1,5 +1,6 @@
 * {
-    --temp-home-format: 'const const' 'webring webring' 'chat chat';
+    /* --temp-home-format: 'const const' 'webring webring' 'chat chat'; */
+    --temp-home-format: 'const const' 'chat chat';
     --new-home-format: 'const const' 'bloglet bloglet' 'webring webring' 'chat chat';
     --degree-check: 141.1deg;
 }
@@ -15,7 +16,7 @@
 
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
-        grid-template-columns: 50em 14em;
+        grid-template-columns: 45em 16em;
         grid-template-rows: 60px 100px auto;
     }
 
@@ -28,12 +29,14 @@
         display: flex;
         flex-direction: row;
         width: 1000px;
+        position: relative;
     }
 
     .hover-item {
         width: 100%;
         justify-content: center;
     }
+
     .hover-hitbox {
         width: 100%;
     }
@@ -44,15 +47,15 @@
         flex: 1;
     }
 
-    .hover-item > h4 {
+    .hover-item>h4 {
         display: none;
     }
 
-    .hover-container:has(.hover-hitbox:hover){
+    .hover-container:has(.hover-hitbox:hover) {
         z-index: 100000;
     }
 
-    .hover-container:has(.hover-hitbox:hover) > .hover-item {
+    .hover-container:has(.hover-hitbox:hover)>.hover-item {
         width: 500px;
         padding-left: unset;
         padding-right: 10px;
@@ -60,15 +63,16 @@
         gap: 0px;
     }
 
-    .hover-container:has(.hover-hitbox:hover) > .hover-item > h4 {
+    .hover-container:has(.hover-hitbox:hover)>.hover-item>h4 {
         display: block;
     }
 
     .home-sub-module-place {
         /* grid-template-areas: 'const const' 'bloglet bloglet' 'webring webring' 'chat chat'; */
         grid-template-areas: var(--temp-home-format);
-        grid-template-rows: auto;
-        grid-template-columns: initial
+        grid-template-rows: 1fr 2fr;
+        grid-template-columns: initial;
+        gap: 10px;
     }
 
     .bloglet-window {
@@ -80,9 +84,19 @@
         --warning: repeating-linear-gradient(var(--degree-check), var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
     }
 
+    .main-content-container.categories, .list-catalog:not(.hidden){
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-area {
+        min-height: 250px;
+    }
+
 }
 
 @media screen and (orientation: portrait) and (max-width: 1023px) {
+
     /* smaller than vertical desktop on the works */
     .header-container {
         width: 80%;
@@ -94,7 +108,7 @@
 
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
-        grid-template-columns: 50em 14em;
+        grid-template-columns: 45em 16em;
         grid-template-rows: 60px 100px auto;
     }
 
@@ -106,12 +120,14 @@
     .window-container {
         display: flex;
         flex-direction: row;
+        position: relative;
     }
 
     .home-sub-module-place {
         grid-template-areas: var(--temp-home-format);
-        grid-template-rows: auto;
-        grid-template-columns: initial
+        grid-template-rows: 1fr 2fr;
+        grid-template-columns: initial;
+        gap: 10px;
     }
 
     .bloglet-window {
@@ -121,6 +137,15 @@
 
     * {
         --warning: repeating-linear-gradient(var(--degree-check), var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
+    }
+
+    .main-content-container.categories, .list-catalog:not(.hidden){
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-area {
+        min-height: 250px;
     }
 
 }
@@ -136,7 +161,7 @@
 
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
-        grid-template-columns: 50em 14em;
+        grid-template-columns: 45em 16em;
         grid-template-rows: 60px 100px auto;
     }
 
@@ -148,12 +173,15 @@
     .window-container {
         display: flex;
         flex-direction: row;
+        position: relative;
+        width: 100%;
     }
 
     .home-sub-module-place {
         grid-template-areas: var(--temp-home-format);
-        grid-template-rows: auto;
-        grid-template-columns: initial
+        grid-template-rows: 1fr 2fr;
+        grid-template-columns: initial;
+        gap: 10px;
     }
 
     .bloglet-window {
@@ -163,6 +191,15 @@
 
     * {
         --warning: repeating-linear-gradient(var(--degree-check), var(--box-shadow-bottom), var(--box-shadow-bottom) 15px, #000 15px, #000 25px);
+    }
+
+    .main-content-container.categories, .list-catalog:not(.hidden){
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-area {
+        min-height: 250px;
     }
 
 }
