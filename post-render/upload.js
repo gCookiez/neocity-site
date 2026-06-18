@@ -20,6 +20,13 @@ const dirs = {
     sys: '/sys'
 }
 
+const roots = '/assets'
+const reupload = [
+    './dist/shrines/kamen_rider/',
+    './dist/shrines/MTG/',
+]
+
+
 async function getNecessaryDirs(callback) {
     const keys = Object.keys(dirs)
     let index = 0;
@@ -138,9 +145,41 @@ function uploadItems(items) {
 }
 
 
-getNecessaryDirs(async () => {
-    await deleteItems(() => {
-        // console.log(files);
-        uploadItems(files);
+async function replaceNecessaryRoots(toRemove) {
+    getFilesFromDir(`./dist${roots}`);
+    for (var i of reupload) {
+        getFilesFromDir(i);
+    }
+    const obj = {
+        path: '/',
+        files: [`index.html`]
+    }
+    files.push(obj);
+    console.log(files);
+    api.delete(toRemove, (resp) => {
+        console.log(resp);
     })
-})
+    return;
+}
+
+async function checkNecessaryRoots(callback) {
+
+    api.get('list', { path: roots }, async (c) => {
+        console.log(c);
+        const transform = Object.values(c.files).map((d) => `${d.path}`)
+        await replaceNecessaryRoots(transform)
+        callback();
+    })
+}
+
+
+checkNecessaryRoots(() => {
+    getNecessaryDirs(async () => {
+        await deleteItems(() => {
+            // console.log(files);
+            uploadItems(files);
+        })
+    })
+});
+// checkNecessaryRoots()
+// replaceNecessaryRoots()

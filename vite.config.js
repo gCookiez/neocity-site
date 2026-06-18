@@ -23,7 +23,8 @@ export default defineConfig({
 		rollupOptions: {
 			input: {
 				main: resolve(__dirname, 'src/index.html'),
-				kamen_rider: resolve(__dirname, 'src/shrines/kamen_rider/index.html')
+				kamen_rider: resolve(__dirname, 'src/shrines/kamen_rider/index.html'),
+				MTG: resolve(__dirname, 'src/shrines/MTG/index.html')
 			}
 		},
 		// rollDownOptions: {

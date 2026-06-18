@@ -1,11 +1,17 @@
 {
     "method": "blogcategories",
     "list": {
-        "shrines": {
-            "title": "Kamen Rider Site",
+        "kamen": {
+            "title": "Shrine - Kamen Rider",
             "desc": "Showcasing my passion and collection of karate bugmen memorabilia",
             "alt": true,
             "path": "/shrines/kamen_rider/"
+        },
+        "hidden": {
+            "title": "MTG Site",
+            "desc": "My Deck lists and others",
+            "alt": true,
+            "path": "/shrines/MTG/"
         }
     }
 }

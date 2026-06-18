@@ -115,6 +115,7 @@ export const checkpoint = () => {
     const queryParams = new URLSearchParams(window.location.search);
     if (!queryParams['size']) return;
     const path = queryParams.get('redirLink');
+    console.log(path);
     window.history.pushState({}, "", path);
     return;
 }

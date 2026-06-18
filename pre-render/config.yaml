@@ -68,6 +68,9 @@ iconsList:
   - name: "ichomancer"
     path: "/icons/ichobutton.gif"
     link: "https://ichomancer.com/"
+  - name: "ransei"
+    path: "https://ransei.neocities.org/assets/img/embeded.gif"
+    link:  "https://ransei.neocities.org/"              
 webringList:
   - name: "no-ai"
     content: |

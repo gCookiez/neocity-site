@@ -63,7 +63,9 @@ export function sortedByCategory(data) {
 
     temp.querySelector('.blog-category-title').addEventListener('click', () => {
         if (undefined !== data.alt && data.alt) {
-            fetchJson(`${data.path}`);
+            // fetchJson(`${data.path}`);
+
+            window.location.href = data.path;
             return;
         }
         route(`blog/${data.category}`);
