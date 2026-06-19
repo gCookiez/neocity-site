@@ -24,6 +24,7 @@ const roots = '/assets'
 const reupload = [
     './dist/shrines/kamen_rider/',
     './dist/shrines/MTG/',
+    './dist/shrines/GUI/',
 ]
 
 

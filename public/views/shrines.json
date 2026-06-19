@@ -7,11 +7,17 @@
             "alt": true,
             "path": "/shrines/kamen_rider/"
         },
-        "hidden": {
+        "mtg": {
             "title": "MTG Site",
             "desc": "My Deck lists and others",
             "alt": true,
             "path": "/shrines/MTG/"
+        },
+        "GUI": {
+            "title": "GUI Demo",
+            "desc": "GUI Sample",
+            "alt": true,
+            "path": "/shrines/GUI/"
         }
     }
 }
