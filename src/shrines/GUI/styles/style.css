@@ -5,21 +5,21 @@ html {
     box-sizing: border-box;
     font-size: 18pt;
     font-family: "Levi Windows", "MS Sans Serif";
-    overflow: hidden;  
+    overflow: hidden;
 }
 
 * {
     margin: 0;
     padding: 0;
     --shadow-border: gray;
-    --source-border: #FFF; 
+    --source-border: #FFF;
     --outset-preset: var(--source-border) var(--shadow-border) var(--shadow-border) var(--source-border);
-    --inset-preset: var(--shadow-border) var(--source-border) var(--source-border) var(--shadow-border) ;
+    --inset-preset: var(--shadow-border) var(--source-border) var(--source-border) var(--shadow-border);
     --window-background: #C0C0C0;
     --window-title-bar-color: #000080;
     --window-margin: 3px;
     --window-title-color: white;
-    --window-title-bar-height: 40px;
+    --window-title-bar-height: 20px;
     --border: 2px solid;
     --test-hitbox: 0;
 
@@ -32,10 +32,11 @@ window-title {
     display: block;
 }
 
-window,
+/* window,
+desktop,
 taskbar {
     scale: 0.8;
-}
+} */
 
 desktop {
     position: relative;
@@ -46,15 +47,35 @@ desktop {
 
 window {
     position: absolute;
-    left: calc(50% + attr(data-offset-x px));
-    top: calc(50% + attr(data-offset-y px));
-    width: 800px;
-    height: 500px;
-    transform: translate(-50%, -50%);
+    left: calc(0% + attr(data-offset-x %));
+    top: calc(0% + attr(data-offset-y %));
+    width: 500px;
+    height: 400px;
+    /* transform: translate(-50%, -50%); */
+    overflow: hidden;
     border: var(--border);
     border-color: var(--outset-preset);
     background-color: var(--window-background);
+    min-width: 250px;
+    min-height: 250px;
+    box-sizing: border-box;
 }
+
+.code-background{
+    box-sizing: border-box;
+    background-color: black;
+    width: 100%;
+    min-width: max-content;
+    height: max-content;
+    color: white;
+    padding: 10px;
+    display: inline-block;
+}
+
+.code-background > pre > code {
+    font-size: 12pt;
+}
+
 
 /* window:after {
     left: calc(50% + attr(data-offset-x px));
@@ -63,10 +84,10 @@ window {
 
 
 
-window-title {
+window>window-title {
     width: calc(100% - var(--window-margin) * 2);
     height: var(--window-title-bar-height);
-    background: linear-gradient(to right, var(--window-title-bar-color), #0F7FCD 90%);
+    background: linear-gradient(to right, #888, #CCC 90%);
     margin: var(--window-margin);
     display: flex;
     justify-content: space-between;
@@ -75,10 +96,19 @@ window-title {
     position: relative;
 }
 
-window-title>h4 {
-    color: var(--window-title-color);
+window.active>window-title {
+    background: linear-gradient(to right, var(--window-title-bar-color), #0F7FCD 90%);
+}
+
+window>window-title>h4 {
+    color: #AAA;
     padding-left: var(--window-margin);
     padding-right: var(--window-margin);
+    font-size: 12pt;
+}
+
+window.active>window-title>h4 {
+    color: var(--window-title-color);
 }
 
 sys-buttons-area {
@@ -91,31 +121,44 @@ sys-buttons-area {
 }
 
 sys-button {
-    width: 24px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     background-color: var(--window-background);
     border: var(--border);
     border-color: var(--outset-preset);
     border-image: url('/sys/outset.gif') 2 stretch;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 sys-button:active {
     border-color: var(--inset-preset);
     border-image: url('/sys/inset.gif') 2 stretch;
+
+}
+
+sys-button.minimize {
+    background-image: url(/sys/minimize.png);
+}
+
+sys-button.maximize {
+    background-image: url(/sys/maximize.png);
 }
 
 sys-button.close {
-    margin-left: 1px;
+    background-image: url(/sys/close.png);
+    margin-left: 2px;
 }
 
 window-body {
     display: block;
     box-sizing: border-box;
-    height: calc(98% - var(--window-title-bar-height));
+    height: calc(100% - var(--window-title-bar-height) - 10px);
     width: calc(100% - (var(--window-margin)* 2));
     margin: auto;
     border: var(--border);
     border-color: var(--inset-preset);
+    overflow: auto;
 }
 
 title-hitbox {
@@ -124,14 +167,100 @@ title-hitbox {
     height: 100%;
     z-index: 10;
     /* background-color: #00FF00AA; */
-    background-color: if(style(--test-hitbox:1): #00FF00AA; else: #00000000 );
+    background-color: if(style(--test-hitbox:1): #00FF00AA; else: #00000000);
     /* background-color: if(style(--test-hitbox: true) ? "#00FF00AA" : "#000"); */
-    
+
 }
 
 title-hitbox:active {
-    background-color: if(style(--test-hitbox:1): #FF0000AA; else: #00000000 );
-    left: -50%;
+    background-color: if(style(--test-hitbox:1): #FF0000AA; else: #00000000);
+}
+
+border-hitbox {
+    display: block;
+    position: absolute;
+    background-color: if(style(--test-hitbox:1): #00FF00AA; else: #00000000);
+}
+
+
+/* side edges*/
+border-hitbox.edge-right,
+border-hitbox.edge-left {
+    width: 20px;
+    height: 100%;
+    top: 0%;
+}
+/* ceiling-floor edges*/
+border-hitbox.edge-top,
+border-hitbox.edge-bot {
+    width: 99%;
+    height: 20px;
+    left: 6px;
+}
+
+/* top related resizers*/
+border-hitbox.top-right,
+border-hitbox.top-left,
+border-hitbox.edge-top {
+    top: -2%;
+}
+
+/* right-related resizers */
+border-hitbox.edge-right,
+border-hitbox.top-right,
+border-hitbox.bot-right {
+    left: 99%;
+}
+/* left-related resizers */
+border-hitbox.edge-left,
+border-hitbox.top-left,
+border-hitbox.bot-left {
+    left: -10px;
+}
+
+/* bot-related resizers */ 
+border-hitbox.edge-bot,
+border-hitbox.bot-left,
+border-hitbox.bot-right {
+    top: 98%
+}
+
+/* corner-resizers */
+border-hitbox.top-left,
+border-hitbox.bot-left,
+border-hitbox.top-right,
+border-hitbox.bot-right{
+    width: 20px;
+    height: 20px;
+    background-color: if(style(--test-hitbox:1): #0000FFAA; else: #00000000);
+}
+
+
+border-hitbox.edge-left:hover,
+border-hitbox.edge-right:hover {
+    cursor: ew-resize;
+}
+
+border-hitbox.edge-top:hover,
+border-hitbox.edge-bot:hover {
+    cursor: ns-resize;
+}
+
+border-hitbox.bot-left:hover,
+border-hitbox.top-right:hover{
+    cursor: sw-resize;
+}
+
+border-hitbox.top-left:hover,
+border-hitbox.bot-right:hover{
+    cursor:nw-resize;
+}
+
+border-hitbox:active {
+    /* width: 200vw; */
+    /* left: 50%; */
+
+    background-color: if(style(--test-hitbox:1): #FF0000AA; else: #00000000);
 }
 
 

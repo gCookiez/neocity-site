@@ -3,9 +3,16 @@
 import { windows } from "./window-counter";
 
 let isDragging = 0;
+let isResizing = 0;
 let offsetX = 0;
 let offsetY = 0;
 let largestIndex = 0;
+let startX, startY, startWidth, startHeight, startLeft, startTop;
+let activeWindow = null;
+let activeResizer = null;
+let sizeLimit = 250;
+
+const scalefactor = 1;
 
 export function resetLargestIndex() {
     largestIndex = (windows.length) * 10;
@@ -40,46 +47,138 @@ export function windowTargetChecker(e) {
         !('window-body' === e.target.nodeName.toLowerCase()) &&
         !('window-body' === e.target.offsetParent.nodeName.toLowerCase()) &&
         !('sys-button' === e.target.nodeName.toLowerCase()) &&
-        ('title-hitbox' === e.target.nodeName.toLowerCase())
+        (('title-hitbox' === e.target.nodeName.toLowerCase()) ||
+            ('border-hitbox' === e.target.nodeName.toLowerCase()))
 
     )
 }
 
+export function resetColorStatus() {
+    windows.forEach((e) => {
+        e.classList.remove('active');
+    })
+}
+
 export function mouseDownListener(e) {
-    console.log(e.target.nodeName)
-    isDragging = true;
+    resetColorStatus();
 
     largestIndex += 10
+
+
     closestTarget(e).style.zIndex = largestIndex;
+    closestTarget(e).classList.add('active');
+
 
 
     offsetX = e.clientX - closestTarget(e).offsetLeft;
     offsetY = e.clientY - closestTarget(e).offsetTop;
-
     if (windowTargetChecker(e)) {
-        e.target.style.height = '1000vh';
-        e.target.style.width = '1000vw';
-        e.target.addEventListener("mousemove", mouseMoveHandler)
+        console.log(e.target.nodeName.toLowerCase())
+        activeWindow = closestTarget(e);
+
+        if ('title-hitbox' === e.target.nodeName.toLowerCase()) {
+            isDragging = true;
+        }
+
+        if ('border-hitbox' === e.target.nodeName.toLowerCase()) {
+            isResizing = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            startTop = parseFloat(getComputedStyle(closestTarget(e)).getPropertyValue('top', null).replace('px', ''))
+            startLeft = parseFloat(getComputedStyle(closestTarget(e)).getPropertyValue('left', null).replace('px', ''))
+            startWidth = parseFloat(getComputedStyle(closestTarget(e)).getPropertyValue('width', null).replace('px', ''))
+            startHeight = parseFloat(getComputedStyle(closestTarget(e)).getPropertyValue('height', null).replace('px', ''))
+            e.preventDefault();
+            activeResizer = e.target.className;
+            console.log(activeResizer)
+        }
+
+        window.addEventListener("mousemove", mouseMoveHandler)
     }
-    e.target.addEventListener("mouseup", mouseUpHandler)
+    window.addEventListener("mouseup", mouseUpHandler)
+
+    console.log(isDragging)
+    console.log(isResizing)
 }
 
 export function mouseMoveHandler(e) {
-    if (!isDragging) return;
-    closestTarget(e).style.left = `${e.clientX - offsetX}px`
-    closestTarget(e).style.top = `${e.clientY - offsetY}px`
+
+    // if (!isDragging) return;
+    // if (!isResizing) return;
+    console.log(!isDragging && !isResizing);
+
+    if (isResizing) {
+        const dx = (e.clientX - startX) / scalefactor;
+        const dy = (e.clientY - startY) / scalefactor;
+
+        if ('edge-right' === activeResizer || 'top-right' === activeResizer || 'bot-right' === activeResizer) {
+            console.log('egde-right');
+            const width = startWidth + dx;
+            activeWindow.style.width = width + 'px';
+        }
+
+        if ('edge-left' === activeResizer || 'top-left' === activeResizer || 'bot-left' === activeResizer) {
+            console.log('edge-left');
+            const width = startWidth - dx;
+            const newX = startLeft + dx
+            activeWindow.style.width = width + 'px';
+            if (width > sizeLimit) {
+                activeWindow.style.left = newX + 'px';
+            }
+        }
+
+        if ('edge-top' === activeResizer || 'top-right' === activeResizer || 'top-left' === activeResizer) {
+            console.log('edge-top');
+            const height = startHeight - dy;
+            const newY = startTop + dy;
+            activeWindow.style.height = height + 'px';
+            if (height > sizeLimit) {
+                activeWindow.style.top = newY + 'px';
+            }
+        }
+
+        if ('edge-bot' === activeResizer || 'bot-right' === activeResizer || 'bot-left' === activeResizer) {
+            console.log('edge-bot');
+            const height = startHeight + dy;
+            activeWindow.style.height = height + 'px';
+        }
+
+    }
+
+    if (isDragging) {
+        activeWindow.style.left = `${e.clientX - offsetX}px`
+        activeWindow.style.top = `${e.clientY - offsetY}px`
+    }
+
 }
 
 export function mouseUpHandler(e) {
     isDragging = false;
+    isResizing = false;
+    startX, startY, startWidth, startHeight, startLeft, startTop = 0;
+    activeWindow = null;
+    activeResizer = null;
     if (windowTargetChecker(e)) {
-        e.target.style.height = '100%';
-        e.target.style.removeProperty('width');
+        if ('title-hitbox' === e.target.nodeName.toLowerCase()) {
+            e.target.style.height = '100%';
+            e.target.style.removeProperty('width');
+        }
+    }
+    else if ('SYS-BUTTON' === e.target.nodeName && 'close' === e.target.classList.value) {
+        const item = closestTarget(e);
+        const index = windows.indexOf(item);
+        if (index > -1) {
+            windows.splice(index, 1);
+            resetLargestIndex();
+        }
+        item.removeEventListener('mousedown', mouseDownListener);
+        item.remove();
+        return;
     }
 
     zIndexFixer();
-    e.target.removeEventListener("mousemove", mouseMoveHandler);
-    e.target.removeEventListener("mouseup", mouseUpHandler);
+    window.removeEventListener("mousemove", mouseMoveHandler);
+    window.removeEventListener("mouseup", mouseUpHandler);
 }
 
 // windows.forEach((e, i) => {

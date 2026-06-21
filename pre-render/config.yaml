@@ -70,7 +70,19 @@ iconsList:
     link: "https://ichomancer.com/"
   - name: "ransei"
     path: "https://ransei.neocities.org/assets/img/embeded.gif"
-    link:  "https://ransei.neocities.org/"              
+    link: "https://ransei.neocities.org/"
+  - name: "Psyker: ONLINE!"
+    path: "https://psyker-online.neocities.org/buttons!/psyker-online%20button.gif"
+    link: "https://psyker-online.neocities.org"
+  - name: "zukin@kawaiiOS ~"
+    path: "https://idoltalk.neocities.org/images/itbutton.png"
+    link: "https://idoltalk.neocities.org/"
+  - name: "AltMont"
+    path: "https://altmont.neocities.org/Altmont%20-%2088%20x%2031.gif"
+    link: "https://altmont.neocities.org/"
+  - name: "lintnaya"
+    path: "https://lintnaya.com/_assets/button.png"
+    link: "https://lintnaya.com"
 webringList:
   - name: "no-ai"
     content: |
@@ -173,7 +185,7 @@ webringList:
     content: |
       <div id='tokuring'>
       <script type="text/javascript" src="https://onthequiet.nekoweb.org/tokuring/tokuring-variables.js"></script>
-      <script type="text/javascript" src="https://onthequiet.nekoweb.org/tokuring/tokuring-widget.js"></script>
+      <script type="text/javascript" src="https://onthequiet.nekoweb.org/tokuring/tokuring-widget3.js"></script>
       <link rel="stylesheet" href="https://onthequiet.nekoweb.org/tokuring/tokuring.css">
       <script>
       window.addEventListener('DOMContentLoaded', () => {

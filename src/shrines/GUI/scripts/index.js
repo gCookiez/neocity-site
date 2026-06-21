@@ -1,35 +1,88 @@
 import { addWindow, windows } from "./window-counter";
 import { mouseDownListener } from "./window-controller";
 
-const desktop = document.querySelector('desktop');
+
+const button = document.querySelector('.add-new-window');
+
+button.addEventListener('click', (e) => {
+    e.preventDefault();
+    addWindow([{}]);
+})
 
 addWindow([
+    
     {
-        xOffset: 20,
-        yOffset: 80,
-        title: 'Feels Free to Drag around',
-        body: '<h1> Let\'s Go! </h1>'
+        xOffset:'20',
+        yOffset:'20',
+        width: '900px',
+        height: '450px',
+        title: "Welcome_Window",
+        body: `<h4> Welcome to the Window Area! </h4>
+                <p> Feel Free to Drag Around the windows! </p>`
     },
     {
-        xOffset: 50,
-        yOffset: -200,
-        title: 'Draggable',
-        body: '<h1> You May Drag windows for now </h1>',
+        xOffset:'60',
+        yOffset:'10',
+        width: '696px',
+        height: '500px',
+        title: "Welcome_Window",
+        body: `<p> To get started, Open Devtools -> Console and copy this: </p>
+                <br>
+                <div class="code-background">
+              <pre><code>
+ addWindow([
+ {
+     xOffset: 20,
+     yOffset: 20,
+     width: '250px',
+     height: '250px',
+     title: 'Window_title',
+     body: '&lt;h1&gt; Hello World! &lt;/h1&gt;'
+ }
+ ])
+              </code>
+              </pre>
+              </div>
+        `
     },
     {
-        xOffset: -400,
-        yOffset: -100,
-        title: 'Demo Only',
-        body: '<h1> This is Demo Only </h1>',
+        xOffset:'72',
+        yOffset:'60',
+        width: '300',
+        title: "Recommended Screen",
+        body: '<h4> Only recommended in desktop and Minimum Size 1920x1080px </h4>'
     }
-]);
+])
+
+// addWindow([
+//     {
+//         xOffset: 20,
+//         yOffset: 80,
+//         title: 'Feels Free to Drag around',
+//         body: '<h1> Let\'s Go! </h1>'
+//     },
+//     {
+//         xOffset: 50,
+//         yOffset: -200,
+//         title: 'Draggable',
+//         body: '<h1> You May Drag windows for now </h1>',
+//     },
+//     {
+//         xOffset: -400,
+//         yOffset: -100,
+//         title: 'Demo Only',
+//         body: '<h1> This is Demo Only </h1>',
+//     },
+//     {
+//         xOffset: 400,
+//         yOffset: -100,
+//         title: 'Active/Inactive Windows Now Applicable!',
+//         body: '<h1> WOOHOO</h1>',
+//     }
+// ]);
+
+window.addWindow = addWindow;
 
 console.log(windows);
 
-for (var [e, i] of Object.entries(windows)) {
-    console.log(parseInt(e) + 1);
-    desktop.append(i);
-    i.style.zIndex = (parseInt(e) + 1) * 10;
-    i.addEventListener('mousedown', mouseDownListener);
-}
 
