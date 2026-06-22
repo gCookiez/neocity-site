@@ -6,6 +6,7 @@ html {
     font-size: 18pt;
     font-family: "Levi Windows", "MS Sans Serif";
     overflow: hidden;
+    cursor: url('/sys/cursor98/Cursor79.cur'), auto;
 }
 
 * {
@@ -21,15 +22,35 @@ html {
     --window-title-color: white;
     --window-title-bar-height: 20px;
     --border: 2px solid;
+    --border-start: 3px solid;
+    --border-div: 1px solid;
     --test-hitbox: 0;
+}
 
+button {
+    cursor: url('/sys/cursor98/Cursor107.cur'), auto;
 }
 
 desktop,
 window,
-window-title {
+window-title,
+taskbar,
+start-button,
+task-div {
     box-sizing: border-box;
     display: block;
+}
+desktop > * {
+    user-select: none;
+}
+
+desktop > * pre {
+    user-select: text;
+    
+}
+
+desktop > * pre:hover {
+    cursor: text;
 }
 
 /* window,
@@ -38,6 +59,21 @@ taskbar {
     scale: 0.8;
 } */
 
+taskbar {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    background-color: var(--window-background);
+    border: 2px solid;
+    border-color: #fff #00000000 #00000000 #00000000;
+    box-shadow: 0 -1.5px var(--window-background);
+    position: absolute;
+    bottom: 0px;
+    align-items: center;
+    gap: 2px;
+
+}
+
 desktop {
     position: relative;
     width: 100vw;
@@ -45,10 +81,36 @@ desktop {
     background-color: cadetblue;
 }
 
+start-button {
+    width: 80px;
+    height: 25px;
+    border: var(--border-start);
+    border-color: var(--outset-preset);
+    border-image: url('/sys/outset.gif') 2 stretch;
+    font-size: 12pt;
+}
+
+start-button:active {
+    width: 80px;
+    height: 25px;
+    border: var(--border-start);
+    border-color: var(--inset-preset);
+    border-image: url('/sys/inset.gif') 2 stretch;
+}
+
+task-div {
+    height: 85%;
+    width: 1px;
+    border: var(--border-div);
+    border-color: var(--inset-preset);
+}
+
 window {
+    --offsetX: attr(data-offset-x %);
+    --offsetY: attr(data-offset-Y %);
     position: absolute;
-    left: calc(0% + attr(data-offset-x %));
-    top: calc(0% + attr(data-offset-y %));
+    left: calc(0% + var(--offsetX));
+    top: calc(0% + var(--offsetY));
     width: 500px;
     height: 400px;
     /* transform: translate(-50%, -50%); */
@@ -61,9 +123,9 @@ window {
     box-sizing: border-box;
 }
 
-.code-background{
+.code-background {
     box-sizing: border-box;
-    background-color: black;
+    background-color: #000;
     width: 100%;
     min-width: max-content;
     height: max-content;
@@ -72,7 +134,7 @@ window {
     display: inline-block;
 }
 
-.code-background > pre > code {
+.code-background>pre>code {
     font-size: 12pt;
 }
 
@@ -190,6 +252,7 @@ border-hitbox.edge-left {
     height: 100%;
     top: 0%;
 }
+
 /* ceiling-floor edges*/
 border-hitbox.edge-top,
 border-hitbox.edge-bot {
@@ -211,6 +274,7 @@ border-hitbox.top-right,
 border-hitbox.bot-right {
     left: 99%;
 }
+
 /* left-related resizers */
 border-hitbox.edge-left,
 border-hitbox.top-left,
@@ -218,7 +282,7 @@ border-hitbox.bot-left {
     left: -10px;
 }
 
-/* bot-related resizers */ 
+/* bot-related resizers */
 border-hitbox.edge-bot,
 border-hitbox.bot-left,
 border-hitbox.bot-right {
@@ -229,7 +293,7 @@ border-hitbox.bot-right {
 border-hitbox.top-left,
 border-hitbox.bot-left,
 border-hitbox.top-right,
-border-hitbox.bot-right{
+border-hitbox.bot-right {
     width: 20px;
     height: 20px;
     background-color: if(style(--test-hitbox:1): #0000FFAA; else: #00000000);
@@ -238,22 +302,25 @@ border-hitbox.bot-right{
 
 border-hitbox.edge-left:hover,
 border-hitbox.edge-right:hover {
-    cursor: ew-resize;
+    cursor: url('/sys/cursor98/Cursor93.cur'), ew-resize;
 }
 
 border-hitbox.edge-top:hover,
 border-hitbox.edge-bot:hover {
-    cursor: ns-resize;
+    /* cursor: ns-resize; */
+    cursor: url('/sys/cursor98/Cursor95.cur'), ns-resize;
 }
 
 border-hitbox.bot-left:hover,
-border-hitbox.top-right:hover{
-    cursor: sw-resize;
+border-hitbox.top-right:hover {
+    /* cursor: sw-resize; */
+    cursor: url('/sys/cursor98/Cursor91.cur'), sw-resize;
 }
 
 border-hitbox.top-left:hover,
-border-hitbox.bot-right:hover{
-    cursor:nw-resize;
+border-hitbox.bot-right:hover {
+    /* cursor: nw-resize; */
+    cursor: url('/sys/cursor98/Cursor89.cur'), nw-resize;
 }
 
 border-hitbox:active {
@@ -261,6 +328,60 @@ border-hitbox:active {
     /* left: 50%; */
 
     background-color: if(style(--test-hitbox:1): #FF0000AA; else: #00000000);
+}
+
+window[data-resizable="false"] > border-hitbox:hover {
+    cursor: url('/sys/cursor98/Cursor79.cur'), auto !important;
+}
+
+/* quick launch */
+
+quick-launch {
+    display: flex;
+    width: 100px;
+    gap: 2px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+ql-icon {
+    width: 22px;
+    height: 22px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: 22px 22px;
+}
+
+ql-icon.add {
+    background-image: url('/sys/add.png');
+}
+ql-icon.trash {
+    background-image: url('/sys/trash.png');
+}
+
+ql-icon:active {
+    border: var(--border);
+    border-color: var(--inset-preset);
+    border-image: url('/sys/inset.gif') 2 stretch;
+    background-size: 20px 20px;
+}
+
+window-body > .new-window-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 18pt;
+    padding: 10px;
+    gap: 2px;
+    box-sizing: border-box;
+}
+
+.new-window-form > input {
+    font-size: 12pt;
+}
+
+.new-window-form > label {
+    font-size: 12pt;
 }
 
 

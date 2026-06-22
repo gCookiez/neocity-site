@@ -17,7 +17,8 @@ const dirs = {
     articles: '/articles',
     views_cat: '/views',
     icons: '/icons',
-    sys: '/sys'
+    sys: '/sys',
+    sys: '/sys/cursor98'
 }
 
 const roots = '/assets'

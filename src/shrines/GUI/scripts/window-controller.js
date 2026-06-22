@@ -12,6 +12,7 @@ let activeWindow = null;
 let activeResizer = null;
 let sizeLimit = 250;
 
+
 const scalefactor = 1;
 
 export function resetLargestIndex() {
@@ -81,7 +82,7 @@ export function mouseDownListener(e) {
         }
 
         if ('border-hitbox' === e.target.nodeName.toLowerCase()) {
-            isResizing = true;
+            
             startX = e.clientX;
             startY = e.clientY;
             startTop = parseFloat(getComputedStyle(closestTarget(e)).getPropertyValue('top', null).replace('px', ''))
@@ -90,6 +91,7 @@ export function mouseDownListener(e) {
             startHeight = parseFloat(getComputedStyle(closestTarget(e)).getPropertyValue('height', null).replace('px', ''))
             e.preventDefault();
             activeResizer = e.target.className;
+            isResizing = JSON.parse(activeWindow.getAttribute('data-resizable'));
             console.log(activeResizer)
         }
 
@@ -152,6 +154,21 @@ export function mouseMoveHandler(e) {
 
 }
 
+export function closeWindows(wins) {
+    console.log(wins);
+    if (!wins.length) return;
+    for (var i of wins) {
+        const index = windows.indexOf(i);
+        if (index > -1) {
+            windows.splice(index, 1);
+            resetLargestIndex();
+        }
+        i.removeEventListener('mousedown', mouseDownListener);
+        i.remove();
+    }
+    return;
+}
+
 export function mouseUpHandler(e) {
     isDragging = false;
     isResizing = false;
@@ -165,14 +182,7 @@ export function mouseUpHandler(e) {
         }
     }
     else if ('SYS-BUTTON' === e.target.nodeName && 'close' === e.target.classList.value) {
-        const item = closestTarget(e);
-        const index = windows.indexOf(item);
-        if (index > -1) {
-            windows.splice(index, 1);
-            resetLargestIndex();
-        }
-        item.removeEventListener('mousedown', mouseDownListener);
-        item.remove();
+        closeWindows([closestTarget(e)]);
         return;
     }
 
