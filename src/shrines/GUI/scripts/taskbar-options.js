@@ -1,5 +1,5 @@
 import { closestTarget, closeWindows } from "./window-controller";
-import { windows, addWindow, uniqueChecker } from "./window-counter";
+import { windows, addWindow, uniqueChecker, removeTaskItem } from "./window-counter";
 
 
 export function newWindowPopup() {
@@ -50,11 +50,12 @@ export function newWindowPopup() {
         })
 
         console.log(attr);
+        
+        const thisWin = closestTarget(e)
+        removeTaskItem(thisWin)
+        closeWindows([thisWin]);
         addWindow(attr);
 
-
-
-        closeWindows([closestTarget(e)]);
         ref.removeEventListener('click', this);
     })
 

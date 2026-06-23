@@ -1,6 +1,6 @@
 // const windows = document.querySelectorAll('windowsdow');
 // const header = document.querySelectorAll('windowsdow-title');
-import { windows } from "./window-counter";
+import { removeTaskItem, searchTaskItem, windows, resetTaskbarActiveStatus } from "./window-counter";
 
 let isDragging = 0;
 let isResizing = 0;
@@ -17,6 +17,11 @@ const scalefactor = 1;
 
 export function resetLargestIndex() {
     largestIndex = (windows.length) * 10;
+}
+
+export function forceLarge() {
+    largestIndex = 100000000;
+    return;
 }
 
 
@@ -57,17 +62,16 @@ export function windowTargetChecker(e) {
 export function resetColorStatus() {
     windows.forEach((e) => {
         e.classList.remove('active');
+
     })
 }
 
 export function mouseDownListener(e) {
-    resetColorStatus();
+    if (!closestTarget(e).className.includes('active')) {
+        resetColorStatus();
+    }
 
     largestIndex += 10
-
-
-    closestTarget(e).style.zIndex = largestIndex;
-    closestTarget(e).classList.add('active');
 
 
 
@@ -82,7 +86,7 @@ export function mouseDownListener(e) {
         }
 
         if ('border-hitbox' === e.target.nodeName.toLowerCase()) {
-            
+
             startX = e.clientX;
             startY = e.clientY;
             startTop = parseFloat(getComputedStyle(closestTarget(e)).getPropertyValue('top', null).replace('px', ''))
@@ -98,9 +102,6 @@ export function mouseDownListener(e) {
         window.addEventListener("mousemove", mouseMoveHandler)
     }
     window.addEventListener("mouseup", mouseUpHandler)
-
-    console.log(isDragging)
-    console.log(isResizing)
 }
 
 export function mouseMoveHandler(e) {
@@ -170,6 +171,11 @@ export function closeWindows(wins) {
 }
 
 export function mouseUpHandler(e) {
+    if (null !== closestTarget(e)) {
+        closestTarget(e).style.zIndex = largestIndex;
+        closestTarget(e).classList.add('active');
+    }
+
     isDragging = false;
     isResizing = false;
     startX, startY, startWidth, startHeight, startLeft, startTop = 0;
@@ -182,17 +188,20 @@ export function mouseUpHandler(e) {
         }
     }
     else if ('SYS-BUTTON' === e.target.nodeName && 'close' === e.target.classList.value) {
-        closeWindows([closestTarget(e)]);
+        const closestWin = closestTarget(e)
+        removeTaskItem(closestWin)
+        closeWindows([closestWin]);
         return;
+    }
+
+
+    resetTaskbarActiveStatus();
+    if (null !== closestTarget(e)) {
+        const taskItem = searchTaskItem(closestTarget(e));
+        taskItem.classList.add('active');
     }
 
     zIndexFixer();
     window.removeEventListener("mousemove", mouseMoveHandler);
     window.removeEventListener("mouseup", mouseUpHandler);
 }
-
-// windows.forEach((e, i) => {
-//     e.style.zIndex = (i + 1) * 10;
-//     e.addEventListener('mousedown', mouseDownListener)
-
-// })

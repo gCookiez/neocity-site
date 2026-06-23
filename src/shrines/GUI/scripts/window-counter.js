@@ -1,4 +1,4 @@
-import { mouseDownListener, resetColorStatus, resetLargestIndex } from "./window-controller";
+import { forceLarge, mouseDownListener, resetColorStatus, resetLargestIndex, zIndexFixer } from "./window-controller";
 
 const desktop = document.querySelector('desktop');
 export const windows = [];
@@ -17,6 +17,62 @@ const resizers = [
     'bot-right',
     'bot-left',
 ]
+
+export function resetTaskbarActiveStatus() {
+    const taskbar = document.querySelectorAll(`min-program`);
+    taskbar.forEach((e) => {
+        e.classList.remove('active');
+    })
+}
+
+export function searchTaskItem(e) {
+    const taskbar = document.querySelectorAll(`min-program`);
+    const selected = Object.values(taskbar).filter(task => task.id === e.id);
+    return selected[0];
+}
+
+export function removeTaskItem(e) {
+    const selected = searchTaskItem(e);
+    selected.removeEventListener('click', onClickTaskItem);
+    selected.remove();
+}
+
+export function onClickTaskItem(e) {
+    resetColorStatus();
+    resetTaskbarActiveStatus();
+    const targetWindow = document.querySelector(`window[id="${this.id}"]`);
+    console.log(targetWindow);
+    targetWindow.classList.add('active');
+    targetWindow.style.zIndex = '1000000';
+    this.classList.add('active');
+    forceLarge();
+    zIndexFixer();
+}
+
+export function taskbarPopulation() {
+    const minProgCont = document.querySelector('min-programs');
+    const minProgs = minProgCont.querySelectorAll('min-program');
+    resetTaskbarActiveStatus();
+
+    for (var i of windows) {
+
+        const condition = Object.values(minProgs).filter(a => a.id === i.id);
+        console.log(condition);
+        if (condition.length) continue;
+
+        const programItem = document.createElement('min-program');
+        const programTitle = document.createElement('h5');
+        programTitle.classList.add('prog-title');
+        programTitle.innerHTML = i.querySelector('window-title > h4').textContent;
+        programItem.append(programTitle);
+        programItem.setAttribute('id', i.id)
+        i.className.includes('active') ? programItem.classList.add('active') : null;
+        minProgCont.append(programItem);
+        programItem.addEventListener('click', onClickTaskItem)
+    }
+
+    return;
+}
 
 export function uniqueChecker(name) {
     const filter = windows.filter(e => e.getAttribute('id') === name);
@@ -77,13 +133,17 @@ export function addWindow(list) {
         if (undefined !== i.unique) {
             newWindow.setAttribute('id', i.unique);
         }
+        else {
+            newWindow.id = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
 
+        }
         return newWindow;
     }
 
     if ('object' === typeof list && !list.length) {
         const item = setupFramework(list);
         resetLargestIndex();
+        taskbarPopulation();
         return item;
     }
 
@@ -93,6 +153,7 @@ export function addWindow(list) {
         addedWindows.push(setupFramework(i));
     }
     resetLargestIndex();
+    taskbarPopulation();
     return addedWindows;
 }
 

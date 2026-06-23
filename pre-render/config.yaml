@@ -83,6 +83,9 @@ iconsList:
   - name: "lintnaya"
     path: "https://lintnaya.com/_assets/button.png"
     link: "https://lintnaya.com"
+  - name: "v0idspace"
+    path: "https://v0idspace.nekoweb.org/stamps/v0idbutton.gif"
+    link: "https://v0idspace.nekoweb.org/"
 webringList:
   - name: "no-ai"
     content: |

@@ -1,4 +1,4 @@
-import { addWindow, windows } from "./window-counter";
+import { addWindow, taskbarPopulation, windows } from "./window-counter";
 import { mouseDownListener } from "./window-controller";
 import { newWindowPopup, qlFunctions } from "./taskbar-options";
 
