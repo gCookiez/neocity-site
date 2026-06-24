@@ -39,8 +39,6 @@ export function newWindowPopup() {
         yOffset: "30",
     });
 
-    console.log(ref.getAttribute('id'));
-
     ref.querySelector('.new-window-form > #newWindow').addEventListener('click', function(e){
         const forms = this.closest('.new-window-form').querySelectorAll('input,textarea');
         const attr = {};
@@ -67,6 +65,9 @@ export function qlFunctions() {
     const trash = document.querySelector('ql-icon.trash')
     trash.addEventListener('click', (e) => {
         e.preventDefault();
+        for (var i of windows) {
+            removeTaskItem(i);
+        }
         closeWindows([...windows]);
     })
 
@@ -74,6 +75,12 @@ export function qlFunctions() {
     button.addEventListener('click', (e) => {
         e.preventDefault();
         newWindowPopup();
+    })
+
+    const returnHome = document.querySelector('ql-icon.return');
+    returnHome.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = "/";
     })
     return;
 }

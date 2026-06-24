@@ -165,9 +165,17 @@ export function spawnBurger() {
     return burgerPlaceholder;
 }
 
+export function counter() {
+    const counterCont = document.createElement('div');
+    counterCont.classList.add('counter');
+    const item = document.querySelector('.newCounter')
+    counterCont.append(item);
+    return counterCont;
+}
+
 
 const panelCluster = {
-    panel1: [iconCollection, linkMe, spawnBurger, eyesHurt],
+    panel1: [iconCollection, linkMe, spawnBurger, eyesHurt, counter],
     panel2: [webRingContainer]
 }
 

@@ -20,17 +20,17 @@
 
     <script defer>
         document.addEventListener('DOMContentLoaded', () => {
-            
+
             const preloadLink = document.getElementById('preload-js');
-            
+
             function executeScript() {
                 const script = document.createElement('script');
                 script.src = preloadLink.href;
                 script.async = false;
                 document.head.appendChild(script)
             }
-            
-                executeScript();
+
+            executeScript();
         });
     </script>
 
@@ -44,6 +44,9 @@
     </header>
 
     <script type="module" src="index.js"> </script>
+    <div class="newCounter">
+        <script type="text/javascript" src="https://counter.websiteout.com/js/9/0/0/0"></script>
+    </div>
 
     <div id="loading-anim">
 

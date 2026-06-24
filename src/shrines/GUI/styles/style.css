@@ -71,6 +71,7 @@ taskbar {
     bottom: 0px;
     align-items: center;
     gap: 2px;
+    z-index: 1000000;
 
 }
 
@@ -83,6 +84,7 @@ desktop {
 
 start-button {
     width: 80px;
+    min-width: 80px;
     height: 25px;
     border: var(--border-start);
     border-color: var(--outset-preset);
@@ -209,6 +211,10 @@ sys-button.minimize {
 
 sys-button.maximize {
     background-image: url(/sys/maximize.png);
+}
+
+sys-button.restore {
+    background-image: url(/sys/restore.png);
 }
 
 sys-button.close {
@@ -362,6 +368,9 @@ ql-icon.add {
 }
 ql-icon.trash {
     background-image: url('/sys/trash.png');
+}
+ql-icon.return{
+    background-image: url('/sys/return.png');
 }
 
 ql-icon:active {

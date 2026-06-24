@@ -1,5 +1,5 @@
 import { addWindow, taskbarPopulation, windows } from "./window-counter";
-import { mouseDownListener } from "./window-controller";
+import { mouseDownListener, windowFixer, debouncer } from "./window-controller";
 import { newWindowPopup, qlFunctions } from "./taskbar-options";
 
 
@@ -22,7 +22,7 @@ addWindow([
         yOffset:'10',
         width: '696px',
         height: '500px',
-        title: "Welcome_Window",
+        title: "Alternative",
         body: `<p> To get started, Open Devtools -> Console and copy this: </p>
         <p> Or use the 'Add new Window' "program"</p>
                 <br>
@@ -49,6 +49,13 @@ addWindow([
         width: '300',
         title: "Recommended Screen",
         body: '<h4> Only recommended in desktop and Minimum Size 1920x1080px </h4>'
+    },
+    {
+        xOffset:'3',
+        yOffset:'60',
+        width: '300',
+        title: "Missing Features",
+        body: '<h4> For now, features are still missing. Progress is still ongoing </h4>'
     }
 ])
 
@@ -56,7 +63,10 @@ newWindowPopup();
 
 
 window.addWindow = addWindow;
+window.windowFixer = windowFixer;
 
-console.log(windows);
+const resizeChecker = debouncer(windowFixer);
+window.addEventListener('resize', resizeChecker);
+
 
 

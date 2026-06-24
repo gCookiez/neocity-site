@@ -1,5 +1,3 @@
-// const windows = document.querySelectorAll('windowsdow');
-// const header = document.querySelectorAll('windowsdow-title');
 import { removeTaskItem, searchTaskItem, windows, resetTaskbarActiveStatus } from "./window-counter";
 
 let isDragging = 0;
@@ -12,7 +10,6 @@ let activeWindow = null;
 let activeResizer = null;
 let sizeLimit = 250;
 
-
 const scalefactor = 1;
 
 export function resetLargestIndex() {
@@ -20,8 +17,8 @@ export function resetLargestIndex() {
 }
 
 export function forceLarge() {
-    largestIndex = 100000000;
-    return;
+    largestIndex += 10;
+    return largestIndex;
 }
 
 
@@ -62,24 +59,25 @@ export function windowTargetChecker(e) {
 export function resetColorStatus() {
     windows.forEach((e) => {
         e.classList.remove('active');
-
     })
 }
 
 export function mouseDownListener(e) {
-    if (!closestTarget(e).className.includes('active')) {
-        resetColorStatus();
-    }
 
-    largestIndex += 10
-
-
+    resetColorStatus();
+    closestTarget(e).style.zIndex = forceLarge();
+    closestTarget(e).classList.add('active');
 
     offsetX = e.clientX - closestTarget(e).offsetLeft;
     offsetY = e.clientY - closestTarget(e).offsetTop;
+    zIndexFixer();
+    windowFixer();
+
     if (windowTargetChecker(e)) {
         console.log(e.target.nodeName.toLowerCase())
         activeWindow = closestTarget(e);
+        console.log('zindex?');
+
 
         if ('title-hitbox' === e.target.nodeName.toLowerCase()) {
             isDragging = true;
@@ -99,16 +97,15 @@ export function mouseDownListener(e) {
             console.log(activeResizer)
         }
 
-        window.addEventListener("mousemove", mouseMoveHandler)
+        window.addEventListener("mousemove", mouseMoveHandler);
     }
-    window.addEventListener("mouseup", mouseUpHandler)
+
+    window.addEventListener("mouseup", mouseUpHandler);
 }
 
 export function mouseMoveHandler(e) {
 
-    // if (!isDragging) return;
-    // if (!isResizing) return;
-    console.log(!isDragging && !isResizing);
+
 
     if (isResizing) {
         const dx = (e.clientX - startX) / scalefactor;
@@ -149,6 +146,8 @@ export function mouseMoveHandler(e) {
     }
 
     if (isDragging) {
+        if (activeWindow.querySelector('sys-button.restore')) return;
+        
         activeWindow.style.left = `${e.clientX - offsetX}px`
         activeWindow.style.top = `${e.clientY - offsetY}px`
     }
@@ -164,44 +163,116 @@ export function closeWindows(wins) {
             windows.splice(index, 1);
             resetLargestIndex();
         }
+
         i.removeEventListener('mousedown', mouseDownListener);
         i.remove();
+
     }
     return;
 }
 
 export function mouseUpHandler(e) {
-    if (null !== closestTarget(e)) {
-        closestTarget(e).style.zIndex = largestIndex;
-        closestTarget(e).classList.add('active');
-    }
 
     isDragging = false;
     isResizing = false;
     startX, startY, startWidth, startHeight, startLeft, startTop = 0;
     activeWindow = null;
     activeResizer = null;
-    if (windowTargetChecker(e)) {
-        if ('title-hitbox' === e.target.nodeName.toLowerCase()) {
-            e.target.style.height = '100%';
-            e.target.style.removeProperty('width');
-        }
-    }
-    else if ('SYS-BUTTON' === e.target.nodeName && 'close' === e.target.classList.value) {
+    let skip = false;
+
+    if ('SYS-BUTTON' === e.target.nodeName && 'close' === e.target.classList.value) {
         const closestWin = closestTarget(e)
         removeTaskItem(closestWin)
         closeWindows([closestWin]);
         return;
     }
 
+    if ('SYS-BUTTON' === e.target.nodeName && 'minimize' === e.target.classList.value) {
+
+        resetColorStatus();
+        resetTaskbarActiveStatus();
+        closestTarget(e).classList.remove('active');
+        closestTarget(e).style.display = 'none';
+        return;
+    }
+
+    if ('SYS-BUTTON' === e.target.nodeName && 'maximize' === e.target.classList.value) {
+        let testWindow = 'true' === closestTarget(e).getAttribute('data-resizable');
+        if (testWindow) {
+            closestTarget(e).setAttribute('last-restore', closestTarget(e).style.cssText);
+            closestTarget(e).style.left = `0px`;
+            closestTarget(e).style.top = `0px`;
+            closestTarget(e).style.width = window.innerWidth + 'px';
+            closestTarget(e).style.height = (window.innerHeight - 30) + 'px';
+            e.target.classList.replace('maximize', 'restore');
+            skip = true;
+        }
+
+    }
+
+    if ('SYS-BUTTON' === e.target.nodeName && 'restore' === e.target.classList.value && !skip) {
+        closestTarget(e).style.cssText = closestTarget(e).getAttribute('last-restore');
+        closestTarget(e).setAttribute('last-restore', null);
+        e.target.classList.replace('restore', 'maximize');
+    }
 
     resetTaskbarActiveStatus();
+
     if (null !== closestTarget(e)) {
         const taskItem = searchTaskItem(closestTarget(e));
         taskItem.classList.add('active');
     }
 
-    zIndexFixer();
     window.removeEventListener("mousemove", mouseMoveHandler);
     window.removeEventListener("mouseup", mouseUpHandler);
 }
+
+export function windowFixer() {
+    const windowX = window.innerWidth;
+    const windowY = window.innerHeight;
+
+    function raw(x) {
+        const newCalc = x.replace('px', '');
+        return parseInt(newCalc);
+    }
+
+    windows.forEach((e) => {
+        const itemLeft = raw(window.getComputedStyle(e).left)
+        const itemTop = raw(window.getComputedStyle(e).top)
+        const itemWidth = raw(window.getComputedStyle(e).width)
+        const itemHeight = raw(window.getComputedStyle(e).height)
+        const xCheck = itemLeft + itemWidth;
+        const yCheck = itemTop + itemHeight;
+
+        if (itemLeft > windowX) {
+            e.style.left = (xCheck - itemWidth) + (windowX - xCheck) - 20 + 'px'
+        }
+
+        if (0 > xCheck) {
+            e.style.left = '20px'
+
+        }
+
+        if (itemTop >= (windowY - 50)) {
+            e.style.top = itemTop + (windowY - yCheck) - 50 + 'px'
+        }
+
+        if (0 > itemTop) {
+            e.style.top = '20px'
+        }
+
+    })
+}
+
+export function debouncer(func, delay = 300) {
+    let timerId;
+
+    return function (...args) {
+        clearTimeout(timerId);
+
+        timerId = setTimeout(() => {
+            func.apply(args);
+        }, delay)
+    }
+}
+

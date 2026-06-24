@@ -41,11 +41,12 @@ export function onClickTaskItem(e) {
     resetColorStatus();
     resetTaskbarActiveStatus();
     const targetWindow = document.querySelector(`window[id="${this.id}"]`);
-    console.log(targetWindow);
-    targetWindow.classList.add('active');
-    targetWindow.style.zIndex = '1000000';
-    this.classList.add('active');
-    forceLarge();
+
+    
+    targetWindow.classList.toggle('active');
+    this.classList.toggle('active');
+    targetWindow.style.zIndex = forceLarge();
+    targetWindow.style.display = "block";
     zIndexFixer();
 }
 
@@ -57,7 +58,6 @@ export function taskbarPopulation() {
     for (var i of windows) {
 
         const condition = Object.values(minProgs).filter(a => a.id === i.id);
-        console.log(condition);
         if (condition.length) continue;
 
         const programItem = document.createElement('min-program');
@@ -135,7 +135,6 @@ export function addWindow(list) {
         }
         else {
             newWindow.id = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
-
         }
         return newWindow;
     }
