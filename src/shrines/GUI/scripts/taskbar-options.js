@@ -39,6 +39,8 @@ export function newWindowPopup() {
         yOffset: "30",
     });
 
+    ref.querySelector('sys-button.maximize').remove();
+
     ref.querySelector('.new-window-form > #newWindow').addEventListener('click', function(e){
         const forms = this.closest('.new-window-form').querySelectorAll('input,textarea');
         const attr = {};
