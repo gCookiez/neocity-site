@@ -46,10 +46,10 @@ export const menuItems = {
         desc: `Includes the images shared by the developer.`
 
     },
-    shrines: {
-        name: "Shrines",
+    projects: {
+        name: "Projects",
         hidden: false,
-        url: "/shrines",
+        url: "/projects",
         fetch: true,
         path: '../views/shrines.json',
         desc: `A section full of areas of interest. Feel free to read them all.`
@@ -122,6 +122,8 @@ export const checkpoint = () => {
 
 export const handleLocation = () => {
     checkpoint();
+    const body = document.querySelector('html');
+    body.scrollIntoView();
 
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
 

@@ -167,9 +167,12 @@ export function spawnBurger() {
 
 export function counter() {
     const counterCont = document.createElement('div');
+    const counterTitle = document.createElement('span');
+    counterTitle.innerHTML = "Site Hit Counter"
+    counterTitle.classList.add('counter-title')
     counterCont.classList.add('counter');
     const item = document.querySelector('.newCounter')
-    counterCont.append(item);
+    counterCont.append(counterTitle, item);
     return counterCont;
 }
 

@@ -2,7 +2,7 @@
 
 * {
     /* --temp-home-format: 'const const' 'webring webring' 'chat chat'; */
-    --temp-home-format: 'const const' 'chat chat';
+    --temp-home-format: 'const const' 'chat chat' 'stickers stickers';
     --new-home-format: 'const const' 'bloglet bloglet' 'webring webring' 'chat chat';
     --degree-check: 141.1deg;
 }
@@ -72,7 +72,7 @@
     .home-sub-module-place {
         /* grid-template-areas: 'const const' 'bloglet bloglet' 'webring webring' 'chat chat'; */
         grid-template-areas: var(--temp-home-format);
-        grid-template-rows: 1fr 2fr;
+        grid-template-rows: 1fr 2fr 1fr;
         grid-template-columns: initial;
         gap: 10px;
     }

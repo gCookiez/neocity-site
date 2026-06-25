@@ -25,7 +25,8 @@ export async function mainHome(callback) {
     cont.append(content);
     underConstruction();
     someKindOfChat();
-    webRingContainer();
+    // webRingContainer();
+    stickerArea();
     callback();
     return;
 }
@@ -148,6 +149,20 @@ export function underConstruction() {
     constructionDiv.classList.add('main-widget-module');
     constructionDiv.append(contentFormat)
     moduleSetup.append(constructionDiv);
+}
+
+export function stickerArea() {
+    const moduleSetup = document.querySelector('.home-sub-module-place')
+    const modDiv = document.createElement('div');
+    const format = `
+        <div class="chat-soon">
+            <h3> Sticker Area Coming soon? </h3>
+        </div>
+    `
+    const contentFormat = document.createRange().createContextualFragment(format)
+    modDiv.classList.add('alt-widget-module', 'sticker-soon');
+    modDiv.append(contentFormat)
+    moduleSetup.append(modDiv);
 }
 
 

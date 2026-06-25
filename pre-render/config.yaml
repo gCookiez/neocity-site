@@ -86,6 +86,12 @@ iconsList:
   - name: "v0idspace"
     path: "https://v0idspace.nekoweb.org/stamps/v0idbutton.gif"
     link: "https://v0idspace.nekoweb.org/"
+  - name: "The Syndicate"
+    path: "/icons/syndicate-button.gif"
+    link: "https://ayebz.neocities.org/"
+  - name: "kimichannel"
+    path: "https://kimichannel.net/img/kimichannel.gif"
+    link: "https://kimichannel.net"
 webringList:
   - name: "no-ai"
     content: |
@@ -190,11 +196,11 @@ webringList:
       <script type="text/javascript" src="https://onthequiet.nekoweb.org/tokuring/tokuring-variables.js"></script>
       <script type="text/javascript" src="https://onthequiet.nekoweb.org/tokuring/tokuring-widget3.js"></script>
       <link rel="stylesheet" href="https://onthequiet.nekoweb.org/tokuring/tokuring.css">
-      <script>
-      window.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('#tokuring > * #iconimg').src="https://i.imgur.com/ubRiWjM.png";
-      })
-      </script>
+       <!--<script>
+       window.addEventListener('DOMContentLoaded', () => {
+       document.querySelector('#tokuring > * #iconimg').src="https://i.imgur.com/ubRiWjM.png";
+       })
+       </script> -->
       </div>
   - name: "The WiiRing"
     content: |

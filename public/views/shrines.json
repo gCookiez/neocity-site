@@ -7,17 +7,17 @@
             "alt": true,
             "path": "/shrines/kamen_rider/"
         },
-        "mtg": {
-            "title": "MTG Site",
-            "desc": "My Deck lists and others",
-            "alt": true,
-            "path": "/shrines/MTG/"
-        },
         "GUI": {
             "title": "GUI Demo",
             "desc": "GUI Sample",
             "alt": true,
             "path": "/shrines/GUI/"
+        },
+        "Mock Terminal": {
+            "title": "Mock Terminal",
+            "desc": "One of my first pet projects. Inspired by websites with their entire GUI only revolving aroung a terminal.",
+            "alt": true,
+            "path": "https://gcookiez.github.io/main-portfolio/"
         }
     }
 }
