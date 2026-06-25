@@ -17,8 +17,10 @@ export const menuItems = {
         action: () => {
             mainHome(() => {
                 switchAnimations()
-                //fix on webrings that have rely on DOMContentLoaded Triggers
+
                 
+                //fix on webrings that have rely on DOMContentLoaded Triggers
+
 
             });
         },
@@ -104,8 +106,6 @@ export function backtrack(data) {
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
     if (path.length <= 0) return;
     path.length = path.length - 1;
-
-    console.log(path);
     const joined = path.join('/')
     route(`/${joined}`)
 

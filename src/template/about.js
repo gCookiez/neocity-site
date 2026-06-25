@@ -8,5 +8,4 @@ export function aboutMe(data) {
     aboutCont.append(aboutContent);
     cont.append(aboutCont);
     // const 
-    console.log(data)
 }

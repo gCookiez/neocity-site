@@ -18,7 +18,6 @@ export function loadingBurger() {
 }
 
 export function spawnLoading() {
-    console.log('called!')
     container().replaceChildren();
     container().append(window.loadingAnim());
 }
@@ -57,9 +56,10 @@ export function linkBrowser(data) {
 }
 
 export function fetchJson(url, options) {
-    resetPage();
+    
 
     if (undefined === options) {
+        resetPage();
         spawnLoading();
     }
 

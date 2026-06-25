@@ -975,10 +975,11 @@ body.myeyeshurt,
   flex: 1 1 100%;
   box-sizing: border-box;
   display: grid;
-  grid-template-areas: 'const const' 'chat stickers';
-  grid-template-rows: 20em 30em;
+  grid-template-areas: 'const const' 'chat bloglet';
+  grid-template-rows: 20em 40em;
   grid-template-columns: 50% 50%;
   margin-bottom: 50px;
+  column-gap: 10px;
 }
 
 .bloglet-module,
@@ -987,6 +988,11 @@ body.myeyeshurt,
   justify-content: center;
   display: flex;
   align-items: center;
+}
+
+.bloglet-list {
+  max-height: calc(40em - 70px);
+  overflow-y: scroll;
 }
 
 .chat-soon {
@@ -1004,21 +1010,21 @@ body.myeyeshurt,
 #chattable,
 #cbox {
   width: 100%;
-  height: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-top: 10px;
+  height: calc(40em - 69px);
   box-sizing: border-box;
-  border: 1px solid #2222220F;
+  border: none;
+}
 
+.chat-box-wrapper {
+  margin-left: 30px;
+  height: 100%;
 }
 
 .sticker-soon.alt-widget-module {
   grid-area: stickers;
 }
 
-.chat-area.alt-widget-module {
-  flex-direction: column;
+.chat-box-wrapper {
   grid-area: chat;
 }
 
@@ -1055,6 +1061,7 @@ body.myeyeshurt,
 
 .bloglet-module {
   grid-area: bloglet;
+  height: 100%;
 }
 
 .bloglet-webring {
@@ -1070,6 +1077,13 @@ body.myeyeshurt,
   width: 100%;
   /* box-shadow: 7px 7px var(--box-shadow-bottom);
   transition: var(--container-normal-trans); */
+}
+
+
+.bloglet-module:has(.bloglet-window) {
+   width: unset;
+   margin-right: 30px;
+   height: 100%;
 }
 
 .bloglet-window:has(.webring-content) {

@@ -59,7 +59,6 @@ export function sortedByCategory(data) {
     const temp =  document.createRange().createContextualFragment(categoryTemplate);
     temp.querySelector('.blog-category-title').innerHTML = `<h2> ${data.title} </h2>`
     temp.querySelector('.blog-category-desc').innerHTML = `<span> ${data.desc} </span>`
-    console.log('test', data);
 
     temp.querySelector('.blog-category-title').addEventListener('click', () => {
         if (undefined !== data.alt && data.alt) {

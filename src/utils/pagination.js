@@ -17,7 +17,6 @@ export class pagination {
                 <span class="back-to-previous"> &lt;- Back </span>
             </div>
         `
-        console.log(data);
         this.catalog = data;
         this.limit = Object.keys(this.catalog.articles).length;
         this.initRender();
@@ -40,7 +39,6 @@ export class pagination {
         listingCatalog.classList.add('group-catalog');
 
         for (var [page, article] of Object.entries(this.catalog.articles)) {
-            console.log(page);
             const pageView = document.createElement('div');
             pageView.classList.add('list-catalog', 'hidden', `page-${parseInt(page) + 1}`);
             article.forEach(element => {

@@ -1,6 +1,7 @@
 import { container } from '@utils/render-json'
 import { intToDateFormat } from '@utils/date'
 import { route } from '@utils/router'
+import { fetchJson } from '../utils/render-json';
 
 const listModule = `
     <div class="list-item-bloglet"> 
@@ -25,8 +26,27 @@ export async function mainHome(callback) {
     cont.append(content);
     underConstruction();
     someKindOfChat();
-    // webRingContainer();
-    stickerArea();
+    // stickerArea();
+
+
+    try {
+        function dataFetch(data) {
+            blogletModule(data);
+        }
+
+        const options = {
+            module: true,
+            callback: dataFetch
+        }
+
+        fetchJson('/views/categories/update.json', options)
+
+    }
+    catch (e) {
+        console.error(e);
+    }
+
+
     callback();
     return;
 }
@@ -58,13 +78,13 @@ export function blogletList(data) {
         title.innerHTML = i.title;
         blogdate.innerHTML = intToDateFormat(i.date);
         containerArea.append(listItem);
-        const articleID = i.articleID;
+        const articleID = i.fileId;
 
         title.addEventListener('click', () => {
-            route(`blog/${articleID}`);
+            route(`/blog/update/${articleID}`);
         })
         blogdate.addEventListener('click', () => {
-            route(`blog/${articleID}`);
+            route(`/blog/update/${articleID}`);
         })
     }
 
@@ -125,7 +145,7 @@ export function blogletModule(data) {
     blogletCont.classList.add('bloglet-module');
     blogletContent.classList.add('bloglet-window');
 
-    blogletModTitle.innerHTML = '<h3> Blog </h3>';
+    blogletModTitle.innerHTML = '<h3> Site Updates </h3>';
 
 
     blogletContent.append(blogletModTitle, blogletList(data.articles[0]));
@@ -179,15 +199,20 @@ export function someKindOfChat() {
     // modDiv.append(contentFormat)
     // moduleSetup.append(modDiv);
     const container = document.createElement('div');
-    const chatTitle = document.createElement('h3')
-    chatTitle.innerHTML = "CHAT AREA";
+    const denseContainer = document.createElement('div');
+    const chatTitle = document.createElement('div');
+    chatTitle.classList.add('bloglet-mod-title');
+    chatTitle.innerHTML = "<h3>CHAT AREA </h3>";
     // const script = document.createElement('script');
     const iframe = document.createElement('iframe');
-    container.classList.add('chat-area','alt-widget-module')
+    container.classList.add('chat-area', 'alt-widget-module')
     // script.setAttribute('src', "https://iframe.chat/scripts/main.min.js");
     iframe.setAttribute('id', "cbox");
-
     iframe.setAttribute('src', " https://www3.cbox.ws/box/?boxid=3556129&boxtag=keCO7I");
-    container.append(chatTitle, iframe)
-    moduleSetup.append(container);
+
+    denseContainer.classList.add('chat-box-wrapper');
+
+    denseContainer.append(chatTitle, iframe)
+    container.append(denseContainer)
+    moduleSetup.append(denseContainer);
 }
