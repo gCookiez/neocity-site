@@ -20,7 +20,7 @@
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
         grid-template-columns: 45em 16em;
-        grid-template-rows: 60px 100px auto;
+        grid-template-rows: 60px 80px auto;
     }
 
     .grid-container.navi {
@@ -30,44 +30,34 @@
 
     .window-container {
         display: flex;
-        flex-direction: row;
-        width: 1000px;
+        flex-direction: column;
+        width: 10000px;
         position: relative;
     }
 
-    .hover-item {
-        width: 100%;
-        justify-content: center;
+    *:has(.window-container:not(.collapse))>* marquee {
+        visibility: hidden;
     }
+
+
+    /* .window-container.collapse > .hover-container{
+        transform: none;
+    } */
+
 
     .hover-hitbox {
         width: 100%;
     }
 
     .hover-container {
-        justify-content: unset;
-        width: 50px;
+        justify-content: flex-start;
+        width: 100%;
         flex: 1;
     }
 
-    .hover-item>h4 {
-        display: none;
-    }
 
     .hover-container:has(.hover-hitbox:hover) {
         z-index: 100000;
-    }
-
-    .hover-container:has(.hover-hitbox:hover)>.hover-item {
-        width: 500px;
-        padding-left: unset;
-        padding-right: 10px;
-        padding-top: 10px;
-        gap: 0px;
-    }
-
-    .hover-container:has(.hover-hitbox:hover)>.hover-item>h4 {
-        display: block;
     }
 
     .home-sub-module-place {
@@ -139,8 +129,8 @@
         /* min-width: 200px;
         max-width: 300px; */
     }
-    
-    
+
+
     .header-container {
         width: 80%;
     }
@@ -152,7 +142,7 @@
     .wrapper.home {
         grid-template-areas: 'header header' 'navi navi' 'content side-panel';
         grid-template-columns: 45em 16em;
-        grid-template-rows: 60px 100px auto;
+        grid-template-rows: 60px 80px auto;
     }
 
     .grid-container.navi {
@@ -163,14 +153,22 @@
 
     .window-container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         position: relative;
         width: 100%;
     }
 
+    .hover-container {
+        justify-content: unset;
+    }
+
+    *:has(.window-container:not(.collapse))>* marquee {
+        visibility: hidden;
+    }
+
     .home-sub-module-place {
         grid-template-areas: var(--temp-home-format);
-        grid-template-rows: 1fr 2fr;
+        /* grid-template-rows: 1fr 2fr; */
         grid-template-columns: initial;
         gap: 10px;
     }

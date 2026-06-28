@@ -4,7 +4,10 @@ import { fetchJson } from '@utils/render-json';
 import { applySideBar } from '@template/right-panel';
 import { locationInit } from './articles';
 import { switchAnimations } from './template/right-panel';
+import { toggleMediaQuery } from './utils/router';
 console.log('Hello!')
+
+
 
 async function init() {
     const body = document.querySelector('body')
@@ -27,6 +30,8 @@ const action = {
                 cancelable: true
             }));
         }, 1000)
+
+        window.addEventListener('resize', toggleMediaQuery);
     }
 }
 

@@ -10,21 +10,30 @@ menuItem.innerHTML = `
                 </div>
 
 `
+
 function generateMenuItems(items) {
 	const comp = document.createElement('div');
     comp.classList.add('window-container');
+    comp.style.setProperty('--total', Object.keys(items).length)
+    let index = 1;
 
 	for (var [key, value] of Object.entries(items)) {
         if (value.hidden == true) continue;
 		const clone = menuItem.cloneNode(true)
 		const template = clone.content.firstElementChild;
+        const refresh = value.refresh;
 
 		const textBox = template.querySelector('.hover-item');
 		const id = template.querySelector('.hover-hitbox');
+        template.style.setProperty('--index', index)
         const url = value.url
 
 		id.setAttribute('id', key);
         id.addEventListener('click', () => {
+            if(undefined !== refresh && false === refresh) {
+                value.action();
+                return;
+            }
             route(url);
         })
 
@@ -34,6 +43,7 @@ function generateMenuItems(items) {
         `;
 
 		comp.append(template);
+        index++;
 	}
 
 	return comp;

@@ -54,6 +54,8 @@ h4 {
   --warped: repeating-linear-gradient(-141.4deg, var(--hover-item-select-bg-color), var(--hover-item-select-bg-color) 15px, var(--hover-item-hover-bg-color) 15px, var(--hover-item-hover-bg-color) 25px);
 }
 
+/*burger animation*/
+
 @keyframes burgerloading-tb {
   0% {
     transform: translateY(0);
@@ -123,6 +125,8 @@ h4 {
     transform: translateY(0px);
   }
 }
+
+/*end of burger animation*/
 
 @keyframes warningWarp {
   from {
@@ -424,11 +428,11 @@ body.myeyeshurt,
   display: flex;
   flex-direction: column;
   width: 185px;
-  height: max-content;
+  height: calc(62.2px * var(--total));
   align-items: center;
   border: 5px solid black;
   background-color: yellow;
-  transition: var(--container-normal-trans);
+  transition: var(--container-normal-trans), height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: fixed;
 
 }
@@ -570,7 +574,7 @@ body.myeyeshurt,
   height: 50px;
   background-image: url('/sys/sysassets.png');
   background-repeat: no-repeat;
-  background-size: 550%;
+  background-size: 725%;
   background-attachment: local;
 }
 
@@ -602,6 +606,14 @@ body.myeyeshurt,
   background-position: -91px;
 }
 
+.icon-set-shrink.Collapse {
+  background-position: -283px;
+}
+
+.window-container.collapse > * .icon-set-shrink.Collapse {
+  background-position: -325px;
+}
+
 .hover-item {
   background-color: var(--hover-item-hover-bg-color);
   gap: 10px;
@@ -614,7 +626,38 @@ body.myeyeshurt,
   width: 100%;
   cursor: pointer;
   position: relative;
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 0.5s ease-in;
 }
+
+
+.window-container.collapse {
+  height: 70px;
+}
+
+.window-container.collapse > .hover-container {
+  /*firefox/samsung fallback*/
+  transform: translateY(calc(0% + calc(var(--index) * -70px) + 70px) );
+  /*chrome Def*/
+  transform: translateY(calc(0% + calc(sibling-index() * -70px) + 70px) );
+}
+
+.window-container.collapse > .hover-container {
+  user-select: none;
+  opacity: 0;
+}
+
+.window-container.collapse > .hover-container > .hover-hitbox{
+  pointer-events:none;
+}
+
+.window-container.collapse > .hover-container:has(#collapse) > .hover-hitbox{
+  pointer-events:auto !important;
+}
+
+.window-container.collapse > .hover-container:has(#collapse) {
+  opacity: 1;
+}
+
 
 .hover-hitbox {
   display: flex;
@@ -1081,9 +1124,9 @@ body.myeyeshurt,
 
 
 .bloglet-module:has(.bloglet-window) {
-   width: unset;
-   margin-right: 30px;
-   height: 100%;
+  width: unset;
+  margin-right: 30px;
+  height: 100%;
 }
 
 .bloglet-window:has(.webring-content) {
@@ -1286,7 +1329,7 @@ body.myeyeshurt,
 
 }
 
-.counter > .counter-title {
+.counter>.counter-title {
   font-width: expanded;
   font-weight: 700;
 }

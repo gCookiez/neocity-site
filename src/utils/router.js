@@ -8,6 +8,46 @@ import { container } from '@utils/render-json'
 import { loadingBurger, spawnLoading } from './render-json'
 import { switchAnimations } from '@template/right-panel'
 
+export function toggleMediaQuery() {
+    const mediaMatch1 = window.matchMedia('screen and (orientation: landscape) and (min-width: 0px) and (max-width: 1560px)')
+    const mediaMatch2 = window.matchMedia('screen and (orientation: portrait) and (min-width: 1024px)')
+
+    if (mediaMatch1.matches || mediaMatch2.matches) {
+        expandContract(true);
+    }
+    else {
+        expandContract(false);
+    }
+    
+    return;
+}
+
+export function expandContract(force) {
+    const item = document.querySelector('.window-container')
+
+    if(undefined === force) {
+        item.classList.toggle('collapse');
+    }
+    else if (force) {
+        item.classList.add('collapse');
+    }
+    else {
+        item.classList.remove('collapse');
+    }
+    
+    const h4 = item.querySelector('.hover-container:has(#collapse) > * h4')
+
+    if (item.className.includes('collapse')) {
+        h4.innerHTML = "Expand"
+        return;
+    }
+
+    if (!item.className.includes('collapse')) {
+        h4.innerHTML = "Collapse"
+        return;
+    }
+}
+
 export const menuItems = {
     '/': {
         name: "Home",
@@ -18,7 +58,7 @@ export const menuItems = {
             mainHome(() => {
                 switchAnimations()
 
-                
+
                 //fix on webrings that have rely on DOMContentLoaded Triggers
 
 
@@ -82,6 +122,16 @@ export const menuItems = {
         url: `/404`,
         fetch: true,
         desc: `Wrong turn buddy.`
+    },
+    collapse: {
+        name: 'Collapse',
+        hidden: false,
+        fetch: false,
+        refresh: false,
+        action: () => {
+            expandContract();
+        },
+        desc: `Wrong turn buddy.`
     }
 }
 
@@ -94,10 +144,10 @@ export function route(event) {
         console.log(event);
         window.history.pushState({}, "", event);
     }
-    if (typeof event == 'object') {
-        console.log(event.target.href);
-        window.history.pushState({}, "", event.target.href);
-    }
+    // if (typeof event == 'object') {
+    //     console.log(event.target.href);
+    //     window.history.pushState({}, "", event.target.href);
+    // }
 
     handleLocation();
 }
@@ -124,9 +174,8 @@ export const handleLocation = () => {
     checkpoint();
     const body = document.querySelector('html');
     body.scrollIntoView();
-
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
-
+    toggleMediaQuery();
 
     if (path[0] === "blog" && path[1] != undefined) {
         if (undefined !== path[2]) {
