@@ -455,6 +455,7 @@ body.myeyeshurt,
 .grid-container.navi {
   grid-area: navi;
   margin-top: 10px;
+  z-index: 100;
 }
 
 .grid-container.content {

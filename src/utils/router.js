@@ -11,8 +11,9 @@ import { switchAnimations } from '@template/right-panel'
 export function toggleMediaQuery() {
     const mediaMatch1 = window.matchMedia('screen and (orientation: landscape) and (min-width: 0px) and (max-width: 1560px)')
     const mediaMatch2 = window.matchMedia('screen and (orientation: portrait) and (min-width: 1024px)')
+    const mediaMatch3 = window.matchMedia('screen and (orientation: portrait) and (max-width: 1023px)')
 
-    if (mediaMatch1.matches || mediaMatch2.matches) {
+    if (mediaMatch1.matches || mediaMatch2.matches || mediaMatch3.matches) {
         expandContract(true);
     }
     else {
