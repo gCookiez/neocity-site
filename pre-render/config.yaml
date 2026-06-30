@@ -92,6 +92,9 @@ iconsList:
   - name: "kimichannel"
     path: "https://kimichannel.net/img/kimichannel.gif"
     link: "https://kimichannel.net"
+  - name: "tabf5"
+    path: "https://tabf5.com/img/button.gif"
+    link: "https://tabf5.com/"
 webringList:
   - name: "no-ai"
     content: |
