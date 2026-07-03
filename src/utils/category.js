@@ -8,7 +8,7 @@ export function segregateByTag(data) {
     container.classList.add('main-content-container', 'categories');
 
     for (var [key, value] of Object.entries(data)) {
-        value.category = key;
+        // value.category = key;
         const temp = sortedByCategory(value);
         container.append(temp)
     }

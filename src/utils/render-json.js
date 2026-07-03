@@ -33,7 +33,7 @@ export function resetPage() {
 
 export function linkBrowser(data) {
     resetPage();
-    if (data.method === "view") {
+    if (data.method === "bloglistview") {
         listArticles(data);
         return;
     }
@@ -53,9 +53,18 @@ export function linkBrowser(data) {
         categoryRenderer(data.list);
         return;
     }
+    if (undefined === data.method) {
+        console.log(data);
+        return
+    }
 }
 
 export function fetchJson(url, options) {
+    let fetchSettings = {};
+    if ('string' !== typeof url) {
+        fetchSettings = url.settings;
+        url = url.link;
+    }
     
 
     if (undefined === options) {
@@ -64,7 +73,7 @@ export function fetchJson(url, options) {
     }
 
     setTimeout(() => {
-        fetch(url)
+        fetch(url, fetchSettings)
             .then(response => {
                 const contentType = response.headers.get("content-type");
                 if (contentType && contentType.includes("application/json")) {

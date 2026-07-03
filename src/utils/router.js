@@ -5,8 +5,9 @@ import { mainHome, blogletModule } from '@template/revo-main'
 import { createSiteMap } from '@template/sitemap'
 import { categoryRenderer } from './category'
 import { container } from '@utils/render-json'
-import { loadingBurger, spawnLoading } from './render-json'
+import { linkBrowser, loadingBurger, spawnLoading } from './render-json'
 import { switchAnimations } from '@template/right-panel'
+import { supabase } from './db-connection'
 
 export function toggleMediaQuery() {
     const mediaMatch1 = window.matchMedia('screen and (orientation: landscape) and (min-width: 0px) and (max-width: 1560px)')
@@ -19,14 +20,14 @@ export function toggleMediaQuery() {
     else {
         expandContract(false);
     }
-    
+
     return;
 }
 
 export function expandContract(force) {
     const item = document.querySelector('.window-container')
 
-    if(undefined === force) {
+    if (undefined === force) {
         item.classList.toggle('collapse');
     }
     else if (force) {
@@ -35,7 +36,7 @@ export function expandContract(force) {
     else {
         item.classList.remove('collapse');
     }
-    
+
     const h4 = item.querySelector('.hover-container:has(#collapse) > * h4')
 
     if (item.className.includes('collapse')) {
@@ -53,7 +54,6 @@ export const menuItems = {
     '/': {
         name: "Home",
         url: "/",
-        img: "/sys/sysassets.png",
         fetch: false,
         action: () => {
             mainHome(() => {
@@ -78,7 +78,7 @@ export const menuItems = {
         name: 'Blog',
         url: '/blog',
         fetch: true,
-        path: `../views/category.json?t=${new Date().getTime()}`,
+        path: `blog_category`,
         desc: `Blog entries are compiled in this page. Mainly the thoughts of the site's developer.`
     },
     gallery: {
@@ -145,10 +145,10 @@ export function route(event) {
         console.log(event);
         window.history.pushState({}, "", event);
     }
-    // if (typeof event == 'object') {
-    //     console.log(event.target.href);
-    //     window.history.pushState({}, "", event.target.href);
-    // }
+    if (typeof event == 'object') {
+        console.log(event.target.href);
+        window.history.pushState({}, "", event.target.href);
+    }
 
     handleLocation();
 }
@@ -171,21 +171,102 @@ export const checkpoint = () => {
     return;
 }
 
-export const handleLocation = () => {
+export async function blogParser(path) {
+    if (path[0] !== 'blog') return false;
+
+    resetPage();
+    spawnLoading();
+
+    if (undefined === path[1]) {
+        try {
+            // const {res, error} = await supabase.from(menuItems[path[0]].path).select('*');
+            const response = await supabase.from(menuItems[path[0]].path).select('*');
+            if (response.error) throw new Error(response.error);
+
+            console.log(await response.data);
+
+            const obj = {
+                method: 'blogcategories',
+                list: await response.data
+            }
+
+            linkBrowser(await obj);
+        }
+        catch (e) {
+            console.error(e);
+            route('/404');
+        }
+    }
+
+    if (undefined !== path[1] && undefined === path[2]) {
+        try {
+            const response = await supabase.rpc('get_pages_from_blogentries',
+                {
+                    'target_category': path[1],
+                    'page': 1
+                }
+            )
+            if (response.error) throw new Error(response.error);
+
+            console.log(await response.data);
+
+            const obj = {
+                method: 'bloglistview',
+                target_category: path[1],
+                table: menuItems[path[0]].path,
+                page: 1,
+                list: await response.data
+            }
+
+            linkBrowser(await obj);
+        }
+        catch (e) {
+            console.error(e);
+            route('/404');
+        }
+    }
+
+    if (undefined !== path[1] && undefined !== path[2]) {
+        try {
+            const response = await supabase.from('blog_category_content')
+                                            .select('created_at, uuid, blog_category!inner(key_check), author, content, title')
+                                            .eq('uuid', path[2])
+            if (response.error) throw new Error(response.error);
+
+            console.log(await response.data);
+
+            const holster = await response.data[0];
+
+            const obj = await {
+                method: 'blogRender',
+                author: holster.author,
+                title: holster.title,
+                date: holster.created_at,
+                content: holster.content,
+                target_category: path[1],
+            }
+
+            linkBrowser(await obj);
+        }
+        catch (e) {
+            console.error(e);
+            route('/404');
+        }
+    }
+
+    return true;
+}
+
+export const handleLocation = async () => {
     checkpoint();
     const body = document.querySelector('html');
     body.scrollIntoView();
     const path = window.location.pathname === "/" ? "/" : window.location.pathname.replace('/', '').split('/');
     toggleMediaQuery();
 
-    if (path[0] === "blog" && path[1] != undefined) {
-        if (undefined !== path[2]) {
-            fetchJson(`/articles/${path[1]}/${path[2]}.json?t=${new Date().getTime()}`);
-            return;
-        }
-        fetchJson(`/views/categories/${path[1]}.json?t=${new Date().getTime()}`);
-        return;
-    }
+
+    const checker = await blogParser(path);
+    if (await checker) return;
 
     const route = menuItems[path[0]] && undefined !== menuItems[path[0]].path ? `${menuItems[path[0]].path}?t=${new Date().getTime()}` : false;
 

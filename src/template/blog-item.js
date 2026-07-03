@@ -37,15 +37,15 @@ elementArticleTemplate.innerHTML = articleTemplate;
 export function applyArticle(data) {
     const documentArea = elementArticleTemplate.content.firstElementChild.cloneNode(true);
     documentArea.querySelector('.article-title').innerHTML = `<h2> ${data.title} </h2>`
-    documentArea.querySelector('.date-posted').innerHTML = `<span> Posted on: ${intToDateFormat(data.date)} </span>`
+    documentArea.querySelector('.date-posted').innerHTML = `<span> Posted on: ${intToDateFormat(data.created_at)} </span>`
     documentArea.querySelector('.article-content').innerHTML = `<p> ${data.content} </p>`
     documentArea.querySelector('.expand-article span').addEventListener("click", () => {
-        route(`${data.category}/${data.fileId}`);
+        route(`/blog/${data.category}/${data.uuid}`);
         document.querySelector('.site-title').scrollIntoView();
     })
 
     documentArea.querySelector('.article-title').addEventListener("click", () => {
-        route(`${data.category}/${data.fileId}`);
+        route(`/blog/${data.category}/${data.uuid}`);
         document.querySelector('.site-title').scrollIntoView();
     })
     // const container = document.querySelector('.content-container');
@@ -56,8 +56,8 @@ export function applyArticle(data) {
 }
 
 export function sortedByCategory(data) {
-    const temp =  document.createRange().createContextualFragment(categoryTemplate);
-    temp.querySelector('.blog-category-title').innerHTML = `<h2> ${data.title} </h2>`
+    const temp = document.createRange().createContextualFragment(categoryTemplate);
+    temp.querySelector('.blog-category-title').innerHTML = `<h2> ${undefined !== data.title ? data.title : data.blog_category} </h2>`
     temp.querySelector('.blog-category-desc').innerHTML = `<span> ${data.desc} </span>`
 
     temp.querySelector('.blog-category-title').addEventListener('click', () => {
@@ -67,7 +67,7 @@ export function sortedByCategory(data) {
             window.location.href = data.path;
             return;
         }
-        route(`blog/${data.category}`);
+        route(`/blog/${undefined !== data.category ? data.category : data.key_check}`);
     })
     return temp;
 }
