@@ -202,7 +202,7 @@ export function someKindOfChat() {
     const denseContainer = document.createElement('div');
     const chatTitle = document.createElement('div');
     chatTitle.classList.add('bloglet-mod-title');
-    chatTitle.innerHTML = "<h3>CHAT AREA </h3>";
+    chatTitle.innerHTML = "<h3>Chat Area</h3>";
     // const script = document.createElement('script');
     const iframe = document.createElement('iframe');
     container.classList.add('chat-area', 'alt-widget-module')

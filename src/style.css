@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wdth,wght@0,120,100..900;1,120,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
 body {
   color: black;
   font-family: Verdana;
@@ -17,6 +20,8 @@ h4 {
 }
 
 * {
+  --hungry-dev: "Tourney", sans-serif;
+  --content-font: "Lexend", sans-serif;
   --burger-top-offset: 20px;
   --link-deco: underline dotted black;
   --hover-demo-bg-color: #fff;
@@ -226,6 +231,13 @@ body.myeyeshurt,
   animation: none !important;
 }
 
+.content-container > *, 
+.side-panel#panel1 > *,
+.bloglet-mod-title > *,
+.hover-item h4{
+  font-family: var(--content-font);
+}
+
 /*burger loading*/
 #loading-anim.full {
   height: 100vh;
@@ -388,6 +400,10 @@ body.myeyeshurt,
 
 .site-title {
   font-size: 35px;
+  font-family: var(--hungry-dev);
+  font-optical-sizing: auto;
+  font-variation-settings:
+    "wdth" 120;
   user-select: none;
 }
 

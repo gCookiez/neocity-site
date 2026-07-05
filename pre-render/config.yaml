@@ -95,6 +95,9 @@ iconsList:
   - name: "tabf5"
     path: "https://tabf5.com/img/button.gif"
     link: "https://tabf5.com/"
+  - name: "Scribblemakes"
+    path: "/icons/scribblemakesButton.png"
+    link: "https://scribblemakes.com"
 webringList:
   - name: "no-ai"
     content: |
